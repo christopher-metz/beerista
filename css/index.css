@@ -1,1 +1,53 @@
+body {
+  height: 100vh;
+  width: 100%;
+}
 
+
+/*
+-------------------------------------------------------------------------------
+  Search
+-------------------------------------------------------------------------------
+*/
+
+#search {
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#search form label {
+  font-size: 50px;
+}
+
+#search form button {
+  /*height: 5%;
+  width: 10%;
+  font-size: 50px;*/
+  margin: 0 auto;
+
+}
+
+/*
+-------------------------------------------------------------------------------
+  Footer
+-------------------------------------------------------------------------------
+*/
+
+footer {
+  height: 20%;
+  background-color: red;
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
