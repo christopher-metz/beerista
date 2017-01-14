@@ -1,0 +1,22 @@
+{
+  "name": "beerista",
+  "version": "0.1.0",
+  "description": "Beerista is a beer buying guide that aims to simplify the beer selection process by creating a very simple and fast beer search and rating tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christopher-metz/beerista.git"
+  },
+  "author": "Christopher Metz <cmetz7@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christopher-metz/beerista/issues"
+  },
+  "homepage": "https://github.com/christopher-metz/beerista#readme",
+  "dependencies": {
+    "yelp": "^1.0.2"
+  }
+}
