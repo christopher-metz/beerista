@@ -15,7 +15,7 @@ main {
 
 /* SEARCH */
 #search {
-  height: 15%;
+  height: 10vh;
   width: 100%;
 }
 
@@ -51,9 +51,9 @@ main {
 }
 
 .result {
-  height: 18%;
+  height: 12vh;
   width: 90%;
-  margin: 0 auto;
+  margin: 0.5% auto;
   background-color: white;
   box-shadow: 0 0 0 1px 5px gray;
   display: flex;
@@ -114,14 +114,39 @@ main {
 #beer {
   position: absolute;
   height: 80%;
+  position: relative;
+  height: 60vh;
   width: 90%;
   margin: 0 auto;
   background-color: white;
   box-shadow: 0 0 0 1px 5px gray;
 }
 
+.beer-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.beer-info {
+
+}
+
+#rate-beer {
+
+}
+
+#select-venue {
+
+}
+
+#add-rating {
+
+}
+
 #exit {
   position: absolute;
+  font-size: 5em;
   top: 0;
-  left: 0;
+  right: 0;
 }

@@ -1,5 +1,5 @@
 body {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background: linear-gradient(to right, #C2C2C2, #D6D6D6, #C2C2C2);
 }
@@ -40,7 +40,7 @@ header #login {
 */
 
 footer {
-  height: 20%;
+  height: 20vh;
   width: 100%;
   background-color: inherit;
   position: absolute;
