@@ -4,7 +4,7 @@
   "description": "Beerista is a beer buying guide that aims to simplify the beer selection process by creating a very simple and fast beer search and rating tool.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "knex": "knex"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/christopher-metz/beerista#readme",
   "dependencies": {
+    "knex": "^0.12.6",
+    "pg": "^6.1.2",
     "yelp": "^1.0.2"
   }
 }
