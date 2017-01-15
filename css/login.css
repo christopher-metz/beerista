@@ -1,49 +1,36 @@
-body {
-  height: 100vh;
-  width: 100%;
-  background: linear-gradient(to right, #C2C2C2, #D6D6D6, #C2C2C2);
-}
-
-/*
--------------------------------------------------------------------------------
-  Nav
--------------------------------------------------------------------------------
-*/
-
-/*nav {
-  background-color: inherit;
-  box-shadow: 0;
-}*/
-
-
-/*
--------------------------------------------------------------------------------
-  Search
--------------------------------------------------------------------------------
-*/
-
-#search {
+.row {
   height: 65%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0;
 }
 
-#search form {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.col {
+  height: 100%;
 }
 
-#search form label {
-  /*color: white;*/
-  font-size: 50px;
+.card {
+  height: 90%;
 }
 
-#search form button {
-  /*height: 5%;
-  width: 10%;
-  font-size: 50px;*/
-  margin: 0 auto;
+.card-content {
+  height: 90%;
+}
 
+label {
+  font-size: 40px;
+}
+
+input[type=email],
+input[type=password],
+input[type=text] {
+  height: 70px;
+  font-size: 20px;
+}
+
+.signup {
+  font-size: 30px;
+}
+
+.btn-large {
+  font-size: 20px;
+  width: 300px;
 }

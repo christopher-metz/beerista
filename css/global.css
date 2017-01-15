@@ -41,6 +41,7 @@ header #login {
 
 footer {
   height: 20%;
+  width: 100%;
   background-color: inherit;
   position: absolute;
   bottom: 0;
