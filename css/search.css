@@ -112,7 +112,7 @@ main {
 /*Beer Page*/
 
 #beer {
-  position: relative;
+  position: absolute;
   height: 80%;
   width: 90%;
   margin: 0 auto;
