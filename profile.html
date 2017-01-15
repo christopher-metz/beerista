@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Beerista</title>
 
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="css/materialize.css" rel="stylesheet"> -->
+    <link href="css/global.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
+
+    <script defer src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <!-- <script defer src="js/materialize.js"></script> -->
+    <script defer src="js/profile.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Beerista</h1>
+      <form>
+        <input type="text" name="search-from-profile" placeholder="Search all beers...">
+      </form>
+      <i class="material-icons" id="account-icon">account_circle</i>
+    </header>
+
+    <main>
+      <section id="filters">
+        <div id="filter-one">
+          <form>
+            <input type="text" name="search-your-beers" placeholder="Search your beers" class="filter-one-input">
+          </form>
+
+          <form>
+            <input type="text" name="search-by-brewery" placeholder="Search by brewery" class="filter-one-input">
+          </form>
+        </div>
+
+        <div id="filter-two">
+          <form>
+            <input type="text" name="search-by-style" placeholder="Search by style" class="filter-two-input">
+          </form>
+
+          <form>
+            <input type="text" name="select-friend" placeholder="Select a friend" class="filter-two-input">
+          </form>
+        </div>
+
+        <div id="filter-three">
+          <div id="rating-filter">
+            <div class="status">
+              <h4>Rating</h4>
+            </div>
+            <button class="rating-filter-btn">
+              <i class="material-icons rating-selection">looks_one</i>
+            </button>
+            <button class="rating-filter-btn">
+              <i class="material-icons rating-selection">looks_two</i>
+            </button>
+            <button class="rating-filter-btn">
+              <i class="material-icons rating-selection">looks_3</i>
+            </button>
+            <button class="rating-filter-btn">
+              <i class="material-icons rating-selection">looks_4</i>
+            </button>
+          </div>
+
+          <form>
+            <input type="select" name="select-by-state" placeholder="State" class="filter-three-input">
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <h5>Beerista</h5>
+        <p>Your beer buying guide.</p>
+        <p>&copy 2016 Beerista</p>
+      </div>
+    </footer>
+  </body>
+</html>
