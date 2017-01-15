@@ -3,6 +3,8 @@
 const data = [{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' }];
 console.log(data);
 
+let $allResults;
+
 const populateResults = function(event) {
   const $results = $('#results');
   $results.empty();
@@ -45,6 +47,9 @@ const populateResults = function(event) {
     $stats.append($ratingP);
 
     $results.append($result);
+
+    $allResults = $('.result');
+
     event.preventDefault();
   };
 }
@@ -60,25 +65,31 @@ const loadBeerPage = function(event) {
   const $target = $(event.target).parents('.result');
   console.log($target);
 
-  $('.result').detach();
+  $allResults.detach();
   $results.addClass('off');
 
   $('#beer').removeClass('off');
 
   $('#beer-photo').attr('src', $target.find('.photo img').attr('src'));
-  $('#name').text($target.find('.name').text());
-  $('#brewery').text($target.find('.brewery').text());
-  $('#style').text($target.find('.style').text());
+  $('#name').text($target.find('.name h3').text());
+  $('#brewery').text($target.find('.name h4').text());
+  $('#style').text($target.find('.name h5').text());
   $('#abv').text($target.find('.abv').text());
   $('#ibu').text($target.find('.ibu').text());
-  $('#rating').text($target.find('.ibu').text());
-
-
+  $('#rating').text($target.find('.rating').text());
 }
-
-
-$results.on('click', openBeerPage);
 
 const $results = $('#results');
 
 $results.on('click', '.result', loadBeerPage);
+
+const exitBeerPage = function(event) {
+  event.preventDefault();
+
+  $results.append($allResults);
+  $results.removeClass('off');
+}
+
+const $exit = $('i');
+
+$exit.on('click', exitBeerPage);
