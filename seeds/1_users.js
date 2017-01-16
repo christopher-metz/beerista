@@ -5,6 +5,7 @@ exports.seed = function(knex) {
     .then(() => {
       return knex('users')
         .insert([{
+          id: 1,
           first_name: 'Jamieson',
           last_name: 'Bates',
           email: 'jamiesonbates@beerista.com',
@@ -12,6 +13,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 2,
           first_name: 'Chris',
           last_name: 'Metz',
           email: 'chrismetz@beerista.com',
@@ -19,6 +21,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 3,
           first_name: 'Emile',
           last_name: 'Fleming',
           email: 'emilefleming@beerista.com',
@@ -26,6 +29,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 4,
           first_name: 'Dylan',
           last_name: 'vu',
           email: 'dylanvu@beerista.com',
@@ -33,6 +37,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 5,
           first_name: 'Brian',
           last_name: 'Lee',
           email: 'brianlee@beerista.com',
@@ -40,6 +45,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 6,
           first_name: 'Mike',
           last_name: 'Friedman',
           email: 'mikefriedman@beerista.com',
@@ -47,6 +53,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 7,
           first_name: 'Hiromi',
           last_name: 'Heider',
           email: 'hiromiheider@beerista.com',
@@ -54,6 +61,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 8,
           first_name: 'Minh',
           last_name: 'Chau',
           email: 'minhchau@beerista.com',
@@ -61,6 +69,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 9,
           first_name: 'Will',
           last_name: 'Helton',
           email: 'willhelton@beerista.com',
@@ -68,6 +77,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 10,
           first_name: 'Dan',
           last_name: 'Pencak',
           email: 'danpencak@beerista.com',
@@ -75,6 +85,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 11,
           first_name: 'Paul',
           last_name: 'Miller',
           email: 'paulmiller@beerista.com',
@@ -82,6 +93,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 12,
           first_name: 'Siyami',
           last_name: 'Avci',
           email: 'siyamiavci@beerista.com',
@@ -89,6 +101,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 13,
           first_name: 'Jake',
           last_name: 'Bell',
           email: 'jakebell@beerista.com',
@@ -96,6 +109,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 14,
           first_name: 'Ryan',
           last_name: 'Sobol',
           email: 'ryansobol@beerista.com',
@@ -103,6 +117,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 15,
           first_name: 'Roger',
           last_name: 'Schmidt',
           email: 'rogerschmidt@beerista.com',
@@ -110,6 +125,7 @@ exports.seed = function(knex) {
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }, {
+          id: 16,
           first_name: 'Scott',
           last_name: 'Hurlow',
           email: 'scotthurlow@beerista.com',
