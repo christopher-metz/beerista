@@ -115,19 +115,12 @@ const data = [{
 }];
 
 router.get('/beers', (req, res, next) => {
-  // Pull fresh data from API req.body.q
-  const beers = data;
-
-  res.send(data);
-});
-
-router.get('/beers/:search', (req, res, next) => {
   console.log(data);
   const results = [];
   data.forEach((beer) => {
-    console.log(req.params.search);
+    console.log(req.body.name);
     console.log(beer.name);
-    if (beer.name === req.params.search) {
+    if (beer.name === req.body.name) {
       results.push(beer);
     }
   });
