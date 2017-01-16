@@ -121,6 +121,20 @@ router.get('/beers', (req, res, next) => {
   res.send(data);
 });
 
+router.get('/beers/:search', (req, res, next) => {
+  console.log(data);
+  const results = [];
+  data.forEach((beer) => {
+    console.log(req.params.search);
+    console.log(beer.name);
+    if (beer.name === req.params.search) {
+      results.push(beer);
+    }
+  });
+  console.log('here');
+  res.send(results);
+});
+
 router.get('/beers/:id', (req, res, next) => {
   // Pull specific beer page data
 });
