@@ -39,14 +39,14 @@ app.use((req, res, next) => {
 });
 
 const beers = require('./routes/beers');
-const friends = require('./routes/friends');
+const followers = require('./routes/followers');
 const ratings = require('./routes/ratings');
 const stars = require('./routes/stars');
 const token = require('./routes/token');
 const users = require('./routes/users');
 
 app.use(beers);
-app.use(friends);
+app.use(followers);
 app.use(ratings);
 app.use(stars);
 app.use(token);
