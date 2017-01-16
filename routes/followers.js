@@ -21,13 +21,16 @@ const authorize = function(req, res, next) {
 
 router.get('/followers', authorize, (req, res, next) => {
   knex('followers')
-    .innerJoin('users', 'followers.user_id_2', 'user.id')
+    .innerJoin('users', 'followers.user_id_2', 'users.id')
     .where('followers.user_id_1', req.claim.userId)
     .orderBy('users.id', 'ASC')
     .then((rows) => {
+      if (rows.length === 0) {
+        throw boom.create(404, 'You havent followed anyone');
+      }
       const followers = camelizeKeys(rows);
 
-      res.send(follwers);
+      res.send(followers);
     })
     .catch((err) => {
       next(err);

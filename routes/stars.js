@@ -27,6 +27,10 @@ router.get('/stars', authorize, (req, res, next) => {
     .where('stars.user_id', req.claim.userId)
     .orderBy('stars.beer_id', 'ASC')
     .then((rows) => {
+      if (rows.length === 0) {
+        throw boom.create(404, 'You havent followed any beers');
+      }
+
       const stars = camelizeKeys(rows);
 
       res.send(stars);

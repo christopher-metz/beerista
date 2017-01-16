@@ -25,7 +25,7 @@ router.get('/ratings', authorize, (req, res, next) => {
     .innerJoin('venues', 'ratings.venue_id', 'venues.id')
     .where('ratings.user_id', req.claim.userId)
     .then((ratings) => {
-      if (!ratings) {
+      if (ratings.length === 0) {
         throw boom.create(404, 'Ratings not found');
       }
 
