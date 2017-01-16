@@ -47,45 +47,46 @@ router.post('/stars', authorize, (req, res, next) => {
         // Go grab beer info from request body and add to DB
       }
 
-      return knex('favorites')
+      return knex('stars')
       .insert({
-        book_id: bookId, // eslint-disable-line camelcase
-        user_id: req.claim.userId // eslint-disable-line camelcase
+        beer_id: beerId, // eslint-disable-line camelcase
+        user_id: req.claim.userId, // eslint-disable-line camelcase
+        active_flag: 1
       }, '*');
     })
-    .then((favorites) => {
-      res.send(camelizeKeys(favorites[0]));
+    .then((stars) => {
+      res.send(camelizeKeys(stars[0]));
     })
     .catch((err) => {
       next(err);
     });
 });
 
-router.delete('/favorites', authorize, (req, res, next) => {
-  const { bookId } = req.body;
+router.patch('/stars', authorize, (req, res, next) => {
+  const { beerId } = req.body;
 
-  if (Number.isNaN(Number.parseInt(bookId))) {
-    return next(boom.create(400, 'Book ID must be an integer'));
-  }
-
-  knex('favorites')
-    .where('book_id', bookId)
+  knex('stars')
+    .where('beer_id', beerId)
+    .where('user_id', req.claim.userId)
     .first()
-    .then((favorite) => {
-      if (!favorite) {
-        throw boom.create(404, 'Favorite not found');
+    .then((star) => {
+      if (!star) {
+        throw boom.create(404, 'Star not found');
       }
 
-      return knex('favorites')
-        .del('*')
+      return knex('stars')
+        .update({
+          active_flag: 0,
+          updated_at: Date.now()
+        })
         .where('user_id', req.claim.userId)
-        .where('book_id', bookId);
+        .where('beer_id', beerId);
     })
-    .then((favorites) => {
-      const favorite = favorites[0];
+    .then((stars) => {
+      const star = stars[0];
 
-      delete favorite.id;
-      res.send(camelizeKeys(favorite));
+      delete star.id;
+      res.send(camelizeKeys(star));
     })
     .catch((err) => {
       next(err);
