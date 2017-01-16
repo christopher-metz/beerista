@@ -13,7 +13,6 @@ exports.up = function(knex) {
       .references('users.id')
       .onDelete('CASCADE')
       .index();
-    table.integer('active_flag').notNullable().defaultTo(0);
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
   });
 };
