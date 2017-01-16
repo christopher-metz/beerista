@@ -24,50 +24,61 @@
     </header>
 
     <main>
-      <section id="filters">
-        <div id="filter-one">
-          <form>
-            <input type="text" name="search-your-beers" placeholder="Search your beers" class="filter-one-input">
-          </form>
+      <section id="filters-nav">
+        <button id="filter-btn">Filter</button>
+        <div id="current-filter" class="off"></div>
+      </section>
 
-          <form>
-            <input type="text" name="search-by-brewery" placeholder="Search by brewery" class="filter-one-input">
-          </form>
-        </div>
+      <div class="filter-menu-container off">
+        <section id="filters-pop">
+          <div id="filter-one">
+            <form>
+              <input type="text" name="search-your-beers" placeholder="Search your beers" class="filter-one-input">
+            </form>
 
-        <div id="filter-two">
-          <form>
-            <input type="text" name="search-by-style" placeholder="Search by style" class="filter-two-input">
-          </form>
-
-          <form>
-            <input type="text" name="select-friend" placeholder="Select a friend" class="filter-two-input">
-          </form>
-        </div>
-
-        <div id="filter-three">
-          <div id="rating-filter">
-            <div class="status">
-              <h4>Rating</h4>
-            </div>
-            <button class="rating-filter-btn">
-              <i class="material-icons rating-selection">looks_one</i>
-            </button>
-            <button class="rating-filter-btn">
-              <i class="material-icons rating-selection">looks_two</i>
-            </button>
-            <button class="rating-filter-btn">
-              <i class="material-icons rating-selection">looks_3</i>
-            </button>
-            <button class="rating-filter-btn">
-              <i class="material-icons rating-selection">looks_4</i>
-            </button>
+            <form>
+              <input type="text" name="search-by-brewery" placeholder="Search by brewery" class="filter-one-input">
+            </form>
           </div>
 
-          <form>
-            <input type="select" name="select-by-state" placeholder="State" class="filter-three-input">
-          </form>
-        </div>
+          <div id="filter-two">
+            <form>
+              <input type="text" name="search-by-style" placeholder="Search by style" class="filter-two-input">
+            </form>
+
+            <form>
+              <input type="text" name="select-friend" placeholder="Select a friend" class="filter-two-input">
+            </form>
+          </div>
+
+          <div id="filter-three">
+            <div id="rating-filter">
+              <div class="rating-circle-filter"></div>
+              <div class="rating-circle-filter"></div>
+              <div class="rating-circle-filter"></div>
+              <div class="rating-circle-filter"></div>
+            </div>
+
+            <form>
+              <input type="select" name="select-by-state" placeholder="State" class="filter-three-input">
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <section id="profile-beers">
+        <section id="profile-menu">
+          <div id="rated-beers">
+            <h2>Rated Beers</h2>
+          </div>
+
+          <div id="starred-beers">
+            <h2>Starred Beers</h2>
+          </div>
+        </section>
+
+        <section id="beer-display">
+        </section>
       </section>
     </main>
 

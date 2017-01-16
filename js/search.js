@@ -26,7 +26,6 @@ const populateResults = function(event) {
     $info.append($name);
 
     const $h3 = $('<h3>').text(beer.name);
-    console.log($result);
     const $h4 = $('<h4>').text(beer.brewery);
     const $h5 = $('<h5>').text(beer.style);
 
@@ -48,8 +47,6 @@ const populateResults = function(event) {
 
     $results.append($result);
 
-    $allResults = $('.result');
-
     event.preventDefault();
   };
 }
@@ -61,6 +58,8 @@ $search.on('click', populateResults);
 
 const loadBeerPage = function(event) {
   event.preventDefault();
+
+  $allResults = $('.result');
 
   const $target = $(event.target).parents('.result');
   console.log($target);
