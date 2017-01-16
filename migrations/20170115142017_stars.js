@@ -13,7 +13,8 @@ exports.up = function(knex) {
       .references('beers.id')
       .onDelete('CASCADE')
       .index();
-    table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
+    table.integer('active_flag').notNullable().defaultTo(0);
+    table.timestamps(true, true);
   });
 };
 
