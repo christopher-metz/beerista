@@ -49,9 +49,8 @@ router.post('/stars', authorize, (req, res, next) => {
 
       return knex('stars')
       .insert({
-        beer_id: beerId, // eslint-disable-line camelcase
-        user_id: req.claim.userId, // eslint-disable-line camelcase
-        active_flag: 1
+        beer_id: beerId,
+        user_id: req.claim.userId
       }, '*');
     })
     .then((stars) => {
@@ -62,7 +61,7 @@ router.post('/stars', authorize, (req, res, next) => {
     });
 });
 
-router.patch('/stars', authorize, (req, res, next) => {
+router.delete('/stars', authorize, (req, res, next) => {
   const { beerId } = req.body;
 
   knex('stars')
@@ -75,10 +74,7 @@ router.patch('/stars', authorize, (req, res, next) => {
       }
 
       return knex('stars')
-        .update({
-          active_flag: 0,
-          updated_at: Date.now()
-        })
+        .del('*')
         .where('user_id', req.claim.userId)
         .where('beer_id', beerId);
     })

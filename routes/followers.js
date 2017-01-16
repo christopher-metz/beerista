@@ -34,4 +34,65 @@ router.get('/followers', authorize, (req, res, next) => {
     });
 });
 
-router.get('/followers')
+router.get('/followers', authorize, (req, res, next) => {
+  knex('followers')
+    .innerJoin('users', 'followers.user_id_2', 'user.id')
+    .where('followers.user_id_1', req.claim.userId)
+    .where('users.first_name', 'LIKE', `%${req.body.name}%`)
+    .orWhere('users.last_name', 'LIKE', `%${req.body.name}%`)
+    .orderBy('users.first_name', 'ASC')
+    .then((users) => {
+      if (!users) {
+        throw boom.create(404, 'No Matches');
+      }
+
+      delete user.hashedPassword;
+
+      res.send(camelizeKeys(users));
+    })
+    .catch((err) => {
+      next(err);
+    });
+})
+
+router.post('/followers', authorize, (req, res, next) => {
+  knex('followers')
+    .insert({
+      user_id_1: req.claim.userId,
+      user_id_2: req.body.userId
+    }, '*')
+    .then((followers) => {
+      res.send(camelizeKeys(followers[0]));
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.delete('/followers', authorize, (req, res, next) => {
+  knex('followers')
+    .where('followers.user_id_1', req.claim.userId)
+    .where('followers.user_id_2', req.body.userId)
+    .first()
+    .then((follower) => {
+      if (!follower) {
+        throw boom.create(404, 'Follower not found');
+      }
+
+      return knex('followers')
+        .del('*')
+        .where('followers.user_id_1', req.claim.userId)
+        .where('followers.user_id_2', req.body.userId)
+    })
+    .then((followers) => {
+      const follower = followers[0];
+
+      delete follower.id;
+      res.send(camelizeKeys(follower));
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+module.exports = router;
