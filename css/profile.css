@@ -99,6 +99,34 @@ main {
 }
 
 /*Profile*/
+#profile-info {
+  height: 10vh;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#user-icon {
+  font-size: 75px;
+}
+
+#user-name {
+  font-size: 50px;
+}
+
+#follow-user {
+  height: 40%;
+  width: 25%;
+  background-color: #002596;
+  font-size: 50px;
+  color: white;
+  box-shadow: 0 1px 10px 5px gray;
+  /*align-self: center;
+  align-content: flex-end;*/
+}
+
 #profile-beers {
   height: 60vh;
   width: 90%;
