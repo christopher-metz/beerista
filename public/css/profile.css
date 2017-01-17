@@ -136,7 +136,6 @@ main {
   margin: 0 auto;
   background-color: white;
   box-shadow: 0 1px 1px 1px gray;
-
 }
 
 #profile-menu {
@@ -216,7 +215,7 @@ main {
   font-size: 1.5em;
 }
 
-#rated-beers {
+.shadow {
   background-color: #003BF0;
   box-shadow: 0 5px 25px 5px gray;
 }

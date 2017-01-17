@@ -21,19 +21,38 @@ const authorize = function(req, res, next) {
   });
 };
 
+// Get all ratings for a user.
 router.get('/stars', authorize, (req, res, next) => {
-  knex('stars')
-    .innerJoin('beers', 'stars.beer_id', 'beers.id')
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .innerJoin('stars', 'stars.beer_id', 'beers.id')
     .where('stars.user_id', req.claim.userId)
-    .orderBy('stars.beer_id', 'ASC')
-    .then((rows) => {
-      if (rows.length === 0) {
-        throw boom.create(404, 'You havent followed any beers');
+    .orderBy('beers.name')
+    .then((ratings) => {
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers!');
       }
 
-      const stars = camelizeKeys(rows);
+      res.send(ratings);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
-      res.send(stars);
+// Get all ratings for a follower.
+router.get('/stars/:id', authorize, (req, res, next) => {
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .innerJoin('stars', 'stars.beer_id', 'beers.id')
+    .where('stars.user_id', req.params.id)
+    .orderBy('beers.name')
+    .then((ratings) => {
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers!');
+      }
+
+      res.send(ratings);
     })
     .catch((err) => {
       next(err);
