@@ -54,16 +54,14 @@
 
   const getBeers = function() {
     const searchParam = $('.search-box').val();
-    console.log(searchParam);
+    // console.log('this' + searchParam);
 
     const $xhr = $.ajax({
       method: 'GET',
       url: `/beers/?${searchParam}`,
       dataType: 'json'
-    });
-    console.log($xhr);
-
-    $xhr.done((data) => {
+    })
+    .done((data) => {
       if ($xhr.status !== 200) {
         return;
       }
@@ -71,11 +69,14 @@
 
       beers = data;
       console.log(data);
+    })
+    .fail(($xhr) => {
+      console.log($xhr)
     });
-  }
+  };
 
   const $search = $('#search-btn');
-  // console.log($search);
+  console.log($search);
   const $searchInput = $('.search-box');
   // console.log($searchInput);
 
@@ -88,7 +89,7 @@
     $allResults = $('.result');
 
     const $target = $(event.target).parents('.result');
-    console.log($target);
+    // console.log($target);
 
     $allResults.detach();
     $results.addClass('off');
