@@ -9,12 +9,12 @@
 
   filter.on('click', toggleFilter);
 
-  $.getJSON('/ratings')
-    .done((ratings) => {
-      // fill out profile page
-
-    })
-    .fail(() => {
-      window.location.href = '/login.html';
-    });
+  // $.getJSON('/ratings')
+  //   .done((ratings) => {
+  //     // fill out profile page
+  //
+  //   })
+  //   .fail(() => {
+  //     window.location.href = '/login.html';
+  //   });
 })();
