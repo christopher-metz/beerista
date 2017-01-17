@@ -1,119 +1,126 @@
+(function() {
+
 'use strict';
 
-let beers = [{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' }];
+  let beers = [{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' },{photoURL: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png', name: 'Belgian White', brewery: 'Blue Moon Brewing Company', style: 'Witbier', abv: '5.4%', ibu: '20', rating: '3.4/5.0' }];
 
-let $allResults;
+  let $allResults;
 
-const populateResults = function(event, data) {
-  const $results = $('#results');
-  $results.empty();
+  const populateResults = function(event, data) {
+    const $results = $('#results');
+    $results.empty();
 
-  for (const beer of data) {
-    const $result = $('<div>').addClass('result');
-    const $photo = $('<div>').addClass('photo');
+    for (const beer of data) {
+      const $result = $('<div>').addClass('result');
+      const $photo = $('<div>').addClass('photo');
 
-    $result.append($photo);
+      $result.append($photo);
 
-    const $img = $('<img>').attr('src', beer.photoURL);
+      const $img = $('<img>').attr('src', beer.photoURL);
 
-    $photo.append($img);
+      $photo.append($img);
 
-    const $info = $('<div>').addClass('info');
-    const $name = $('<div>').addClass('name');
+      const $info = $('<div>').addClass('info');
+      const $name = $('<div>').addClass('name');
 
-    $result.append($info);
-    $info.append($name);
+      $result.append($info);
+      $info.append($name);
 
-    const $h3 = $('<h3>').text(beer.name);
-    const $h4 = $('<h4>').text(beer.brewery);
-    const $h5 = $('<h5>').text(beer.style);
+      const $h3 = $('<h3>').text(beer.name);
+      const $h4 = $('<h4>').text(beer.brewery);
+      const $h5 = $('<h5>').text(beer.style);
 
-    $name.append($h3);
-    $name.append($h4);
-    $name.append($h5);
+      $name.append($h3);
+      $name.append($h4);
+      $name.append($h5);
 
-    const $stats = $('<div>').addClass('stats');
+      const $stats = $('<div>').addClass('stats');
 
-    $info.append($stats);
+      $info.append($stats);
 
-    const $abvP = $('<p>').text(`ABV: ${beer.abv}`).addClass('abv');
-    const $ibuP = $('<p>').text(`IBU: ${beer.ibu}`).addClass('ibu');
-    const $ratingP = $('<p>').text(`Rating: ${beer.rating}`).addClass('rating');
+      const $abvP = $('<p>').text(`ABV: ${beer.abv}`).addClass('abv');
+      const $ibuP = $('<p>').text(`IBU: ${beer.ibu}`).addClass('ibu');
+      const $ratingP = $('<p>').text(`Rating: ${beer.rating}`).addClass('rating');
 
-    $stats.append($abvP);
-    $stats.append($ibuP);
-    $stats.append($ratingP);
+      $stats.append($abvP);
+      $stats.append($ibuP);
+      $stats.append($ratingP);
 
-    $results.append($result);
+      $results.append($result);
 
+      event.preventDefault();
+    };
+  }
+
+  const getBeers = function() {
+    const searchParam = $('.search-box').val();
+    console.log(searchParam);
+
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: 'http://localhost:8000/beers',
+      data: { name: searchParam },
+      dataType: 'json'
+    });
+    console.log($xhr);
+
+    $xhr.done((data) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+      console.log(data);
+
+      // beers = JSON.parse(data);
+    });
+  }
+
+  const $searchInput = $('.search-box');
+  console.log($searchInput);
+
+  $searchInput.on('input', getBeers);
+
+
+  const $search = $('#search form button');
+
+
+  $search.on('click', populateResults);
+
+
+  const loadBeerPage = function(event) {
     event.preventDefault();
-  };
-}
 
-const getBeers = function() {
-  const $searchParam = $('.search-box').val();
+    $allResults = $('.result');
 
-  const $xhr = $.ajax({
-    method: 'GET',
-    url: `https://cors-anywhere.herokuapp.com/http://localhost:8000/beers name=${$searchParam}`,
-    dataType: 'json'
-  });
+    const $target = $(event.target).parents('.result');
+    console.log($target);
 
-  $xhr.done((data) => {
-    if ($xhr.status !== 200) {
-      return;
-    }
-    console.log(data);
+    $allResults.detach();
+    $results.addClass('off');
 
-    // beers = JSON.parse(data);
-  });
-}
+    $('#beer').removeClass('off');
 
-const $searchInput = $('.search-box');
-console.log($searchInput);
+    $('#beer-photo').attr('src', $target.find('.photo img').attr('src'));
+    $('#name').text($target.find('.name h3').text());
+    $('#brewery').text($target.find('.name h4').text());
+    $('#style').text($target.find('.name h5').text());
+    $('#abv').text($target.find('.abv').text());
+    $('#ibu').text($target.find('.ibu').text());
+    $('#rating').text($target.find('.rating').text());
+  }
 
-$searchInput.on('input', getBeers);
+  const $results = $('#results');
 
+  $results.on('click', '.result', loadBeerPage);
 
-const $search = $('#search form button');
+  const exitBeerPage = function(event) {
+    event.preventDefault();
 
+    $results.append($allResults);
+    $results.removeClass('off');
+  }
 
-$search.on('click', populateResults);
+  const $exit = $('i');
 
+  $exit.on('click', exitBeerPage);
 
-const loadBeerPage = function(event) {
-  event.preventDefault();
-
-  $allResults = $('.result');
-
-  const $target = $(event.target).parents('.result');
-  console.log($target);
-
-  $allResults.detach();
-  $results.addClass('off');
-
-  $('#beer').removeClass('off');
-
-  $('#beer-photo').attr('src', $target.find('.photo img').attr('src'));
-  $('#name').text($target.find('.name h3').text());
-  $('#brewery').text($target.find('.name h4').text());
-  $('#style').text($target.find('.name h5').text());
-  $('#abv').text($target.find('.abv').text());
-  $('#ibu').text($target.find('.ibu').text());
-  $('#rating').text($target.find('.rating').text());
-}
-
-const $results = $('#results');
-
-$results.on('click', '.result', loadBeerPage);
-
-const exitBeerPage = function(event) {
-  event.preventDefault();
-
-  $results.append($allResults);
-  $results.removeClass('off');
-}
-
-const $exit = $('i');
-
-$exit.on('click', exitBeerPage);
+})();
