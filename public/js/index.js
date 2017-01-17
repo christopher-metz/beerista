@@ -33,12 +33,12 @@
   $('#account-icon').on('click', toggleAccountMenu);
 
   // Navigate to other pages via Account Menu
-  // const myFollows = $('#my-follows');
+  const myFollows = $('#my-follows');
   const myBeers = $('#my-beers');
   // const settings = $('#settings');
 
-  // myFollows.on('click', function() { window.location.href = '/followers.html' });
-  myBeers.on('click', function() { window.location.href = '/profile.html' });
+  myFollows.on('click', () => { window.location.href = '/followers.html' });
+  myBeers.on('click', () => { window.location.href = '/profile.html' });
 
   // const menuOptions = $('#log-out');
 })();
