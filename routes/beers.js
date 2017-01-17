@@ -117,6 +117,7 @@ const data = [{
 router.get('/beers/?', (req, res, next) => {
   const results = [];
 
+  console.log(req.query.name);
   data.forEach((beer) => {
     if (beer.name.includes(req.query.name)) {
       results.push(beer);
