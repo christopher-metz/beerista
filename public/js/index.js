@@ -33,11 +33,11 @@
   $('#account-icon').on('click', toggleAccountMenu);
 
   // Navigate to other pages via Account Menu
-  // const myFriends = $('#my-friends');
+  // const myFollows = $('#my-follows');
   const myBeers = $('#my-beers');
   // const settings = $('#settings');
 
-  // myFriends.on('click', function() { window.location.href = '/friends.html' });
+  // myFollows.on('click', function() { window.location.href = '/followers.html' });
   myBeers.on('click', function() { window.location.href = '/profile.html' });
 
   // const menuOptions = $('#log-out');
