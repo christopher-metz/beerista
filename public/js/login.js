@@ -74,86 +74,86 @@ const buildSignUp = () => {
   isLogin = false;
 };
 
-// const login = () => {
-//   const email = $('input[name|="email"]').val();
-//   const password = $('input[name|="password"]').val();
-//
-//   if (!email) {
-//     return Materialize.toast('Email must not be blank', 3000);
-//   }
-//
-//   if (!password) {
-//     return Materialize.toast('Password must not be blank', 3000);
-//   }
-//
-//   const $xhr = $.ajax({
-//     method: 'POST',
-//     contentType: 'application/json',
-//     url: '/token',
-//     data: JSON.stringify({ email, password }),
-//     dataType: 'json'
-//   });
-//   $xhr.done(() => {
-//     window.location.href = '/profile.html';
-//   });
-//   $xhr.fail((err) => {
-//     console.log(err);
-//   });
-// };
+const login = () => {
+  const email = $('input[name|="email"]').val();
+  const password = $('input[name|="password"]').val();
 
-// const createAccount = () => {
-//   const firstName = $('input[name|="firstName"]').val().trim();
-//   const lastName = $('input[name|="lastName"]').val().trim();
-//   const email = $('input[name|="email"]').val().trim();
-//   const city = $('input[name|="city"]').val().trim();
-//   const state = $('input[name|="state"]').val().trim();
-//   const password = $('input[name|="password"]').val();
-//
-//   if (!firstName) {
-//     return Materialize.toast('First name must not be blank', 3000);
-//   }
-//
-//   if (!lastName) {
-//     return Materialize.toast('Last name must not be blank', 3000);
-//   }
-//
-//   if (!email) {
-//     return Materialize.toast('Email must not be blank', 3000);
-//   }
-//
-//   if (email.indexOf('@') < 0) {
-//     return Materialize.toast('Email must be valid', 3000);
-//   }
-//
-//   if (!city) {
-//     return Materialize.toast('City must not be blank', 3000);
-//   }
-//
-//   if (!state) {
-//     return Materialize.toast('State must not be blank', 3000);
-//   }
-//
-//   if (!password || password.length < 8) {
-//     return Materialize.toast(
-//       'Password must be at least 8 characters long',
-//       3000
-//     );
-//   }
-//
-//   $.ajax({
-//     method: 'POST',
-//     contentType: 'application/json',
-//     data: JSON.stringify({ firstName, lastName, email, city, state, password }),
-//     dataType: 'json',
-//     url: '/users'
-//   });
-//   .done(() => {
-//     window.location.href = '/profile.html';
-//   });
-//   .fail(($xhr) => {
-//     Materialize.toast($xhr.responseText, 3000);
-//   });
-// };
+  if (!email) {
+    return Materialize.toast('Email must not be blank', 3000);
+  }
+
+  if (!password) {
+    return Materialize.toast('Password must not be blank', 3000);
+  }
+
+  const $xhr = $.ajax({
+    method: 'POST',
+    contentType: 'application/json',
+    url: '/token',
+    data: JSON.stringify({ email, password }),
+    dataType: 'json'
+  });
+  $xhr.done(() => {
+    window.location.href = '/profile.html';
+  });
+  $xhr.fail((err) => {
+    console.log(err);
+  });
+};
+
+const createAccount = () => {
+  const firstName = $('input[name|="first-name"]').val();
+  const lastName = $('input[name|="last-name"]').val();
+  const email = $('input[name|="email"]').val();
+  const city = $('input[name|="city"]').val();
+  const state = $('input[name|="state"]').val();
+  const password = $('input[name|="password"]').val();
+
+  if (!firstName) {
+    return Materialize.toast('First name must not be blank', 3000);
+  }
+
+  if (!lastName) {
+    return Materialize.toast('Last name must not be blank', 3000);
+  }
+
+  if (!email) {
+    return Materialize.toast('Email must not be blank', 3000);
+  }
+
+  if (email.indexOf('@') < 0) {
+    return Materialize.toast('Email must be valid', 3000);
+  }
+
+  if (!city) {
+    return Materialize.toast('City must not be blank', 3000);
+  }
+
+  if (!state) {
+    return Materialize.toast('State must not be blank', 3000);
+  }
+
+  if (!password || password.length < 8) {
+    return Materialize.toast(
+      'Password must be at least 8 characters long',
+      3000
+    );
+  }
+
+  const $xhr = $.ajax({
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({ firstName, lastName, email, city, state, password }),
+    dataType: 'json',
+    url: '/users'
+  });
+  $xhr.done(() => {
+    window.location.href = '/profile.html';
+  });
+  $xhr.fail(($xhr) => {
+    Materialize.toast($xhr.responseText, 3000);
+  });
+};
 
 const handleAnchorClick = () => {
   if (isLogin) {
@@ -164,20 +164,20 @@ const handleAnchorClick = () => {
   }
 };
 
-// const handleSubmit = (event) => {
-//   event.preventDefault();
-//
-//   if (isLogin) {
-//     login();
-//   }
-//   else {
-//     createAccount(event);
-//   }
-// };
+const handleSubmit = (event) => {
+  event.preventDefault();
+
+  if (isLogin) {
+    login();
+  }
+  else {
+    createAccount();
+  }
+};
 
 (function() {
   const $form = $('form');
 
   $form.on('click', 'a', handleAnchorClick);
-  // $form.submit(handleSubmit);
+  $form.submit(handleSubmit);
 })();
