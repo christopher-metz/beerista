@@ -30,16 +30,16 @@ switch (app.get('env')) {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-// app.use(express.static(path.join('public')));
+app.use(express.static(path.join('public')));
 
 // CSRF protection
-// app.use((req, res, next) => {
-//   if (/json/.test(req.get('Accept'))) {
-//     return next();
-//   }
-//
-//   res.sendStatus(406);
-// });
+app.use((req, res, next) => {
+  if (/json/.test(req.get('Accept'))) {
+    return next();
+  }
+
+  res.sendStatus(406);
+});
 
 const beers = require('./routes/beers');
 const followers = require('./routes/followers');

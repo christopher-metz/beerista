@@ -58,7 +58,7 @@
 
     const $xhr = $.ajax({
       method: 'GET',
-      url: '/beers',
+      url: 'http://localhost:8000/beers',
       data: { name: searchParam },
       dataType: 'json'
     });
