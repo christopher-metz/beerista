@@ -114,17 +114,14 @@ const data = [{
   description: 'Bud Light is brewed using a blend of premium aroma hop varieties, both American-grown and imported, and a combination of barley malts and rice. Its superior drinkability and refreshing flavor makes it the world’s favorite light beer. '
 }];
 
-router.get('/beers', (req, res, next) => {
-  console.log(data);
+router.get('/beers/?', (req, res, next) => {
   const results = [];
+
   data.forEach((beer) => {
-    console.log(req.body.name);
-    console.log(beer.name);
-    if (beer.name === req.body.name) {
+    if (beer.name.includes(req.query.name)) {
       results.push(beer);
     }
   });
-  console.log('here');
   res.send(results);
 });
 

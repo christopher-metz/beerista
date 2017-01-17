@@ -6,17 +6,19 @@
 
   let $allResults;
 
-  const populateResults = function(event, data) {
+  const populateResults = function(beers) {
+
+    console.log('hello');
     const $results = $('#results');
     $results.empty();
 
-    for (const beer of data) {
+    for (const beer of beers) {
       const $result = $('<div>').addClass('result');
       const $photo = $('<div>').addClass('photo');
 
       $result.append($photo);
 
-      const $img = $('<img>').attr('src', beer.photoURL);
+      const $img = $('<img>').attr('src', beer.photo_url);
 
       $photo.append($img);
 
@@ -47,10 +49,8 @@
       $stats.append($ratingP);
 
       $results.append($result);
-
-      event.preventDefault();
     };
-  }
+  };
 
   const getBeers = function() {
     const searchParam = $('.search-box').val();
@@ -58,8 +58,7 @@
 
     const $xhr = $.ajax({
       method: 'GET',
-      url: '/beers',
-      data: { name: searchParam },
+      url: `/beers/?${searchParam}`,
       dataType: 'json'
     });
     console.log($xhr);
@@ -70,21 +69,18 @@
       }
       console.log(data);
 
-      // beers = JSON.parse(data);
+      beers = data;
+      console.log(data);
     });
   }
 
+  const $search = $('#search-btn');
+  // console.log($search);
   const $searchInput = $('.search-box');
-  console.log($searchInput);
+  // console.log($searchInput);
 
   $searchInput.on('input', getBeers);
-
-
-  const $search = $('#search form button');
-
-
   $search.on('click', populateResults);
-
 
   const loadBeerPage = function(event) {
     event.preventDefault();

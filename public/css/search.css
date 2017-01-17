@@ -16,11 +16,16 @@ main {
 /* SEARCH */
 #search {
   height: 10vh;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #search form {
-  width: 100%;
+  width: 75%;
   height: 100%;
   display: flex;
   justify-content: space-around;
@@ -28,12 +33,12 @@ main {
 }
 
 .search-box {
-  width: 70%;
+  width: 100%;
   height: 75%;
   font-size: 3em;
 }
 
-#search form button {
+#search-btn {
   width: 20%;
   height: 75%;
   font-size: 3em;
