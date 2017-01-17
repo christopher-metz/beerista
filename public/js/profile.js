@@ -1,7 +1,6 @@
 (function() {
   'use strict';
 
-// Populate Results
   let isRatings = true;
 
   const populateResults = function(ratings) {
