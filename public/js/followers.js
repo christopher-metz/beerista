@@ -147,9 +147,9 @@
   // Event Listeners to View Follow's Profile
 
   const sendToFollowPage = function(event) {
-    const param = $(event.target).data();
+    const param = $(this).data();
     console.log(param);
-    window.location.href = `/profile.html?${param}`;
+    window.location.href = `/profile.html?userId=${param.userId}`;
   }
 
   const addResultListener = function() {
