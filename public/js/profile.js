@@ -57,32 +57,73 @@
 /*-------------------------------------------------*/
 // Load user info
   let userId;
+  window.QUERY_PARAMETERS = {};
 
-  const $xhr = $.ajax({
-    method: 'GET',
-    contentType: 'application/json',
-    dataType: 'json',
-    url: '/users'
-  });
-  $xhr.done(($xhr) => {
-    userId = $xhr.id;
-    $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
-  });
-  $xhr.fail(() => {
-    window.location.href = '/login.html';
-  });
+  if (window.location.search) {
+    window.location.search.substr(1).split('&').forEach((paramStr) => {
+      const param = paramStr.split('=');
 
-  const $xhr_2 = $.ajax({
-    method: 'GET',
-    contentType: 'application/json',
-    dataType: 'json',
-    url: '/ratings'
-  })
-  .done((ratings) => {
-    populateResults(ratings);
-  })
-  .fail(() => {
-    window.location.href = '/login.html';
-  });
+      window.QUERY_PARAMETERS[param[0]] = param[1];
+    });
+  }
+
+  if (!window.QUERY_PARAMETERS.userId) {
+    const $xhr = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: '/users'
+    });
+    $xhr.done(($xhr) => {
+      userId = $xhr.id;
+      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
+    });
+    $xhr.fail(() => {
+      window.location.href = '/login.html';
+    });
+
+    const $xhr_2 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: '/ratings'
+    })
+    .done((ratings) => {
+      populateResults(ratings);
+    })
+    .fail(() => {
+      window.location.href = '/login.html';
+    });
+  }
+  else {
+    const equalI = window.location.search.indexOf('=');
+    const followerId = Number.parseInt(window.location.search.slice(equalI));
+    const $xhr = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/users/${window.QUERY_PARAMETERS.userId}`
+    });
+    $xhr.done(($xhr) => {
+      userId = $xhr.id;
+      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
+    });
+    $xhr.fail(() => {
+      window.location.href = '/login.html';
+    });
+
+    const $xhr_2 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/ratings/${window.QUERY_PARAMETERS.userId}`
+    })
+    .done((ratings) => {
+      populateResults(ratings);
+    })
+    .fail(() => {
+      window.location.href = '/login.html';
+    });
+  }
 /*-------------------------------------------------*/
 })();

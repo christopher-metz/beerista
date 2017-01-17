@@ -19,11 +19,34 @@ const authorize = function(req, res, next) {
   });
 };
 
+
+// Get all ratings for a user.
 router.get('/ratings', authorize, (req, res, next) => {
-  knex.select('beer.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url').from('beers')
-    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
     .avg('ratings.rating as rating')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
     .where('ratings.user_id', req.claim.userId)
+    .groupBy('beers.id')
+    .then((ratings) => {
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers!');
+      }
+
+      res.send(ratings);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+// Get all ratings for a follower.
+router.get('/ratings/:id', authorize, (req, res, next) => {
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .avg('ratings.rating as rating')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+    .where('ratings.user_id', req.params.id)
     .groupBy('beers.id')
     .then((ratings) => {
       if (ratings.length === 0) {

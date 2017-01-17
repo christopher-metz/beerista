@@ -36,6 +36,22 @@ router.get('/users', authorize, (req, res, next) => {
     });
 });
 
+router.get('/users/:id', authorize, (req, res, next) => {
+  knex('users')
+    .where('id', req.params.id)
+    .first()
+    .then((user) => {
+      if (!user) {
+        throw boom.create(404, 'User not found');
+      }
+
+      res.send(camelizeKeys(user));
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.post('/users', (req, res, next) => {
   const { firstName, lastName, email, city, state, password } = req.body;
 
