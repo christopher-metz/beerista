@@ -30,15 +30,21 @@ main {
 }
 
 /*Filter*/
+.filter-menu-container {
+  height: 40%;
+  width: 100%;
+  position: absolute;
+  top: 30%;
+}
 
 #filters-pop {
-  height: 20%;
+  height: 100%;
   width: 90%;
   margin: 0 auto;
-  box-shadow: 0 0 0 1px 5px gray;
-  background-color: white;
+  box-shadow: 0 10px 20px 10px gray;
+  background-color: #003FFF;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
 }
@@ -61,10 +67,10 @@ main {
 }
 
 #filter-one, #filter-two, #filter-three {
-  height: 30%;
+  height: 25%;
   width: 100%;
   display: flex;
-  justify-content:space-between;
+  justify-content:space-around;
   align-items: center;
 }
 
@@ -94,6 +100,7 @@ main {
 #rating-filter .rating-circle-filter {
   height: 50px;
   width: 50px;
+  background-color: white;
   border: 5px solid black;
   border-radius: 50%;
 }
