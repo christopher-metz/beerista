@@ -20,10 +20,11 @@ const authorize = function(req, res, next) {
 };
 
 router.get('/ratings', authorize, (req, res, next) => {
-  knex('ratings')
-    .innerJoin('beers', 'ratings.beer_id', 'beers.id')
-    .innerJoin('venues', 'ratings.venue_id', 'venues.id')
+  knex.select('beer.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url').from('beers')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+    .avg('ratings.rating as rating')
     .where('ratings.user_id', req.claim.userId)
+    .groupBy('beers.id')
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers!');
