@@ -74,6 +74,33 @@ const buildSignUp = () => {
   isLogin = false;
 };
 
+const login = () => {
+  const email = $('input[name|="email"]').val();
+  const password = $('input[name|="password"]').val();
+
+  if (!email) {
+    return Materialize.toast('Email must not be blank', 3000);
+  }
+
+  if (!password) {
+    return Materialize.toast('Password must not be blank', 3000);
+  }
+
+  const $xhr = $.ajax({
+    method: 'POST',
+    contentType: 'application/json',
+    url: '/token',
+    data: JSON.stringify({ email, password }),
+    dataType: 'json'
+  });
+  $xhr.done(() => {
+    window.location.href = '/profile.html';
+  });
+  $xhr.fail((err) => {
+    console.log(err);
+  });
+};
+
 const handleAnchorClick = () => {
   if (isLogin) {
     buildSignUp();
@@ -83,8 +110,20 @@ const handleAnchorClick = () => {
   }
 };
 
+const handleSubmit = (event) => {
+  event.preventDefault();
+
+  if (isLogin) {
+    login();
+  }
+  else {
+    createAccount(event);
+  }
+};
+
 (function() {
   const $form = $('form');
 
   $form.on('click', 'a', handleAnchorClick);
+  $form.submit(handleSubmit);
 })();
