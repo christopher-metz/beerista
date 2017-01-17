@@ -3,8 +3,6 @@
 'use strict';
 
   // Check and verify logged in user
-  const verified = false;
-
   const checkForCookie = function() {
     const $xhr = $.ajax({
       method: 'GET',
@@ -19,7 +17,6 @@
       if (bool) {
         $('#login').addClass('off');
         $('#account-icon').removeClass('off');
-        verified = true;
       }
     })
     .fail((err) => {
@@ -163,5 +160,39 @@
   const $exit = $('i');
 
   $exit.on('click', exitBeerPage);
+
+  // Color Rating Option on Beer Page
+  const colorCircles = function() {
+    if ($(this).attr('style')) {
+      $('div.rating-circle').css('backgroundColor', 'white');
+      $(this).prevAll().css('backgroundColor', '#F0BB06');
+      $(this).css('backgroundColor', '#F0BB06');
+    }
+    else {
+      $(this).prevAll().css('backgroundColor', '#F0BB06');
+      $(this).css('backgroundColor', '#F0BB06');
+    }
+  }
+
+  $('div.rating-circle').on('click', colorCircles);
+
+  // Grab Rating from Page Before Rating is Submitted
+
+  // Event Listener for "Add Rating"
+  const submitRating = function() {
+    console.log($('.rating-circle'));
+    const ratingCount = 0;
+    $('.rating-circle').each((div) => {
+      console.log(div);
+      if (div.style.backgroundColor === '#F0BB06') {
+        ratingCount++;
+      }
+    });
+
+    console.log(ratingCount);
+  }
+
+  $('#add-rating').on('click', submitRating);
+
 
 })();
