@@ -26,10 +26,10 @@ router.get('/ratings', authorize, (req, res, next) => {
     .where('ratings.user_id', req.claim.userId)
     .then((ratings) => {
       if (ratings.length === 0) {
-        throw boom.create(404, 'Ratings not found');
+        res.send('You have not rated any beers!');
       }
 
-      res.send(camelizeKeys(ratings));
+      res.send(ratings);
     })
     .catch((err) => {
       next(err);

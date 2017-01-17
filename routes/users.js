@@ -29,7 +29,7 @@ router.get('/users', authorize, (req, res, next) => {
         throw boom.create(404, 'User not found');
       }
 
-      res.send(user);
+      res.send(camelizeKeys(user));
     })
     .catch((err) => {
       next(err);
