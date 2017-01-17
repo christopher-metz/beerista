@@ -1,14 +1,40 @@
 'use strict';
 
 const bcrypt = require('bcrypt-as-promised');
-const express = require('express');
 const boom = require('boom');
+const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../knex');
-
-// eslint-disable-next-line new-cap
 const router = express.Router();
 const { camelizeKeys, decamelizeKeys } = require('humps');
+
+const authorize = function(req, res, next) {
+  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
+    if (err) {
+      return next(boom.create(401, 'Unauthorized'));
+    }
+
+    req.claim = payload;
+
+    next();
+  });
+};
+
+router.get('/users', authorize, (req, res, next) => {
+  knex('users')
+    .where('id', req.claim.userId)
+    .first()
+    .then((user) => {
+      if (!user) {
+        throw boom.create(404, 'User not found');
+      }
+
+      res.send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 router.post('/users', (req, res, next) => {
   const { firstName, lastName, email, city, state, password } = req.body;
