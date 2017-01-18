@@ -24,6 +24,21 @@
     })
   }
 
+// Get User Id
+  let userId;
+  const $xhr = $.ajax({
+    method: 'GET',
+    contentType: 'application/json',
+    dataType: 'json',
+    url: '/users'
+  });
+  $xhr.done(($xhr) => {
+    userId = $xhr.id;
+  });
+  $xhr.fail(() => {
+    console.log('Could not get user Id');
+  });
+
   $(window).on('load', checkForCookie);
 
   // Toggle Account Menu
@@ -172,7 +187,6 @@
   $('div.rating-circle').on('click', colorCircles);
 
   // Grab Rating from Page Before Rating is Submitted
-
   // Event Listener for "Add Rating"
   const submitRating = function() {
     const ratingCircles = document.querySelectorAll('.rating-circle');
@@ -185,7 +199,25 @@
     });
 
     beerData.user_rating = ratingCount;
+    beerData.user_id= userId;
+    console.log(beerData);
 
+    const requestContent = JSON.stringify(beerData);
+    console.log(requestContent);
+
+    const $xhr_2 = $.ajax({
+      method: 'POST',
+      url: '/beers',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(beerData)
+    })
+    .done((data) => {
+      console.log(data);
+    })
+    .fail(() => {
+      console.log('Failure');
+    });
   }
 
   $('#add-rating').on('click', submitRating);
