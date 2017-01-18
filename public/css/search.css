@@ -180,6 +180,10 @@ main {
   border-radius: 50%;
 }
 
+.rating-color {
+  background-color: #F0BB06;
+}
+
 #venue-container {
   height: 100%;
   width: 100%;

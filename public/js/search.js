@@ -164,13 +164,13 @@
   // Color Rating Option on Beer Page
   const colorCircles = function() {
     if ($(this).attr('style')) {
-      $('div.rating-circle').css('backgroundColor', 'white');
-      $(this).prevAll().css('backgroundColor', '#F0BB06');
-      $(this).css('backgroundColor', '#F0BB06');
+      $('div.rating-circle').removeClass('rating-color');
+      $(this).prevAll().addClass('rating-color');
+      $(this).addClass('rating-color');
     }
     else {
-      $(this).prevAll().css('backgroundColor', '#F0BB06');
-      $(this).css('backgroundColor', '#F0BB06');
+      $(this).prevAll().addClass('rating-color');
+      $(this).addClass('rating-color');
     }
   }
 
@@ -180,11 +180,11 @@
 
   // Event Listener for "Add Rating"
   const submitRating = function() {
-    console.log($('.rating-circle'));
+    const ratingCircles = document.querySelectorAll('.rating-circle');
     const ratingCount = 0;
-    $('.rating-circle').each((div) => {
-      console.log(div);
-      if (div.style.backgroundColor === '#F0BB06') {
+
+    ratingCircles.forEach((div) => {
+      if (div.classList.contains('rating-color')) {
         ratingCount++;
       }
     });
