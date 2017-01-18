@@ -9,12 +9,12 @@ const populateResults = function(ratings) {
   const $beerDisplay = $('#beer-display');
 
   $beerDisplay.empty();
-  console.log(ratings);
+  // console.log(ratings);
 
   beers = ratings;
 
   for (const rating of ratings) {
-    console.log(rating);
+    // console.log(rating);
     const $result = $('<div>').addClass('result');
 
     $result.data(rating);
@@ -47,6 +47,19 @@ const populateResults = function(ratings) {
 
     const $abvP = $('<p>').text(`ABV: ${rating.abv}`).addClass('abv');
     const $ibuP = $('<p>').text(`IBU: ${rating.ibu}`).addClass('ibu');
+
+    const $star = $('<div>').addClass('star');
+    const $starIcon = $('<i>').addClass('material-icons star-icon').text('grade');
+
+    console.log(rating);
+
+    if (rating.star) {
+      $starIcon.addClass('star-gold');
+    }
+
+    $star.append($starIcon);
+    $result.append($star);
+
 
     $stats.append($abvP);
     $stats.append($ibuP);
@@ -83,12 +96,12 @@ const populateRatings = () => {
       contentType: 'application/json',
       dataType: 'json',
       url: '/users'
-    });
-    $xhr.done(($xhr) => {
+    })
+    .done(($xhr) => {
       userId = $xhr.id;
       $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
-    });
-    $xhr.fail(() => {
+    })
+    .fail(() => {
       window.location.href = '/login.html';
     });
 
@@ -99,8 +112,29 @@ const populateRatings = () => {
       url: '/ratings'
     })
     .done((ratings) => {
-      // console.log(ratings);
-      populateResults(ratings);
+      console.log(ratings);
+      const $xhr_3 = $.ajax({
+        method: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        url: `/stars`
+      })
+      .done((stars) => {
+        const results = ratings.map((rating) => {
+          for (const star of stars) {
+            if (rating.id === star.id) {
+              rating.star = true;
+              return rating;
+            }
+            rating.star = false;
+            return rating;
+          }
+        })
+        populateResults(results);
+      })
+      .fail(() => {
+        window.location.href = '/login.html';
+      });
     })
     .fail(() => {
       window.location.href = '/login.html';
@@ -130,7 +164,28 @@ const populateRatings = () => {
       url: `/ratings/${window.QUERY_PARAMETERS.userId}`
     })
     .done((ratings) => {
-      populateResults(ratings);
+      const $xhr_3 = $.ajax({
+        method: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        url: `/stars/${window.QUERY_PARAMETERS.userId}`
+      })
+      .done((stars) => {
+        const results = ratings.map((rating) => {
+          for (const star of stars) {
+            if (rating.id === star.id) {
+              rating.star = true;
+              return rating;
+            }
+            rating.star = false;
+            return rating;
+          }
+        })
+        populateResults(results);
+      })
+      .fail(() => {
+        window.location.href = '/login.html';
+      });
     })
     .fail(() => {
       window.location.href = '/login.html';
@@ -178,7 +233,11 @@ const populateStars = () => {
       url: '/stars'
     })
     .done((stars) => {
-      populateResults(stars);
+      const results = stars.map((star) => {
+        star.star = true;
+        return star;
+      });
+      populateResults(results);
     })
     .fail(() => {
       window.location.href = '/login.html';
@@ -208,7 +267,11 @@ const populateStars = () => {
       url: `/stars/${window.QUERY_PARAMETERS.userId}`
     })
     .done((stars) => {
-      populateResults(stars);
+      const results = stars.map((star) => {
+        star.star = true;
+        return star;
+      });
+      populateResults(results);
     })
     .fail(() => {
       window.location.href = '/login.html';
@@ -305,7 +368,7 @@ const submitRating = function() {
     return;
   }
 
-  console.log(beerData);
+  // console.log(beerData);
 
   const ratingData = {
     beer_id: beerData.id,
@@ -378,4 +441,6 @@ $('div.rating-circle').on('click', colorCircles);
 
 // Submit Rating from Beer Page
   $('#add-rating').on('click', submitRating);
+
+//
 })();

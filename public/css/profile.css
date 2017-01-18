@@ -179,7 +179,7 @@ main {
 
 .photo {
   height: 100%;
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,9 +192,25 @@ main {
 
 .info {
   height: 100%;
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-direction: column;
+}
+
+.star {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star-icon {
+  font-size: 100px;
+}
+
+.star-gold {
+  color: #FF9909;
 }
 
 .name {
