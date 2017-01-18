@@ -15,7 +15,7 @@ router.get('/token', (req, res) => {
     if (err) {
       return res.send(false);
     }
-    
+
     res.send(true);
   });
 });
@@ -71,7 +71,7 @@ router.post('/token', (req, res, next) => {
 
 router.delete('/token', (req, res) => {
   res.clearCookie('token');
-  res.end();
+  res.send(false);
 });
 
 module.exports = router;
