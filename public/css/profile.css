@@ -140,7 +140,7 @@ main {
 }
 
 #profile-beers {
-  height: 60vh;
+  /*height: 60vh;*/
   width: 90%;
   margin: 0 auto;
   background-color: white;
@@ -159,7 +159,7 @@ main {
 }
 
 #beer-display {
-  height: 85%;
+  /*height: 85vh;*/
   width: 100%;
   display: flex;
   justify-content: space-between;

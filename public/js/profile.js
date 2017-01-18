@@ -8,8 +8,8 @@ let beers;
 const populateResults = function(ratings) {
   const $beerDisplay = $('#beer-display');
 
-
   $beerDisplay.empty();
+  console.log(ratings);
 
   beers = ratings;
 
@@ -34,12 +34,12 @@ const populateResults = function(ratings) {
     $info.append($name);
 
     const $h3 = $('<h3>').text(rating.name);
-    const $h4 = $('<h4>').text(rating.brewery);
-    const $h5 = $('<h5>').text(rating.city);
+    // const $h4Brew = $('<h4>').text(rating.brewery);
+    const $h4Style = $('<h4>').text(rating.style);
 
     $name.append($h3);
-    $name.append($h4);
-    $name.append($h5);
+    // $name.append($h4Brew);
+    $name.append($h4Style);
 
     const $stats = $('<div>').addClass('stats');
 
@@ -59,6 +59,7 @@ const populateResults = function(ratings) {
     $beerDisplay.append($result);
   };
 };
+
 
 const populateRatings = () => {
   let userId;
@@ -98,7 +99,7 @@ const populateRatings = () => {
       url: '/ratings'
     })
     .done((ratings) => {
-      console.log(ratings);
+      // console.log(ratings);
       populateResults(ratings);
     })
     .fail(() => {
@@ -268,6 +269,76 @@ const loadBeerPage = function(event) {
   $('#rating').text($target.find('.rating').text());
 }
 
+// Exit individual beer "pop-up"
+const exitBeerPage = function(event) {
+  event.preventDefault();
+
+  $('#filters-nav-container').removeClass('off');
+  $('#profile-beers').removeClass('off');
+  $('#beer').addClass('off');
+  $('.rating-circle').removeClass('rating-color');
+  $beerDisplay.append($allResults);
+  $beerDisplay.removeClass('off');
+}
+
+// Color Rating Option on Beer Page
+const colorCircles = function() {
+  $('div.rating-circle').removeClass('rating-color');
+  $(this).prevAll().addClass('rating-color');
+  $(this).addClass('rating-color');
+}
+
+// Grab Rating from Page Before Rating is Submitted
+// Event Listener for "Add Rating"
+const submitRating = function() {
+  const ratingCircles = document.querySelectorAll('.rating-circle');
+  let ratingCount = 0;
+
+  ratingCircles.forEach((div) => {
+    if (div.classList.contains('rating-color')) {
+      ratingCount++;
+    }
+  });
+
+  if (ratingCount === 0) {
+    console.log('No rating selected.');
+    return;
+  }
+
+  console.log(beerData);
+
+  const ratingData = {
+    beer_id: beerData.id,
+    venue_id: 1,
+    rating: ratingCount
+  }
+
+  const requestContent = JSON.stringify(ratingData);
+
+  const $xhr_2 = $.ajax({
+    method: 'POST',
+    url: '/ratings',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify(ratingData)
+  })
+  .done((data) => {
+    window.location.href = '/profile.html';
+  })
+  .fail(() => {
+    console.log('Failure');
+  });
+}
+
+/* -------------------------------------------------------------------------------
+
+Event Handlers and Function Calls
+
+-------------------------------------------------------------------------------
+*/
+
+$('div.rating-circle').on('click', colorCircles);
+
   // Toggle Account Menu
   $('#account-icon').on('click', toggleAccountMenu);
 
@@ -299,4 +370,12 @@ const loadBeerPage = function(event) {
   const $beerDisplay = $('#beer-display');
 
   $beerDisplay.on('click', '.result', loadBeerPage);
+
+// Exit Beer Page
+  const $exit = $('i');
+
+  $exit.on('click', exitBeerPage);
+
+// Submit Rating from Beer Page
+  $('#add-rating').on('click', submitRating);
 })();

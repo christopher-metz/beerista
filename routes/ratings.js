@@ -61,14 +61,17 @@ router.get('/ratings/:id', authorize, (req, res, next) => {
 });
 
 router.post('/ratings', authorize, (req, res, next) => {
+  const { beer_id, venue_id, rating } = req.body;
+
   knex('ratings')
     .insert({
-      beer_id: req.body.beerId,
+      beer_id: beer_id,
       user_id: req.claim.userId,
-      venue_id: req.body.venueId,
-      rating: req.body.rating
+      venue_id: venue_id,
+      rating: rating
     }, '*')
     .then((ratings) => {
+      console.log(ratings[0]);
       res.send(camelizeKeys(ratings[0]));
     })
     .catch((err) => {
