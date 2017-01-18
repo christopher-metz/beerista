@@ -41,4 +41,13 @@
   myBeers.on('click', () => { window.location.href = '/profile.html' });
 
   // const menuOptions = $('#log-out');
+
+  const handleGeneralSearch = (event) => {
+    event.preventDefault();
+    const searchBeer = $('input').val();
+    window.location.href = `/search.html?input=${searchBeer}`;
+  };
+
+  const $form = $('form');
+  $form.submit(handleGeneralSearch);
 })();
