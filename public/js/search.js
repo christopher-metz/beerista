@@ -162,6 +162,7 @@
     $('#rating').text($target.find('.rating').text());
   }
 
+  // Exit individual beer "pop-up"
   const $results = $('#results');
 
   $results.on('click', '.result', loadBeerPage);
@@ -169,6 +170,8 @@
   const exitBeerPage = function(event) {
     event.preventDefault();
 
+    $('#beer').addClass('off');
+    $('.rating-circle').removeClass('rating-color');
     $results.append($allResults);
     $results.removeClass('off');
   }
@@ -198,6 +201,11 @@
       }
     });
 
+    if (ratingCount === 0) {
+      console.log('No rating selected.');
+      return;
+    }
+
     beerData.user_rating = ratingCount;
     beerData.user_id= userId;
     console.log(beerData);
@@ -213,7 +221,7 @@
       data: JSON.stringify(beerData)
     })
     .done((data) => {
-      console.log(data);
+      window.location.href = '/profile.html';
     })
     .fail(() => {
       console.log('Failure');
