@@ -131,7 +131,6 @@ router.get('/beers/:id', (req, res, next) => {
 });
 
 router.post('/beers', (req, res, next) => {
-
   const { name, style, abv, ibu, source_rating, source_count, source_id, photo_url, description, user_rating, user_id } = req.body;
 
   knex('beers')
@@ -139,13 +138,6 @@ router.post('/beers', (req, res, next) => {
     .then((beer) => {
       if (beer) {
         return beer;
-        // knex('ratings')
-        //   .insert({
-        //     beer_id: beer[0].id,
-        //     user_id: user_id,
-        //     venue_id: 1,
-        //     rating: user_rating
-        //   }, '*');
       }
       return knex('beers')
         .insert({
