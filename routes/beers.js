@@ -130,4 +130,31 @@ router.get('/beers/:id', (req, res, next) => {
   // Pull specific beer page data
 });
 
+router.post('/beers', (req, res, next) => {
+  const { name, style, abv, ibu, source_rating, source_count, source_id, photo_url, description, user_rating, user_id } = req.body;
+
+  knex('beers')
+    .insert({
+      name: name,
+      style: style,
+      abv: abv,
+      ibu: ibu,
+      source_rating: source_rating,
+      source_count: source_count,
+      source_id: source_id,
+      photo_url: photo_url,
+      description: description,
+      brewery_id: 1
+    }, '*')
+    .then((beer) => {
+      return knex('ratings')
+        .insert({
+          beer_id: ,
+          user_id: ,
+          venue_id: 1,
+          rating: user_rating
+        });
+    })
+});
+
 module.exports = router;

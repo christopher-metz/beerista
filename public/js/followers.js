@@ -3,7 +3,6 @@
 'use strict';
 
   // Check and verify logged in user
-  let verified = false;
 
   const checkForCookie = function() {
     const $xhr = $.ajax({
@@ -19,7 +18,6 @@
       if (bool) {
         $('#login').addClass('off');
         $('#account-icon').removeClass('off');
-        verified = true;
       }
     })
     .fail((err) => {

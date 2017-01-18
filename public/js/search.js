@@ -45,16 +45,18 @@
 
   // Populate search results
   let beers = [];
+  let beerData;
   let $allResults;
 
   const populateResults = function() {
-
-    console.log(beers);
     const $results = $('#results');
     $results.empty();
 
     for (const beer of beers) {
       const $result = $('<div>').addClass('result');
+
+      $result.data(beer);
+
       const $photo = $('<div>').addClass('photo');
 
       $result.append($photo);
@@ -95,7 +97,6 @@
 
   const getBeers = function() {
     const searchParam = $('.search-box').val();
-    console.log(searchParam);
 
     const $xhr = $.ajax({
       method: 'GET',
@@ -106,10 +107,8 @@
       if ($xhr.status !== 200) {
         return;
       }
-      console.log(data);
 
       beers = data;
-      console.log(beers);
     })
     .fail(($xhr) => {
       console.log($xhr)
@@ -117,7 +116,6 @@
   };
 
   const $search = $('#search-btn');
-  console.log($search);
   const $searchInput = $('.search-box');
   // console.log($searchInput);
 
@@ -131,6 +129,9 @@
 
     const $target = $(event.target).parents('.result');
     // console.log($target);
+
+    beerData = $target.data();
+    console.log(beerData);
 
     $allResults.detach();
     $results.addClass('off');
@@ -163,15 +164,9 @@
 
   // Color Rating Option on Beer Page
   const colorCircles = function() {
-    if ($(this).attr('style')) {
-      $('div.rating-circle').removeClass('rating-color');
-      $(this).prevAll().addClass('rating-color');
-      $(this).addClass('rating-color');
-    }
-    else {
-      $(this).prevAll().addClass('rating-color');
-      $(this).addClass('rating-color');
-    }
+    $('div.rating-circle').removeClass('rating-color');
+    $(this).prevAll().addClass('rating-color');
+    $(this).addClass('rating-color');
   }
 
   $('div.rating-circle').on('click', colorCircles);
@@ -181,7 +176,7 @@
   // Event Listener for "Add Rating"
   const submitRating = function() {
     const ratingCircles = document.querySelectorAll('.rating-circle');
-    const ratingCount = 0;
+    let ratingCount = 0;
 
     ratingCircles.forEach((div) => {
       if (div.classList.contains('rating-color')) {
@@ -189,7 +184,8 @@
       }
     });
 
-    console.log(ratingCount);
+    beerData.user_rating = ratingCount;
+
   }
 
   $('#add-rating').on('click', submitRating);
