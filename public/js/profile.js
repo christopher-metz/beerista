@@ -243,4 +243,9 @@
   const filter = $('#filter-btn');
 
   filter.on('click', toggleFilter);
+
+  $('form').submit(() => {
+    const searchBeer = $('input').val();
+    window.location.href = `/search.html?input=${searchBeer}`;
+  });
 })();
