@@ -67,7 +67,16 @@ router.post('/stars', authorize, (req, res, next) => {
     .first()
     .then((beer) => {
       if (!beer) {
-        // Go grab beer info from request body and add to DB
+        throw boom.create(404, 'Beer not found');
+      }
+
+      return knex('stars')
+        .where('beer_id', beerId)
+        .where('user_id', req.claim.userId)
+    })
+    .then((star) => {
+      if (!star) {
+        throw boom.create(400, 'Star already exists');
       }
 
       return knex('stars')
@@ -102,6 +111,7 @@ router.delete('/stars', authorize, (req, res, next) => {
         .where('beer_id', beerId);
     })
     .then((stars) => {
+      console.log(stars);
       const star = stars[0];
 
       delete star.id;

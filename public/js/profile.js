@@ -9,12 +9,10 @@ const populateResults = function(ratings) {
   const $beerDisplay = $('#beer-display');
 
   $beerDisplay.empty();
-  // console.log(ratings);
 
   beers = ratings;
 
   for (const rating of ratings) {
-    // console.log(rating);
     const $result = $('<div>').addClass('result');
 
     $result.data(rating);
@@ -51,9 +49,7 @@ const populateResults = function(ratings) {
     const $star = $('<div>').addClass('star');
     const $starIcon = $('<i>').addClass('material-icons star-icon').text('grade');
 
-    console.log(rating);
-
-    if (rating.star) {
+    if (rating.starred) {
       $starIcon.addClass('star-gold');
     }
 
@@ -102,7 +98,7 @@ const populateRatings = () => {
       $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
     })
     .fail(() => {
-      window.location.href = '/login.html';
+      // window.location.href = '/login.html';
     });
 
     const $xhr_2 = $.ajax({
@@ -111,33 +107,35 @@ const populateRatings = () => {
       dataType: 'json',
       url: '/ratings'
     })
-    .done((ratings) => {
-      console.log(ratings);
+    .done((dataRatings) => {
+      // console.log(dataRatings);
       const $xhr_3 = $.ajax({
         method: 'GET',
         contentType: 'application/json',
         dataType: 'json',
         url: `/stars`
       })
-      .done((stars) => {
-        const results = ratings.map((rating) => {
-          for (const star of stars) {
-            if (rating.id === star.id) {
-              rating.star = true;
-              return rating;
+      .done((dataStars) => {
+        // console.log(dataStars);
+        const results = dataRatings.map((dataRating) => {
+          for (const dataStar of dataStars) {
+            dataRating.starred = false;
+            if (dataRating.id === dataStar.id) {
+              dataRating.starred = true;
+              return dataRating;
             }
-            rating.star = false;
-            return rating;
           }
+          return dataRating;
         })
+        // console.log(results);
         populateResults(results);
       })
       .fail(() => {
-        window.location.href = '/login.html';
+        // window.location.href = '/login.html';
       });
     })
     .fail(() => {
-      window.location.href = '/login.html';
+      // window.location.href = '/login.html';
     });
   }
   else {
@@ -163,32 +161,32 @@ const populateRatings = () => {
       dataType: 'json',
       url: `/ratings/${window.QUERY_PARAMETERS.userId}`
     })
-    .done((ratings) => {
+    .done((dataRatings) => {
       const $xhr_3 = $.ajax({
         method: 'GET',
         contentType: 'application/json',
         dataType: 'json',
         url: `/stars/${window.QUERY_PARAMETERS.userId}`
       })
-      .done((stars) => {
-        const results = ratings.map((rating) => {
-          for (const star of stars) {
-            if (rating.id === star.id) {
-              rating.star = true;
-              return rating;
+      .done((dataStars) => {
+        const results = dataRatings.map((dataRating) => {
+          for (const dataStar of dataStars) {
+            dataRating.starred = false;
+            if (dataRating.id === dataStar.id) {
+              dataRating.starred = true;
+              return dataRating;
             }
-            rating.star = false;
-            return rating;
           }
+          return dataRating;
         })
         populateResults(results);
       })
       .fail(() => {
-        window.location.href = '/login.html';
+        // window.location.href = '/login.html';
       });
     })
     .fail(() => {
-      window.location.href = '/login.html';
+      // window.location.href = '/login.html';
     });
   }
 };
@@ -223,7 +221,7 @@ const populateStars = () => {
       $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
     });
     $xhr.fail(() => {
-      window.location.href = '/login.html';
+      // window.location.href = '/login.html';
     });
 
     const $xhr_2 = $.ajax({
@@ -234,13 +232,13 @@ const populateStars = () => {
     })
     .done((stars) => {
       const results = stars.map((star) => {
-        star.star = true;
+        star.starred = true;
         return star;
       });
       populateResults(results);
     })
     .fail(() => {
-      window.location.href = '/login.html';
+      // window.location.href = '/login.html';
     });
   }
   else {
@@ -268,7 +266,7 @@ const populateStars = () => {
     })
     .done((stars) => {
       const results = stars.map((star) => {
-        star.star = true;
+        star.starred = true;
         return star;
       });
       populateResults(results);
@@ -307,16 +305,66 @@ const handleGeneralSearch = (event) => {
 let $allResults;
 let beerData;
 
+const updateStar = function(event) {
+  $(event.target).toggleClass('star-gold');
+  $(event.target).parents('.result').data().starred = !$(event.target).parents('.result').data().starred;
+
+  // console.log($(event.target).parents('.result').data());
+
+  const id = $(event.target).parents('.result').data().id;
+  const starred = $(event.target).parents('.result').data().starred;
+
+
+  if (starred) {
+    // console.log('contains-gold');
+    const $xhr = $.ajax({
+      method: 'POST',
+      url: '/stars',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({ beerId: id })
+    })
+    .done((star) => {
+      console.log(star);
+    })
+    .fail(() => {
+      console.log('Failure');
+    });
+
+    return;
+  }
+
+  if (!starred) {
+    // console.log('doesn\'t contain gold');
+    const $xhr_2 = $.ajax({
+      method: 'DELETE',
+      url: '/stars',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({ beerId: id})
+    })
+    .done((star) => {
+      console.log(star);
+    })
+    .fail(() => {
+      console.log('Failure');
+    });
+  }
+}
+
 const loadBeerPage = function(event) {
+  if (event.target.classList.contains('star-icon')) {
+    updateStar(event);
+    return;
+  }
+
   $('#filters-nav-container').addClass('off');
   $('#profile-beers').addClass('off');
   $allResults = $('.result');
 
   const $target = $(event.target).parents('.result');
-  // console.log($target);
 
   beerData = $target.data();
-  // console.log(beerData);
 
   $allResults.detach();
   $beerDisplay.addClass('off');
@@ -367,8 +415,6 @@ const submitRating = function() {
     console.log('No rating selected.');
     return;
   }
-
-  // console.log(beerData);
 
   const ratingData = {
     beer_id: beerData.id,
@@ -451,7 +497,6 @@ $('div.rating-circle').on('click', colorCircles);
 
   const $generalSearch = $('#general-search');
   // $generalSearch.on('submit', handleGeneralSearch);
-  // console.log("Hi mom");
   $generalSearch.submit(handleGeneralSearch);
 
 // Load Beer Page
@@ -466,6 +511,4 @@ $('div.rating-circle').on('click', colorCircles);
 
 // Submit Rating from Beer Page
   $('#add-rating').on('click', submitRating);
-
-//
 })();
