@@ -1,6 +1,5 @@
 (function() {
-
-'use strict';
+  'use strict';
 
   // Check and verify logged in user
   const checkForCookie = function() {
@@ -111,7 +110,15 @@
   };
 
   const getBeers = function() {
-    const searchParam = $('.search-box').val();
+    let searchParam;
+    if (window.location.search) {
+      console.log(window.QUERY_PARAMETERS.input);
+      searchParam = window.QUERY_PARAMETERS.input;
+    }
+    else {
+      console.log('no params');
+      searchParam = $('.search-box').val();
+    }
 
     const $xhr = $.ajax({
       method: 'GET',
@@ -129,6 +136,18 @@
       console.log($xhr)
     });
   };
+
+  window.QUERY_PARAMETERS = {};
+
+  if (window.location.search) {
+    window.location.search.substr(1).split('&').forEach((paramStr) => {
+      const param = paramStr.split('=');
+
+      window.QUERY_PARAMETERS[param[0]] = param[1];
+    });
+    getBeers();
+    populateResults();
+  }
 
   const $search = $('#search-btn');
   const $searchInput = $('.search-box');
