@@ -166,7 +166,7 @@ const populateRatings = () => {
         method: 'GET',
         contentType: 'application/json',
         dataType: 'json',
-        url: `/stars/${window.QUERY_PARAMETERS.userId}`
+        url: `/stars`
       })
       .done((dataStars) => {
         const results = dataRatings.map((dataRating) => {
@@ -264,15 +264,33 @@ const populateStars = () => {
       dataType: 'json',
       url: `/stars/${window.QUERY_PARAMETERS.userId}`
     })
-    .done((stars) => {
-      const results = stars.map((star) => {
-        star.starred = true;
-        return star;
-      });
-      populateResults(results);
+    .done((followStars) => {
+      const $xhr_3 = $.ajax({
+        method: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        url: '/stars'
+      })
+      .done((yourStars) => {
+        const results = followStars.map((followStar) => {
+          for (const yourStar of yourStars) {
+            followStar.starred = false;
+            if (followStar.id === yourStar.id) {
+              followStar.starred = true;
+              return followStar;
+            }
+          }
+          return followStar;
+        });
+        populateResults(results);
+      })
+      .fail(() => {
+        console.log('Failure at xhr_3');
+      })
     })
     .fail(() => {
-      window.location.href = '/login.html';
+      console.log('Failure at xhr_4');
+      // window.location.href = '/login.html';
     });
   }
 };
