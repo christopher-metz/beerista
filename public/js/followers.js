@@ -23,7 +23,30 @@
     .fail((err) => {
       console.log(err);
     })
-  }
+  };
+
+  const logout = () => {
+    const $xhr = $.ajax({
+      method: 'DELETE',
+      url: '/token',
+      dataType: 'JSON'
+    })
+    .done((bool) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+
+      if (bool) {
+        $('#login').removeClass('off');
+        $('#account-icon').addClass('off');
+      }
+
+      window.location.href = '/login.html';
+    })
+    .fail((err) => {
+      console.log(err);
+    })
+  };
 
   $(window).on('load', checkForCookie);
 
@@ -38,9 +61,11 @@
   // const myFriends = $('#my-friends');
   const myBeers = $('#my-beers');
   // const settings = $('#settings');
+  const $logout = $('#log-out');
 
   // myFriends.on('click', function() { window.location.href = '/friends.html' });
   myBeers.on('click', function() { window.location.href = '/profile.html' });
+  $logout.on('click', logout);
 
   // const menuOptions = $('#log-out');
 

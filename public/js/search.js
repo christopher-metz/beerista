@@ -224,6 +224,29 @@ const clearSearchInput = (event) => {
   }
 };
 
+const logout = () => {
+  const $xhr = $.ajax({
+    method: 'DELETE',
+    url: '/token',
+    dataType: 'JSON'
+  })
+  .done((bool) => {
+    if ($xhr.status !== 200) {
+      return;
+    }
+
+    if (bool) {
+      $('#login').removeClass('off');
+      $('#account-icon').addClass('off');
+    }
+
+    window.location.href = '/login.html';
+  })
+  .fail((err) => {
+    console.log(err);
+  })
+};
+
 (function() {
   $('#account-icon').on('click', toggleAccountMenu);
 
@@ -231,9 +254,11 @@ const clearSearchInput = (event) => {
   const myFollows = $('#my-follows');
   const myBeers = $('#my-beers');
   // const settings = $('#settings');
+  const $logout = $('#log-out');
 
   myFollows.on('click', () => { window.location.href = '/followers.html' });
   myBeers.on('click', () => { window.location.href = '/profile.html' });
+  $logout.on('click', logout);
 
   // const menuOptions = $('#log-out');
 
