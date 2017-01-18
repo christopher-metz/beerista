@@ -47,10 +47,12 @@
         <button id="follow-user">Follow</button>
       </section>
 
-      <section id="filters-nav">
-        <button id="filter-btn">Filter</button>
-        <div id="current-filter" class="off"></div>
-      </section>
+      <div id="filters-nav-container">
+        <section id="filters-nav">
+          <button id="filter-btn">Filter</button>
+          <div id="current-filter" class="off"></div>
+        </section>
+      </div>
 
       <div class="filter-menu-container off">
         <section id="filters-pop">
@@ -102,6 +104,56 @@
 
         <section id="beer-display">
         </section>
+      </section>
+
+      <section id="beer" class="off">
+        <div class="beer-container">
+          <i class="material-icons" id="exit">clear</i>
+
+          <div class="beer-info">
+            <div class="photo">
+              <img src="#" id="beer-photo">
+            </div>
+
+            <div class="info">
+              <div class="name">
+                <h3 id="name"></h3>
+                <h4 id="brewery"></h4>
+                <h5 id="style"></h5>
+              </div>
+
+              <div class="stats">
+                <p id="abv"></p>
+                <p id="ibu"></p>
+                <p id="rating"></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="rate-beer">
+            <h4>Rate This Beer</h4>
+            <div id="rating-container">
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+            </div>
+          </div>
+
+          <div id="select-venue">
+            <h4>Add a Venue</h4>
+            <div id="venue-container">
+              <form>
+                <input type="text" name="venue-search" placeholder="Search for a venue...">
+              </form>
+            </div>
+          </div>
+
+          <div id="add-rating">
+            <h5>Add Rating</h5>
+          </div>
+        </div>
       </section>
     </main>
 

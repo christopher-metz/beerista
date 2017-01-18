@@ -70,6 +70,108 @@ header #login {
 }
 
 
+/*Beer Page*/
+
+#beer {
+  height: 60vh;
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 0 1px 5px gray;
+}
+
+.beer-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;;
+  align-items: center;;
+  flex-direction: column;
+}
+
+.beer-info {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#rate-beer, #select-venue {
+  height: 20%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#rate-beer h4, #select-venue h4 {
+  font-size: 3em;
+}
+
+#add-rating {
+  height: 20%;
+  width: 100%;
+  background-color: #D90B29;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-rating h5 {
+  font-size: 5em;
+}
+
+#rating-container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rating-circle {
+  height: 100px;
+  width: 100px;
+  border: 5px solid black;
+  border-radius: 50%;
+}
+
+.rating-color {
+  background-color: #F0BB06;
+}
+
+#venue-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#venue-container form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;;
+  align-items: center;
+}
+
+#venue-container form input {
+  font-size: 3em;
+  height: 50%;
+  width: 100%;
+  border: 1px solid black;
+}
+
+#exit {
+  position: absolute;
+  font-size: 5em;
+  top: 0;
+  right: 0;
+}
+
+
+
 
 /*
 -------------------------------------------------------------------------------

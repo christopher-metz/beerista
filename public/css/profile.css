@@ -1,3 +1,7 @@
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+}
+
 /*
 -------------------------------------------------------------------------------
   Header
@@ -45,10 +49,15 @@ main {
   flex-direction: column;
 }
 
-#filters-nav {
+#filters-nav-container {
   height: 10%;
   width: 90%;
   margin: 0 auto;
+}
+
+#filters-nav {
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -136,6 +145,7 @@ main {
   margin: 0 auto;
   background-color: white;
   box-shadow: 0 1px 1px 1px gray;
+  position: relative;
 }
 
 #profile-menu {

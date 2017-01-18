@@ -1,13 +1,24 @@
+(function() {
+
 'use strict';
 
 let isRatings = true;
+let beers;
 
 const populateResults = function(ratings) {
   const $beerDisplay = $('#beer-display');
+
+
   $beerDisplay.empty();
 
+  beers = ratings;
+
   for (const rating of ratings) {
+    console.log(rating);
     const $result = $('<div>').addClass('result');
+
+    $result.data(rating);
+
     const $photo = $('<div>').addClass('photo');
 
     $result.append($photo);
@@ -87,6 +98,7 @@ const populateRatings = () => {
       url: '/ratings'
     })
     .done((ratings) => {
+      console.log(ratings);
       populateResults(ratings);
     })
     .fail(() => {
@@ -125,6 +137,8 @@ const populateRatings = () => {
   }
 };
 
+
+// Populate Stars Tab with "Starred Beers"
 const populateStars = () => {
   let userId;
 
@@ -226,7 +240,34 @@ const handleGeneralSearch = (event) => {
   window.location.href = `/search.html?input=${searchBeer}`;
 };
 
-(function() {
+let $allResults;
+let beerData;
+
+const loadBeerPage = function(event) {
+  $('#filters-nav-container').addClass('off');
+  $('#profile-beers').addClass('off');
+  $allResults = $('.result');
+
+  const $target = $(event.target).parents('.result');
+  // console.log($target);
+
+  beerData = $target.data();
+  // console.log(beerData);
+
+  $allResults.detach();
+  $beerDisplay.addClass('off');
+
+  $('#beer').removeClass('off');
+
+  $('#beer-photo').attr('src', $target.find('.photo img').attr('src'));
+  $('#name').text($target.find('.name h3').text());
+  $('#brewery').text($target.find('.name h4').text());
+  $('#style').text($target.find('.name h5').text());
+  $('#abv').text($target.find('.abv').text());
+  $('#ibu').text($target.find('.ibu').text());
+  $('#rating').text($target.find('.rating').text());
+}
+
   // Toggle Account Menu
   $('#account-icon').on('click', toggleAccountMenu);
 
@@ -253,4 +294,9 @@ const handleGeneralSearch = (event) => {
   // $generalSearch.on('submit', handleGeneralSearch);
   // console.log("Hi mom");
   $generalSearch.submit(handleGeneralSearch);
+
+// Load Beer Page
+  const $beerDisplay = $('#beer-display');
+
+  $beerDisplay.on('click', '.result', loadBeerPage);
 })();
