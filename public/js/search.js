@@ -111,7 +111,7 @@
 
   const getBeers = function() {
     let searchParam;
-    if (window.location.search) {
+    if (window.QUERY_PARAMETERS.input) {
       console.log(window.QUERY_PARAMETERS.input);
       searchParam = window.QUERY_PARAMETERS.input;
     }
