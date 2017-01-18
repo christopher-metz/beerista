@@ -1,6 +1,24 @@
 (function() {
   'use strict';
 
+  // Toggle Account Menu
+  const toggleAccountMenu = function() {
+    $('#drop-down-container').toggleClass('off');
+  }
+
+  $('#account-icon').on('click', toggleAccountMenu);
+
+  // Navigate to other pages via Account Menu
+  const myFollows = $('#my-follows');
+  const myBeers = $('#my-beers');
+  // const settings = $('#settings');
+
+  myFollows.on('click', () => { window.location.href = '/followers.html' });
+  myBeers.on('click', () => { window.location.href = '/profile.html' });
+
+  // const menuOptions = $('#log-out');
+/*-------------------------------------------------*/
+
   let isRatings = true;
 
   const populateResults = function(ratings) {
