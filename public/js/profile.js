@@ -75,6 +75,7 @@ const populateRatings = () => {
 
   $('#rated-beers').addClass('shadow');
   $('#starred-beers').removeClass('shadow');
+  $('#following').removeClass('shadow');
 
   window.QUERY_PARAMETERS = {};
 
@@ -200,6 +201,7 @@ const populateStars = () => {
 
   $('#starred-beers').addClass('shadow');
   $('#rated-beers').removeClass('shadow');
+  $('#following').removeClass('shadow');
 
   window.QUERY_PARAMETERS = {};
 
@@ -298,6 +300,59 @@ const populateStars = () => {
     });
   }
 };
+
+const populateFollowing = () => {
+  let userId;
+
+  $('#following').addClass('shadow');
+  $('#rated-beers').removeClass('shadow');
+  $('#starred-beers').removeClass('shadow');
+
+  window.QUERY_PARAMETERS = {};
+
+  if (window.location.search) {
+    window.location.search.substr(1).split('&').forEach((paramStr) => {
+      const param = paramStr.split('=');
+
+      window.QUERY_PARAMETERS[param[0]] = param[1];
+    });
+  }
+
+  if (!window.location.search) {
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: '/followers',
+      dataType: 'json'
+    });
+    $xhr.done((data) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+      console.log(data);
+      populateResults(data);
+    });
+    $xhr.fail((err) => {
+      console.log(err);
+    });
+  }
+  else {
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: `/followers/?id=${window.QUERY_PARAMETERS.userId}`,
+      dataType: 'json'
+    });
+    $xhr.done((data) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+      console.log(data);
+      populateResults(data);
+    });
+    $xhr.fail((err) => {
+      console.log(err);
+    });
+  }
+}
 
 const handleStarsOrRating = (event) => {
   if (event.target.id === 'rated-beers') {

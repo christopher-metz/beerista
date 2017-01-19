@@ -28,8 +28,11 @@ router.get('/followers', authorize, (req, res, next) => {
       if (rows.length === 0) {
         throw boom.create(404, 'You havent followed anyone');
       }
-      const followers = camelizeKeys(rows);
 
+      for (const user of rows) {
+        delete user.hashedPassword;
+      }
+      const followers = camelizeKeys(rows);
       res.send(followers);
     })
     .catch((err) => {
@@ -37,19 +40,19 @@ router.get('/followers', authorize, (req, res, next) => {
     });
 });
 
-router.get('/followers', authorize, (req, res, next) => {
+router.get('/followers/:id', authorize, (req, res, next) => {
   knex('followers')
     .innerJoin('users', 'followers.user_id_2', 'user.id')
-    .where('followers.user_id_1', req.claim.userId)
-    .where('users.first_name', 'LIKE', `%${req.body.name}%`)
-    .orWhere('users.last_name', 'LIKE', `%${req.body.name}%`)
+    .where('followers.user_id_1', req.params.id)
     .orderBy('users.first_name', 'ASC')
     .then((users) => {
       if (!users) {
         throw boom.create(404, 'No Matches');
       }
 
-      delete user.hashedPassword;
+      for (const user of users) {
+        delete user.hashedPassword;
+      }
 
       res.send(camelizeKeys(users));
     })
