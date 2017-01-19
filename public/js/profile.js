@@ -135,6 +135,8 @@ const populateRatings = () => {
       });
     })
     .fail(() => {
+      const $h5 = $('<h5>').text('You haven\'t rated any beers yet.');
+      $('#beer-display').append($h5);
       // window.location.href = '/login.html';
     });
   }
@@ -238,6 +240,8 @@ const populateStars = () => {
       populateResults(results);
     })
     .fail(() => {
+      const $h5 = $('<h5>').text('You haven\'t starred any beers yet.');
+      $('#beer-display').append($h5);
       // window.location.href = '/login.html';
     });
   }

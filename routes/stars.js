@@ -24,7 +24,7 @@ const authorize = function(req, res, next) {
 // Get all ratings for a user.
 router.get('/stars', authorize, (req, res, next) => {
   knex('beers')
-    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url', 'beers.source_id')
     .innerJoin('stars', 'stars.beer_id', 'beers.id')
     .where('stars.user_id', req.claim.userId)
     .orderBy('beers.name')

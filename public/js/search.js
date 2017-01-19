@@ -3,6 +3,7 @@
 let beers = [];
 let beerData;
 let $allResults;
+let verified = false;
 
 // Check and verify logged in user
 const checkForCookie = function() {
@@ -19,6 +20,7 @@ const checkForCookie = function() {
     if (bool) {
       $('#login').addClass('off');
       $('#account-icon').removeClass('off');
+      verified = true;
     }
   })
   .fail((err) => {
@@ -50,7 +52,7 @@ const toggleAccountMenu = function() {
 };
 
 // Populate search results
-const populateResults = function() {
+const populateResults = function(beers) {
   const $results = $('#results');
   $results.empty();
 
@@ -67,7 +69,15 @@ const populateResults = function() {
 
     $photo.append($img);
 
-    const $info = $('<div>').addClass('info');
+    const $info = $('<div>');
+
+    if (verified) {
+      $info.addClass('info-loggedIn')
+    }
+    else {
+      $info.addClass('info');
+    }
+
     const $name = $('<div>').addClass('name');
 
     $result.append($info);
@@ -92,6 +102,18 @@ const populateResults = function() {
     $stats.append($abvP);
     $stats.append($ibuP);
     $stats.append($ratingP);
+
+    if (verified) {
+      const $star = $('<div>').addClass('star');
+      const $starIcon = $('<i>').addClass('material-icons star-icon').text('grade');
+
+      // if (rating.starred) {
+      //   $starIcon.addClass('star-gold');
+      // }
+
+      $star.append($starIcon);
+      $result.append($star);
+    }
 
     $results.append($result);
   };
@@ -120,9 +142,21 @@ const getBeers = function(event) {
     if ($xhr.status !== 200) {
       return;
     }
-
     beers = data;
-    populateResults();
+
+    const $xhr_2 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/stars`
+    })
+    .done((stars) => {
+      
+      populateResults()
+    })
+    .fail(() => {
+      console.log('Failure at $xhr_2');
+    });
   })
   .fail(($xhr) => {
     console.log($xhr)
