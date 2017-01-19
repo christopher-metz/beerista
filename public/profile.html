@@ -51,15 +51,44 @@
         <section id="filters-nav">
           <button id="filter-btn">Filter</button>
           <div id="current-filter" class="off"></div>
+          <div id="filter-options" class="off">
+            <div id="filter-options-container">
+              <button id="by-beer" class="filter-option-btn">Beer</button>
+              <button id="by-rating" class="filter-option-btn">Rating</button>
+              <button id="by-style" class="filter-option-btn">Style</button>
+              <button id="by-abv" class="filter-option-btn">ABV</button>
+            </div>
+          </div>
+
+          <form id="find-a-beer" class="off">
+            <div class="form-container">
+              <input type="text" name="find-a-beer" placeholder="Find a beer by rating">
+            </div>
+          </form>
+          <form id="find-by-rating" class="off">
+            <div class="form-container">
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+              <div class="rating-circle"></div>
+            </div>
+          </form>
+          <form id="find-by-style" class="off">
+            <div class="form-container">
+              <input type="text" name="find-by-style" placeholder="Find a beer by style">
+            </div>
+          </form>
+          <form id="find-by-abv" class="off">
+            <div class="form-container">
+              <input type="text" name="find-by-abv" placeholder="Find a beer by ABV">
+            </div>
+          </form>
         </section>
       </div>
 
       <div class="filter-menu-container off">
         <section id="filters-pop">
           <div id="filter-one">
-            <form>
-              <input type="text" name="search-your-beers" placeholder="Search your beers" class="filter-one-input">
-            </form>
 
             <form>
               <input type="text" name="search-by-brewery" placeholder="Search by brewery" class="filter-one-input">

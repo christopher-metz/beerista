@@ -71,41 +71,55 @@ main {
   font-size: 50px;
 }
 
-#filter-one, #filter-two, #filter-three {
-  height: 25%;
+#filter-options {
+  height: 100%;
+  width: 75%;
+}
+
+#filter-options-container {
+  height: 100%;
   width: 100%;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
-}
-
-#filter-one form, #filter-two form, #filter-three form {
-  height: 100%;
-  width: 50%;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-}
-
-.filter-one-input, .filter-two-input, .filter-three-input {
-  height: 90%;
-  width: 90%;
-  font-size: 3em;
-  border: 1px solid black;
-}
-
-#rating-filter {
-  height: 100%;
-  width: 50%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-#rating-filter .rating-circle-filter {
-  height: 50px;
-  width: 50px;
-  background-color: white;
+.filter-option-btn {
+  height: 50%;
+  width: 20%;
+  font-size: 40px;
+  background-color: #FFC72E;
+}
+
+#find-a-beer, #find-by-style, #find-by-abv, #find-by-rating {
+  height: 60%;
+  width: 75%;
+}
+
+#find-a-beer .form-container, #find-by-style .form-container, #find-by-abv .form-container, #find-by-rating .form-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#find-a-beer input, #find-by-style input, #find-by-abv input {
+  height: 100%;
+  width: 90%;
+  font-size: 50px;
+}
+
+#find-by-rating .form-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#find-by-rating .form-container .rating-circle {
+  height: 70px;
+  width: 70px;
   border: 5px solid black;
   border-radius: 50%;
 }

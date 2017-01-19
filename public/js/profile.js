@@ -424,7 +424,11 @@ const toggleAccountMenu = function() {
 };
 
 const toggleFilter = function() {
-  $('.filter-menu-container').toggleClass('off');
+  if (filterOpen) {
+    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-abv').addClass('off');
+  }
+  filterOpen = false;
+  $('#filter-options').removeClass('off');
 };
 
 const handleGeneralSearch = (event) => {
@@ -592,6 +596,32 @@ const logout = () => {
   })
 };
 
+let filterOpen = false;
+
+const openThisFilter = function() {
+  filterOpen = true;
+  const text = $(this).text();
+  console.log(text);
+  $('#filter-options').addClass('off');
+
+  switch (text) {
+    case 'Beer':
+      $('#find-a-beer').removeClass('off');
+      break;
+    case 'Rating':
+      $('#find-by-rating').removeClass('off');
+      break;
+    case 'Style':
+      $('#find-by-style').removeClass('off');
+      break;
+    case 'ABV':
+      $('#find-by-abv').removeClass('off');
+      break;
+    default:
+
+  }
+}
+
 /* -------------------------------------------------------------------------------
 
 Event Handlers and Function Calls
@@ -641,4 +671,7 @@ $('div.rating-circle').on('click', colorCircles);
 
 // Submit Rating from Beer Page
   $('#add-rating').on('click', submitRating);
+
+// Filter Option Btn click
+  $('.filter-option-btn').on('click', openThisFilter)
 })();
