@@ -223,7 +223,7 @@ const updateStar = function(event) {
       url: '/stars',
       contentType: 'application/json',
       dataType: 'json',
-      data: JSON.stringify({ beerId: id})
+      data: JSON.stringify(starData)
     })
     .done((star) => {
       console.log(star);
