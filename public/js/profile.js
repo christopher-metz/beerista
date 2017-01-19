@@ -419,12 +419,12 @@ const populateRatingsBeer = (event) => {
       return;
     }
 
-    console.log(data);
-
     populateResults(data);
   });
   $xhr.fail((err) => {
-    console.log(err);
+    populateResults([]);
+    window.alert(`${err.responseText}`);
+    return;
   });
 };
 
