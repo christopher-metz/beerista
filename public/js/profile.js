@@ -89,7 +89,7 @@ const appendFollowing = function(data) {
 
     $photo.append($i);
 
-    const $info = $('<div>').addClass('info');
+    const $info = $('<div>').addClass('info-follow');
     const $name = $('<div>').addClass('name');
 
     $result.append($info);
@@ -691,6 +691,14 @@ const updateStar = function(event) {
 }
 
 const loadBeerPage = function(event) {
+  if (isRatings === 'follow') {
+    console.log($(event.target).parents('.result'));
+    const id = $(event.target).parents('.result').data().userId;
+
+    window.location.href = `/profile.html?userId=${id}`;
+    return;
+  }
+
   if (event.target.classList.contains('star-icon')) {
     updateStar(event);
     return;
