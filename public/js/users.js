@@ -58,12 +58,12 @@
   $('#account-icon').on('click', toggleAccountMenu);
 
   // Navigate to other pages via Account Menu
-  // const myFriends = $('#my-friends');
+  const findPeople = $('#find-people');
   const myBeers = $('#my-beers');
   // const settings = $('#settings');
   const $logout = $('#log-out');
 
-  // myFriends.on('click', function() { window.location.href = '/friends.html' });
+  findPeople.on('click', function() { window.location.href = '/users.html' });
   myBeers.on('click', function() { window.location.href = '/profile.html' });
   $logout.on('click', logout);
 

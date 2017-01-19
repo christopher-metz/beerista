@@ -146,12 +146,12 @@ const exitDeleteConfirm = (event) => {
   $('#account-icon').on('click', toggleAccountMenu);
 
   // Navigate to other pages via Account Menu
-  const $myFollows = $('#my-follows');
+  const $findPeople = $('#find-people');
   const $myBeers = $('#my-beers');
   // const $settings = $('#settings');
   const $logout = $('#log-out');
 
-  $myFollows.on('click', () => { window.location.href = '/followers.html' });
+  $findPeople.on('click', () => { window.location.href = '/users.html' });
   $myBeers.on('click', () => { window.location.href = '/profile.html' });
   $logout.on('click', logout);
 
