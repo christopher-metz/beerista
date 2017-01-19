@@ -89,8 +89,8 @@ router.get('/ratingsrating/:input', authorize, (req, res, next) => {
     .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
     .avg('ratings.rating as rating')
     .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
-    .having('rating', '>', `%${req.params.input}%`)
-    .groupBy('beers.id')
+    .groupBy('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .where('rating', '>=', `${req.params.input}`)
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
