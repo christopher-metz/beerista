@@ -23,9 +23,11 @@ header {
   align-items: center;
 }
 
-header h1 {
+header a {
   font-size: 80px;
   margin: 0;
+  text-decoration: none;
+  color: black;
 }
 
 header #login {
