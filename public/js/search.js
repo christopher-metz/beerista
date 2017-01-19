@@ -237,6 +237,9 @@ const updateStar = function(event) {
 }
 
 const loadBeerPage = function(event) {
+  if (!verified) {
+    $('#add-rating h5').text('Log In to Add Rating');
+  }
   event.preventDefault();
 
   if (event.target.classList.contains('star-icon')) {
@@ -287,6 +290,10 @@ const colorCircles = function() {
 const submitRating = function() {
   const ratingCircles = document.querySelectorAll('.rating-circle');
   let ratingCount = 0;
+
+  if (!verified) {
+    window.location.href = '/login.html';
+  }
 
   ratingCircles.forEach((div) => {
     if (div.classList.contains('rating-color')) {
