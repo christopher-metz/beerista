@@ -69,19 +69,17 @@
 
   // const menuOptions = $('#log-out');
 
-  let follows = [];
+  let users = [];
   let $allResults;
 
-  const populateResults = function() {
-
-    console.log(follows);
+  const populateResults = function(users) {
     const $results = $('#results');
     $results.empty();
 
-    for (const follow of follows) {
+    for (const user of users) {
       const $result = $('<div>').addClass('result');
 
-      $result.data("userId", follow.id);
+      $result.data("userId", user.id);
 
       const $photo = $('<div>').addClass('photo');
 
@@ -97,8 +95,8 @@
       $result.append($info);
       $info.append($name);
 
-      const $h3 = $('<h3>').text(`${follow.firstName} ${follow.lastName}`);
-      const $h4 = $('<h4>').text(`${follow.city}, ${follow.state}`);
+      const $h3 = $('<h3>').text(`${user.firstName} ${user.lastName}`);
+      const $h4 = $('<h4>').text(`${user.city}, ${user.state}`);
 
       $name.append($h3);
       $name.append($h4);
@@ -108,49 +106,42 @@
     addResultListener();
   };
 
-  // Get All Follows
-  const getAllFollows = function() {
-    const searchParam = $('.search-box').val();
-    console.log(searchParam);
-
+  // Get All users
+  const getAllUsers = function() {
     const $xhr = $.ajax({
       method: 'GET',
-      url: `/followers/?name=${searchParam}`,
+      url: `/users/all`,
       dataType: 'json'
     })
     .done((data) => {
       if ($xhr.status !== 200) {
         return;
       }
-      console.log(data);
 
-      follows = data;
-      console.log(follows);
-      populateResults();
+      users = data;
+      populateResults(users);
     })
     .fail(($xhr) => {
       console.log($xhr);
     });
   };
 
-  // Get Followers by Search Query
-  const getFollow = function() {
+  // Get Users by Search Query
+  const searchAllUsers = function() {
     const searchParam = $('.search-box').val();
-    console.log(searchParam);
 
     const $xhr = $.ajax({
       method: 'GET',
-      url: `/followers/?name=${searchParam}`,
+      url: `/users/search/?search=${searchParam}`,
       dataType: 'json'
     })
     .done((data) => {
       if ($xhr.status !== 200) {
         return;
       }
-      console.log(data);
 
-      follows = data;
-      console.log(follows);
+      users = data;
+      populateResults(users);
     })
     .fail(($xhr) => {
       console.log($xhr);
@@ -163,9 +154,8 @@
   const $searchInput = $('.search-box');
   // console.log($searchInput);
 
-  $(window).on('load', getAllFollows);
-  $searchInput.on('input', getFollow);
-  $searchInput.on('input', populateResults);
+  $(window).on('load', getAllUsers);
+  $searchInput.on('input', searchAllUsers);
 
   // Event Listeners to View Follow's Profile
 

@@ -37,6 +37,55 @@ router.get('/users', authorize, (req, res, next) => {
     });
 });
 
+router.get('/users/all', authorize, (req, res, next) => {
+  console.log('here at all users');
+  knex('users')
+    .then((users) => {
+      if (!users) {
+        throw boom.create(404, 'Users not found');
+      }
+
+      const newUsers = [];
+      // console.log(users);
+      for (const user of users) {
+        delete user.hashed_password;
+        newUsers.push(camelizeKeys(user));
+      }
+      console.log(newUsers);
+      res.send(newUsers);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get('/users/search/?', authorize, (req, res, next) => {
+  console.log('got here');
+  const search = req.query.search;
+  console.log(search);
+
+  knex('users')
+    .where('first_name', 'LIKE', `%${search}%`)
+    .orWhere('last_name', 'LIKE', `%${search}%`)
+    .then((users) => {
+      if (!users) {
+        throw boom.create(404, 'Users not found');
+      }
+
+      const newUsers = [];
+
+      for (const user of users) {
+        delete user.hashed_password;
+        newUsers.push(camelizeKeys(user));
+      }
+      console.log(newUsers);
+      res.send(newUsers);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get('/users/:id', authorize, (req, res, next) => {
   knex('users')
     .where('id', req.params.id)
@@ -47,24 +96,6 @@ router.get('/users/:id', authorize, (req, res, next) => {
       }
 
       res.send(camelizeKeys(user));
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
-router.get('/users/all', authorize, (req, res, next) => {
-  knex('users')
-    .then((users) => {
-      if (!user) {
-        throw boom.create(404, 'Users not found');
-      }
-
-      for (const user of users) {
-        delete user.hashed_password;
-        user = camelizeKeys(user);
-      }
-      res.send(users);
     })
     .catch((err) => {
       next(err);
