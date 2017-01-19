@@ -155,6 +155,15 @@ main {
   color: white;
 }
 
+#rated-beers, #starred-beers, #following {
+  border: 1px solid black;
+}
+
+/*#starred-beers {
+  flex-direction: column;
+  align-items: flex-start;
+}*/
+
 #beer-display {
   width: 85%;
   margin: 0 auto;
