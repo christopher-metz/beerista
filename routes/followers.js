@@ -41,8 +41,9 @@ router.get('/followers', authorize, (req, res, next) => {
 });
 
 router.get('/followers/:id', authorize, (req, res, next) => {
+  console.log('here');
   knex('followers')
-    .innerJoin('users', 'followers.user_id_2', 'user.id')
+    .innerJoin('users', 'followers.user_id_2', 'users.id')
     .where('followers.user_id_1', req.params.id)
     .orderBy('users.first_name', 'ASC')
     .then((users) => {

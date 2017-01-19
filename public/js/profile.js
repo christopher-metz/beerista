@@ -77,6 +77,7 @@ const appendFollowing = function(data) {
   $beerDisplay.empty();
 
   for (const follow of data) {
+    console.log(follow);
     const $result = $('<div>').addClass('result');
 
     $result.data("userId", follow.id);
@@ -103,7 +104,6 @@ const appendFollowing = function(data) {
 
     $beerDisplay.append($result);
   };
-  // addResultListener();
 };
 
 // const sendToFollowPage = function(event) {
@@ -386,9 +386,10 @@ const populateFollowing = () => {
     });
   }
   else {
+    console.log(window.QUERY_PARAMETERS.userId);
     const $xhr = $.ajax({
       method: 'GET',
-      url: `/followers/?id=${window.QUERY_PARAMETERS.userId}`,
+      url: `/followers/${window.QUERY_PARAMETERS.userId}`,
       dataType: 'json'
     });
     $xhr.done((data) => {
