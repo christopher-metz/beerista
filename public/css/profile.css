@@ -91,19 +91,19 @@ main {
   background-color: #FFC72E;
 }
 
-#find-a-beer, #find-by-style, #find-by-abv, #find-by-rating {
+#find-a-beer, #find-by-style, #find-by-brewery, #find-by-rating {
   height: 60%;
   width: 75%;
 }
 
-#find-a-beer .form-container, #find-by-style .form-container, #find-by-abv .form-container, #find-by-rating .form-container {
+#find-a-beer .form-container, #find-by-style .form-container, #find-by-brewery .form-container, #find-by-rating .form-container {
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
-#find-a-beer input, #find-by-style input, #find-by-abv input {
+#find-a-beer input, #find-by-style input, #find-by-brewery input {
   height: 100%;
   width: 90%;
   font-size: 50px;

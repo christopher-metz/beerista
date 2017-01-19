@@ -56,7 +56,7 @@
               <button id="by-beer" class="filter-option-btn">Beer</button>
               <button id="by-rating" class="filter-option-btn">Rating</button>
               <button id="by-style" class="filter-option-btn">Style</button>
-              <button id="by-abv" class="filter-option-btn">ABV</button>
+              <button id="by-brewery" class="filter-option-btn">Brewery</button>
             </div>
           </div>
 
@@ -67,10 +67,7 @@
           </form>
           <form id="find-by-rating" class="off">
             <div class="form-container">
-              <div class="rating-circle"></div>
-              <div class="rating-circle"></div>
-              <div class="rating-circle"></div>
-              <div class="rating-circle"></div>
+              <input type="range" min=0 max=5 name="find-by-rating" placeholder="Min. Rating">
             </div>
           </form>
           <form id="find-by-style" class="off">
@@ -78,9 +75,9 @@
               <input type="text" name="find-by-style" placeholder="Find a beer by style">
             </div>
           </form>
-          <form id="find-by-abv" class="off">
+          <form id="find-by-brewery" class="off">
             <div class="form-container">
-              <input type="text" name="find-by-abv" placeholder="Find a beer by ABV">
+              <input type="text" name="find-by-brewery" placeholder="Find a beer by Brewery">
             </div>
           </form>
         </section>

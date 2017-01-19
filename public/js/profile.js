@@ -402,6 +402,103 @@ const populateFollowing = () => {
   }
 }
 
+/*---------------------------------------------------*/
+// Gather filter results for specific beer search.
+const populateRatingsBeer = (event) => {
+  event.preventDefault();
+
+  const searchInput = $('input[name|="find-a-beer"]').val();
+  console.log({ input: `${searchInput}` });
+  const $xhr = $.ajax({
+    method: 'GET',
+    url: `/ratingsbeer/${searchInput}`,
+    dataType: 'json'
+  });
+  $xhr.done((data) => {
+    if ($xhr.status !== 200) {
+      return;
+    }
+
+    console.log(data);
+
+    populateResults(data);
+  });
+  $xhr.fail((err) => {
+    console.log(err);
+  });
+};
+
+/*---------------------------------------------------*/
+// Gather filter results for minimum rating search.
+const populateRatingsRating = (event) => {
+  event.preventDefault();
+
+  const ratingInput = $('input[name|="find-by-rating"]').val();
+  const $xhr = $.ajax({
+    method: 'GET',
+    url: `/ratingsrating/${ratingInput}`,
+    dataType: 'json'
+  });
+  $xhr.done((data) => {
+    if ($xhr.status !== 200) {
+      return;
+    }
+
+    populateResults(data);
+  });
+  $xhr.fail((err) => {
+    console.log(err);
+  });
+};
+
+/*---------------------------------------------------*/
+// Gather filter results for minimum rating search.
+const populateRatingsStyle = (event) => {
+  event.preventDefault();
+
+  const styleInput = $('input[name|="find-by-style"]').val();
+  const $xhr = $.ajax({
+    method: 'GET',
+    url: `/ratingsstyle/${styleInput}`,
+    dataType: 'json'
+  });
+  $xhr.done((data) => {
+    if ($xhr.status !== 200) {
+      return;
+    }
+
+    populateResults(data);
+  });
+  $xhr.fail((err) => {
+    console.log(err);
+  });
+};
+
+/*---------------------------------------------------*/
+// Gather filter results for minimum rating search.
+const populateRatingsBrewery = (event) => {
+  event.preventDefault();
+
+  const breweryInput = $('input[name|="find-by-brewery"]').val();
+  const $xhr = $.ajax({
+    method: 'GET',
+    url: `/ratingsbrewery/${breweryInput}`,
+    dataType: 'json'
+  });
+  $xhr.done((data) => {
+    if ($xhr.status !== 200) {
+      return;
+    }
+
+    populateResults(data);
+  });
+  $xhr.fail((err) => {
+    console.log(err);
+  });
+};
+
+/*------------------------------------------------------------*/
+
 const handleStarsOrRating = (event) => {
   const $target = $(event.target);
   console.log($target.parent()[0].id);
@@ -425,7 +522,7 @@ const toggleAccountMenu = function() {
 
 const toggleFilter = function() {
   if (filterOpen) {
-    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-abv').addClass('off');
+    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-brewery').addClass('off');
   }
   filterOpen = false;
   $('#filter-options').removeClass('off');
@@ -601,7 +698,7 @@ let filterOpen = false;
 const openThisFilter = function() {
   filterOpen = true;
   const text = $(this).text();
-  console.log(text);
+
   $('#filter-options').addClass('off');
 
   switch (text) {
@@ -614,8 +711,8 @@ const openThisFilter = function() {
     case 'Style':
       $('#find-by-style').removeClass('off');
       break;
-    case 'ABV':
-      $('#find-by-abv').removeClass('off');
+    case 'Brewery':
+      $('#find-by-brewery').removeClass('off');
       break;
     default:
 
@@ -744,4 +841,12 @@ $('div.rating-circle').on('click', colorCircles);
 
   $('#follow-user').on('click', followOrUnfollow);
 
+  // Filter beer
+  $('#find-a-beer').submit(populateRatingsBeer);
+  // Filter rating
+  $('#find-by-rating').submit(populateRatingsRating);
+  // Filter style
+  $('#find-by-style').submit(populateRatingsStyle);
+  // Filter brewery
+  $('#find-by-brewery').submit(populateRatingsBrewery);
 })();

@@ -60,6 +60,90 @@ router.get('/ratings/:id', authorize, (req, res, next) => {
     });
 });
 
+// Get all ratings for a beer search.
+router.get('/ratingsbeer/:input', authorize, (req, res, next) => {
+  console.log(req.params.input);
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .avg('ratings.rating as "rating"')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+    .where('beers.name', 'LIKE', `%${req.params.input}%`)
+    .groupBy('beers.id')
+    .then((ratings) => {
+      console.log(ratings);
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers with this filter!');
+      }
+      else {
+        res.send(ratings);
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+// Get all ratings for a minimum rating.
+router.get('/ratingsrating/:input', authorize, (req, res, next) => {
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .avg('ratings.rating as rating')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+    .having('rating', '>', `%${req.params.input}%`)
+    .groupBy('beers.id')
+    .then((ratings) => {
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers with this filter!');
+      }
+
+      res.send(ratings);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+// Get all ratings for a minimum rating.
+router.get('/ratingsstyle/:input', authorize, (req, res, next) => {
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .avg('ratings.rating as rating')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+    .where('beers.style', 'LIKE', `%${req.params.input}%`)
+    .groupBy('beers.id')
+    .then((ratings) => {
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers with this filter!');
+      }
+
+      res.send(ratings);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+// Get all ratings for a minimum rating.
+router.get('/ratingsbrewery/:input', authorize, (req, res, next) => {
+  knex('beers')
+    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
+    .avg('ratings.rating as rating')
+    .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
+    .innerJoin('breweries', 'beers.brewery_id', 'breweries.id')
+    .where('breweries.name', 'LIKE', `%${req.params.input}%`)
+    .groupBy('beers.id')
+    .then((ratings) => {
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers with this filter!');
+      }
+
+      res.send(ratings);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.post('/ratings', authorize, (req, res, next) => {
   const { beer_id, venue_id, rating } = req.body;
 
