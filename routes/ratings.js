@@ -68,6 +68,7 @@ router.get('/ratingsbeer/:input', authorize, (req, res, next) => {
     .avg('ratings.rating as "rating"')
     .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
     .where('beers.name', 'LIKE', `%${req.params.input}%`)
+    .where('ratings.user_id', req.claim.userId)
     .groupBy('beers.id')
     .then((ratings) => {
       console.log(ratings);
@@ -91,6 +92,7 @@ router.get('/ratingsrating/:input', authorize, (req, res, next) => {
     .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
     .groupBy('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
     .where('rating', '>=', `${req.params.input}`)
+    .where('ratings.user_id', req.claim.userId)
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
@@ -110,6 +112,7 @@ router.get('/ratingsstyle/:input', authorize, (req, res, next) => {
     .avg('ratings.rating as rating')
     .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
     .where('beers.style', 'LIKE', `%${req.params.input}%`)
+    .where('ratings.user_id', req.claim.userId)
     .groupBy('beers.id')
     .then((ratings) => {
       if (ratings.length === 0) {
@@ -131,6 +134,7 @@ router.get('/ratingsbrewery/:input', authorize, (req, res, next) => {
     .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
     .innerJoin('breweries', 'beers.brewery_id', 'breweries.id')
     .where('breweries.name', 'LIKE', `%${req.params.input}%`)
+    .where('ratings.user_id', req.claim.userId)
     .groupBy('beers.id')
     .then((ratings) => {
       if (ratings.length === 0) {
