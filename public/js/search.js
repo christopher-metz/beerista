@@ -107,9 +107,9 @@ const populateResults = function(beers) {
       const $star = $('<div>').addClass('star');
       const $starIcon = $('<i>').addClass('material-icons star-icon').text('grade');
 
-      // if (rating.starred) {
-      //   $starIcon.addClass('star-gold');
-      // }
+      if (beer.starred) {
+        $starIcon.addClass('star-gold');
+      }
 
       $star.append($starIcon);
       $result.append($star);
@@ -142,21 +142,36 @@ const getBeers = function(event) {
     if ($xhr.status !== 200) {
       return;
     }
+
     beers = data;
 
-    const $xhr_2 = $.ajax({
-      method: 'GET',
-      contentType: 'application/json',
-      dataType: 'json',
-      url: `/stars`
-    })
-    .done((stars) => {
-      
-      populateResults()
-    })
-    .fail(() => {
-      console.log('Failure at $xhr_2');
-    });
+    if (verified) {
+      const $xhr_2 = $.ajax({
+        method: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        url: `/stars`
+      })
+      .done((stars) => {
+        beers = beers.map((beer) => {
+          for (const star of stars) {
+            beer.starred = false;
+            if (star.source_id === beer.source_id) {
+              beer.starred = true;
+              return beer;
+            }
+          }
+          return beer;
+        })
+        populateResults(beers);
+      })
+      .fail(($xhr2) => {
+        console.log($xhr2);
+      });
+    }
+    else {
+      populateResults(beers);
+    }
   })
   .fail(($xhr) => {
     console.log($xhr)
@@ -170,8 +185,62 @@ const checkForSearchInput = () => {
   }
 };
 
+const updateStar = function(event) {
+  $(event.target).toggleClass('star-gold');
+  $(event.target).parents('.result').data().starred = !$(event.target).parents('.result').data().starred;
+
+
+  const id = $(event.target).parents('.result').data().source_id;
+  const starred = $(event.target).parents('.result').data().starred;
+  const starData = $(event.target).parents('.result').data();
+  starData.userId = userId;
+  console.log(starData);
+
+
+  if (starred) {
+    // console.log('contains-gold');
+    const $xhr = $.ajax({
+      method: 'POST',
+      url: '/beers/star',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify(starData)
+    })
+    .done((star) => {
+      console.log(star);
+    })
+    .fail(() => {
+      console.log('Failure');
+    });
+
+    return;
+  }
+
+  if (!starred) {
+    // console.log('doesn\'t contain gold');
+    const $xhr_2 = $.ajax({
+      method: 'DELETE',
+      url: '/stars',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({ beerId: id})
+    })
+    .done((star) => {
+      console.log(star);
+    })
+    .fail(() => {
+      console.log('Failure');
+    });
+  }
+}
+
 const loadBeerPage = function(event) {
   event.preventDefault();
+
+  if (event.target.classList.contains('star-icon')) {
+    updateStar(event);
+    return;
+  }
 
   $allResults = $('.result');
 
@@ -237,7 +306,7 @@ const submitRating = function() {
 
   const $xhr_2 = $.ajax({
     method: 'POST',
-    url: '/beers',
+    url: '/beers/rating',
     dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify(beerData)

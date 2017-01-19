@@ -129,7 +129,7 @@ router.get('/beers/:id', (req, res, next) => {
   // Pull specific beer page data
 });
 
-router.post('/beers', (req, res, next) => {
+router.post('/beers/rating', (req, res, next) => {
   const { name, style, abv, ibu, source_rating, source_count, source_id, photo_url, description, user_rating, user_id } = req.body;
 
   knex('beers')
@@ -163,6 +163,48 @@ router.post('/beers', (req, res, next) => {
     })
     .then((rating) => {
       res.send(rating);
+    })
+    .catch((err) => {
+      next(err);
+    });
+
+});
+
+router.post('/beers/star', (req, res, next) => {
+  const { name, style, abv, ibu, source_rating, source_count, source_id, photo_url, description, userId } = req.body;
+  console.log(source_id);
+
+  knex('beers')
+    .where('source_id', source_id)
+    .then((beer) => {
+      if (beer) {
+        return beer;
+      }
+      return knex('beers')
+        .insert({
+          name: name,
+          style: style,
+          abv: abv,
+          ibu: ibu,
+          source_rating: source_rating,
+          source_count: source_count,
+          source_id: source_id,
+          photo_url: photo_url,
+          description: description,
+          brewery_id: 1
+        }, '*')
+    })
+    .then((beer) => {
+      console.log(beer);
+      return knex('stars')
+        .insert({
+          beer_id: beer[0].id,
+          user_id: userId
+        }, '*');
+    })
+    .then((star) => {
+      console.log(star);
+      res.send(star);
     })
     .catch((err) => {
       next(err);
