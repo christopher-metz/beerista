@@ -2,7 +2,7 @@
 
 'use strict';
 
-let isRatings = 'rate';
+let isRatings = 'rate'; // State of tabs can be rate, star, follow.
 let beers;
 
 const populateResults = function(ratings) {
@@ -438,7 +438,7 @@ const populateRatingsRating = (event) => {
     window.alert('Minimum rating must be between 1 and 5');
     return;
   }
-  
+
   const $xhr = $.ajax({
     method: 'GET',
     url: `/ratingsrating/${ratingInput}`,
@@ -515,28 +515,29 @@ const handleStarsOrRating = (event) => {
   console.log($target.parent()[0].id);
   if ($target.parent()[0].id === 'rated-beers') {
     isRatings = 'rate';
+    $('#filter-btn').removeClass('off');
     populateRatings();
   }
   else if ($target.parent()[0].id === 'starred-beers'){
     isRatings = 'star';
+    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-brewery').addClass('off');
+    $('#filter-options').addClass('off');
+    filterOpen = false;
+    $('#filter-btn').addClass('off');
     populateStars();
   }
   else {
     isRatings = 'follow';
+    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-brewery').addClass('off');
+    $('#filter-options').addClass('off');
+    filterOpen = false;
+    $('#filter-btn').addClass('off');
     populateFollowing();
   }
 };
 
 const toggleAccountMenu = function() {
   $('#drop-down-container').toggleClass('off');
-};
-
-const toggleFilter = function() {
-  if (filterOpen) {
-    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-brewery').addClass('off');
-  }
-  filterOpen = false;
-  $('#filter-options').removeClass('off');
 };
 
 const handleGeneralSearch = (event) => {
@@ -706,8 +707,20 @@ const logout = () => {
 
 let filterOpen = false;
 
+const toggleFilter = function() {
+  if (filterOpen) {
+    $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-brewery').addClass('off');
+    $('#filter-options').addClass('off');
+    populateRatings();
+    filterOpen = false;
+  }
+  else {
+    $('#filter-options').removeClass('off');
+    filterOpen = true;
+  }
+};
+
 const openThisFilter = function() {
-  filterOpen = true;
   const text = $(this).text();
 
   $('#filter-options').addClass('off');
@@ -728,7 +741,7 @@ const openThisFilter = function() {
     default:
 
   }
-}
+};
 
 let isFollowing = false;
 
