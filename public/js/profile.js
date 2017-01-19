@@ -452,7 +452,9 @@ const populateRatingsRating = (event) => {
     populateResults(data);
   });
   $xhr.fail((err) => {
-    console.log(err);
+    populateResults([]);
+    window.alert(`${err.responseText}`);
+    return;
   });
 };
 
@@ -475,7 +477,9 @@ const populateRatingsStyle = (event) => {
     populateResults(data);
   });
   $xhr.fail((err) => {
-    console.log(err);
+    populateResults([]);
+    window.alert(`${err.responseText}`);
+    return;
   });
 };
 
@@ -498,7 +502,9 @@ const populateRatingsBrewery = (event) => {
     populateResults(data);
   });
   $xhr.fail((err) => {
-    console.log(err);
+    populateResults([]);
+    window.alert(`${err.responseText}`);
+    return;
   });
 };
 
