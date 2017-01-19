@@ -29,6 +29,7 @@ router.get('/users', authorize, (req, res, next) => {
         throw boom.create(404, 'User not found');
       }
 
+      delete user.hashed_password;
       res.send(camelizeKeys(user));
     })
     .catch((err) => {
@@ -95,6 +96,57 @@ router.post('/users', (req, res, next) => {
       delete user.hashedPassword;
 
       res.send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.patch('/users', authorize, (req, res, next) => {
+  const { firstName, lastName, email, city, state } = req.body;
+  console.log(firstName);
+
+  if (!email || !email.trim()) {
+    return next(boom.create(400, 'Email must not be blank'));
+  }
+
+  knex('users')
+    .where('id', req.claim.userId)
+    .update(decamelizeKeys({
+      firstName,
+      lastName,
+      email,
+      city,
+      state
+    }), '*')
+    .then((users) => {
+      const user = users[0];
+      if (!user) {
+        return next(boom.create(400, 'Could not update.'));
+      }
+
+      delete user.hashed_password;
+      res.send(camelizeKeys(user));
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.delete('/users', authorize, (req, res, next) => {
+  knex('users')
+    .del('*')
+    .where('id', req.claim.userId)
+    .then((users) => {
+      const user = users[0];
+
+      if (!user) {
+        throw boom.create(400, 'User not found');
+      }
+
+      delete user.id;
+      delete user.hashed_password;
+      res.send(camelizeKeys(user));
     })
     .catch((err) => {
       next(err);

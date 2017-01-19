@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Beerista</title>
+
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="./css/materialize.css" rel="stylesheet"> -->
+    <link href="./css/global.css" rel="stylesheet">
+    <link href="./css/settings.css" rel="stylesheet">
+
+    <script defer src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <!-- <script defer src="./js/materialize.js"></script> -->
+    <script defer src="./js/settings.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Beerista</h1>
+      <form id="general-search">
+        <input type="text" name="search-from-profile" placeholder="Search all beers...">
+      </form>
+      <i class="material-icons" id="account-icon">account_circle</i>
+    </header>
+
+    <div id="drop-down-container" class="off">
+      <section id="drop-down">
+        <div id="my-follows" class="menu-option">
+          <h3>My Follows</h3>
+        </div>
+        <div id="my-beers" class="menu-option">
+          <h3>My Beers</h3>
+        </div>
+        <a id="settings" class="menu-option" href="/settings.html">
+          <h3>Settings</h3>
+        </a>
+        <div id="log-out" class="menu-option">
+          <h3>Log Out</h3>
+        </div>
+      </section>
+    </div>
+
+    <main>
+      <form id="user-info">
+        <span>
+          <label>First Name:</label>
+          <input type="text" name="first-name"/>
+        </span>
+        <span>
+          <label>Last Name:</label>
+          <input type="text" name="last-name"/>
+        </span>
+        <span>
+          <label>Email:</label>
+          <input class="input-area" type="text" name="email" placeholder="email@domain.com"/>
+        </span>
+        <span>
+          <label>City:</label>
+          <input type="text" name="city"/>
+        </span>
+        <span>
+          <label>State:</label>
+          <input type="text" name="state"/>
+        </span>
+        <button type="submit">Edit Profile</button>
+      </form>
+      <section id="confirm" class="off">
+        <div class="user-container">
+          <i class="material-icons" id="exit">clear</i>
+
+          <!-- <div class="user-info">
+
+          </div> -->
+
+          <span id="yea-or-nea">
+            <h5 id="cancel">Cancel</h5>
+            <h5 id="remove">Delete</h5>
+          </span>
+        </div>
+      </section>
+      <button id="delete">Delete Account</button>
+    <main>
+
+    <footer>
+      <div class="container">
+        <h5>Beerista</h5>
+        <p>Your beer buying guide.</p>
+        <p>&copy 2016 Beerista</p>
+      </div>
+    </footer>
+  </body>
+</html>
