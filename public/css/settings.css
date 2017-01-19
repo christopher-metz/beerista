@@ -29,9 +29,23 @@ main {
   width: 100%;
 }
 
+#confirm-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;;
+  align-items: center;
+}
+
 #user-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;;
+  align-items: center;
+}
+
+#yea-or-nea {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;;
   align-items: center;
 }

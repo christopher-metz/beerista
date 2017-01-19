@@ -109,6 +109,7 @@ const loadDeleteConfirm = (event) => {
   // $target.parents('#results').addClass('off');
 
   $('#confirm').removeClass('off');
+  $('#delete').addClass('off');
 
   // $('#beer-photo').attr('src', $target.find('.photo img').attr('src'));
   // $('#name').text($target.find('.name h3').text());
@@ -123,6 +124,7 @@ const exitDeleteConfirm = (event) => {
   event.preventDefault();
 
   $('#confirm').addClass('off');
+  $('#delete').removeClass('off');
   // $('.rating-circle').removeClass('rating-color');
   // $('#results').append($allResults);
   // $('#results').removeClass('off');
@@ -165,6 +167,6 @@ const exitDeleteConfirm = (event) => {
   const $remove = $('#remove');
   $remove.on('click', handleDeleteUser);
 
-  const $cancel = $('cancel');
+  const $cancel = $('#cancel');
   $cancel.on('click', exitDeleteConfirm);
 })();
