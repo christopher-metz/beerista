@@ -53,6 +53,24 @@ router.get('/users/:id', authorize, (req, res, next) => {
     });
 });
 
+router.get('/users/all', authorize, (req, res, next) => {
+  knex('users')
+    .then((users) => {
+      if (!user) {
+        throw boom.create(404, 'Users not found');
+      }
+
+      for (const user of users) {
+        delete user.hashed_password;
+        user = camelizeKeys(user);
+      }
+      res.send(users);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.post('/users', (req, res, next) => {
   const { firstName, lastName, email, city, state, password } = req.body;
 
