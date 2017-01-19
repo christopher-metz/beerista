@@ -413,13 +413,34 @@ const populateRatingsBeer = (event) => {
     method: 'GET',
     url: `/ratingsbeer/${searchInput}`,
     dataType: 'json'
-  });
-  $xhr.done((data) => {
-    if ($xhr.status !== 200) {
-      return;
-    }
+  })
+  $xhr.done((ratingsbeers) => {
+    const $xhr_2 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/stars`
+    })
+    .done((dataStars) => {
+      if ($xhr_2.status !== 200) {
+        return;
+      }
 
-    populateResults(data);
+      const results = ratingsbeers.map((ratingbeer) => {
+        for (const dataStar of dataStars) {
+          ratingbeer.starred = false;
+          if (ratingbeer.id === dataStar.id) {
+            ratingbeer.starred = true;
+            return ratingbeer;
+          }
+        }
+        return ratingbeer;
+      })
+      populateResults(results);
+    })
+    .fail((err) => {
+      console.log(err);
+    })
   });
   $xhr.fail((err) => {
     populateResults([]);
@@ -444,12 +465,36 @@ const populateRatingsRating = (event) => {
     url: `/ratingsrating/${ratingInput}`,
     dataType: 'json'
   });
-  $xhr.done((data) => {
+  $xhr.done((ratingsratings) => {
     if ($xhr.status !== 200) {
       return;
     }
 
-    populateResults(data);
+    const $xhr_2 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/stars`
+    })
+    .done((dataStars) => {
+      if ($xhr_2.status !== 200) {
+        return;
+      }
+      const results = ratingsratings.map((ratingrating) => {
+        for (const dataStar of dataStars) {
+          ratingrating.starred = false;
+          if (ratingrating.id === dataStar.id) {
+            ratingrating.starred = true;
+            return ratingrating;
+          }
+        }
+        return ratingrating;
+      })
+      populateResults(results);
+    })
+    .fail((err) => {
+      console.log(err);
+    })
   });
   $xhr.fail((err) => {
     populateResults([]);
@@ -469,12 +514,36 @@ const populateRatingsStyle = (event) => {
     url: `/ratingsstyle/${styleInput}`,
     dataType: 'json'
   });
-  $xhr.done((data) => {
+  $xhr.done((styles) => {
     if ($xhr.status !== 200) {
       return;
     }
 
-    populateResults(data);
+    const $xhr_2 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/stars`
+    })
+    .done((dataStars) => {
+      if ($xhr_2.status !== 200) {
+        return;
+      }
+      const results = styles.map((style) => {
+        for (const dataStar of dataStars) {
+          style.starred = false;
+          if (style.id === dataStar.id) {
+            style.starred = true;
+            return style;
+          }
+        }
+        return style;
+      })
+      populateResults(results);
+    })
+    .fail((err) => {
+      console.log(err);
+    })
   });
   $xhr.fail((err) => {
     populateResults([]);
@@ -494,12 +563,36 @@ const populateRatingsBrewery = (event) => {
     url: `/ratingsbrewery/${breweryInput}`,
     dataType: 'json'
   });
-  $xhr.done((data) => {
+  $xhr.done((breweries) => {
     if ($xhr.status !== 200) {
       return;
     }
 
-    populateResults(data);
+    const $xhr_3 = $.ajax({
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+      url: `/stars`
+    })
+    .done((dataStars) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+      const results = breweries.map((brewery) => {
+        for (const dataStar of dataStars) {
+          brewery.starred = false;
+          if (brewery.id === dataStar.id) {
+            brewery.starred = true;
+            return brewery;
+          }
+        }
+        return brewery;
+      })
+      populateResults(results);
+    })
+    .fail((err) => {
+      console.log(err);
+    })
   });
   $xhr.fail((err) => {
     populateResults([]);
