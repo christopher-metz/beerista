@@ -142,18 +142,12 @@ main {
   right: 0;
 }
 
-#profile-beers {
-  /*height: 60vh;*/
-  width: 90%;
-  margin: 0 auto;
-  background-color: white;
-  box-shadow: 0 1px 1px 1px gray;
-  position: relative;
-}
-
 #profile-menu {
   height: 10vh;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 1px 0 1px 1px gray;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -162,11 +156,18 @@ main {
 }
 
 #beer-display {
-  /*height: 85vh;*/
-  width: 100%;
+  width: 85%;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+  top: 2vh;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+#beer-display h5 {
+  font-size: 35px;
 }
 
 .result {

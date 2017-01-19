@@ -73,8 +73,6 @@ let follows = [];
 let $allResults;
 
 const appendFollowing = function(data) {
-
-  console.log(data);
   const $beerDisplay = $('#beer-display');
   $beerDisplay.empty();
 
@@ -184,6 +182,7 @@ const populateRatings = () => {
       });
     })
     .fail(() => {
+      populateResults([]);
       const $h5 = $('<h5>').text('You haven\'t rated any beers yet.');
       $('#beer-display').append($h5);
       // window.location.href = '/login.html';
@@ -290,6 +289,7 @@ const populateStars = () => {
       populateResults(results);
     })
     .fail(() => {
+      populateResults([]);
       const $h5 = $('<h5>').text('You haven\'t starred any beers yet.');
       $('#beer-display').append($h5);
       // window.location.href = '/login.html';
@@ -380,7 +380,9 @@ const populateFollowing = () => {
       appendFollowing(data);
     });
     $xhr.fail((err) => {
-      console.log(err);
+      appendFollowing([]);
+      const $h5 = $('<h5>').text('You aren\'t following any people yet.');
+      $('#beer-display').append($h5);
     });
   }
   else {
@@ -695,7 +697,6 @@ const loadBeerPage = function(event) {
   }
 
   $('#filters-nav-container').addClass('off');
-  $('#profile-beers').addClass('off');
   $allResults = $('.result');
 
   const $target = $(event.target).parents('.result');
@@ -721,7 +722,6 @@ const exitBeerPage = function(event) {
   event.preventDefault();
 
   $('#filters-nav-container').removeClass('off');
-  $('#profile-beers').removeClass('off');
   $('#beer').addClass('off');
   $('.rating-circle').removeClass('rating-color');
   $beerDisplay.append($allResults);
