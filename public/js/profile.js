@@ -434,6 +434,11 @@ const populateRatingsRating = (event) => {
   event.preventDefault();
 
   const ratingInput = $('input[name|="find-by-rating"]').val();
+  if (ratingInput < 1 || ratingInput > 5) {
+    window.alert('Minimum rating must be between 1 and 5');
+    return;
+  }
+  
   const $xhr = $.ajax({
     method: 'GET',
     url: `/ratingsrating/${ratingInput}`,

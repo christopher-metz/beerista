@@ -103,25 +103,10 @@ main {
   justify-content: flex-end;
 }
 
-#find-a-beer input, #find-by-style input, #find-by-brewery input {
+#find-a-beer input, #find-by-style input, #find-by-brewery input, #find-by-rating input {
   height: 100%;
   width: 90%;
   font-size: 50px;
-}
-
-#find-by-rating .form-container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-#find-by-rating .form-container .rating-circle {
-  height: 70px;
-  width: 70px;
-  border: 5px solid black;
-  border-radius: 50%;
 }
 
 /*Profile*/
