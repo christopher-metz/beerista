@@ -393,6 +393,7 @@ const logout = () => {
   $searchInput.focus(clearSearchInput);
   $searchInput.on('input', getBeers);
   $('form').submit(getBeers);
+  $('#search-btn').on('click', getBeers);
 
   // Exit individual beer "pop-up"
   const $results = $('#results');
