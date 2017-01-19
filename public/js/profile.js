@@ -2,7 +2,7 @@
 
 'use strict';
 
-let isRatings = true;
+let isRatings = 'rate';
 let beers;
 
 const populateResults = function(ratings) {
@@ -60,7 +60,7 @@ const populateResults = function(ratings) {
     $stats.append($abvP);
     $stats.append($ibuP);
 
-    if (isRatings) {
+    if (isRatings === 'rate') {
       const $ratingP = $('<p>').text(`Rating: ${rating.rating}`).addClass('rating');
       $stats.append($ratingP);
     }
@@ -69,6 +69,54 @@ const populateResults = function(ratings) {
   };
 };
 
+let follows = [];
+let $allResults;
+
+const appendFollowing = function(data) {
+
+  console.log(data);
+  const $beerDisplay = $('#beer-display');
+  $beerDisplay.empty();
+
+  for (const follow of data) {
+    const $result = $('<div>').addClass('result');
+
+    $result.data("userId", follow.id);
+
+    const $photo = $('<div>').addClass('photo');
+
+    $result.append($photo);
+
+    const $i = $('<i>').text('account_circle').addClass('material-icons');
+
+    $photo.append($i);
+
+    const $info = $('<div>').addClass('info');
+    const $name = $('<div>').addClass('name');
+
+    $result.append($info);
+    $info.append($name);
+
+    const $h3 = $('<h3>').text(`${follow.firstName} ${follow.lastName}`);
+    const $h4 = $('<h4>').text(`${follow.city}, ${follow.state}`);
+
+    $name.append($h3);
+    $name.append($h4);
+
+    $beerDisplay.append($result);
+  };
+  // addResultListener();
+};
+
+// const sendToFollowPage = function(event) {
+//   const param = $(this).data();
+//   console.log(param);
+//   window.location.href = `/profile.html?userId=${param.userId}`;
+// };
+//
+// const addResultListener = function() {
+//   $('.result').on('click', sendToFollowPage);
+// };
 
 const populateRatings = () => {
   let userId;
@@ -328,8 +376,8 @@ const populateFollowing = () => {
       if ($xhr.status !== 200) {
         return;
       }
-      console.log(data);
-      populateResults(data);
+
+      appendFollowing(data);
     });
     $xhr.fail((err) => {
       console.log(err);
@@ -345,8 +393,8 @@ const populateFollowing = () => {
       if ($xhr.status !== 200) {
         return;
       }
-      console.log(data);
-      populateResults(data);
+
+      appendFollowing(data);
     });
     $xhr.fail((err) => {
       console.log(err);
@@ -355,13 +403,19 @@ const populateFollowing = () => {
 }
 
 const handleStarsOrRating = (event) => {
-  if (event.target.id === 'rated-beers') {
-    isRatings = true;
+  const $target = $(event.target);
+  console.log($target.parent()[0].id);
+  if ($target.parent()[0].id === 'rated-beers') {
+    isRatings = 'rate';
     populateRatings();
   }
-  else {
-    isRatings = false;
+  else if ($target.parent()[0].id === 'starred-beers'){
+    isRatings = 'star';
     populateStars();
+  }
+  else {
+    isRatings = 'follow';
+    populateFollowing();
   }
 };
 
@@ -379,7 +433,6 @@ const handleGeneralSearch = (event) => {
   window.location.href = `/search.html?input=${searchBeer}`;
 };
 
-let $allResults;
 let beerData;
 
 const updateStar = function(event) {

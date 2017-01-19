@@ -246,14 +246,15 @@ main {
   box-shadow: 0 5px 25px 5px gray;
 }
 
-#rated-beers, #starred-beers {
+#rated-beers, #starred-beers, #following {
   height: 100%;
-  width: 50%;
+  width: 33%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#rated-beers h2, #starred-beers h2 {
+#rated-beers h2, #starred-beers h2, #following h2 {
   font-size: 50px;
+  height: 100%;
 }
