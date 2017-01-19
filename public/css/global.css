@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
 body {
   height: 100%;
   width: 100%;
@@ -13,6 +15,10 @@ body {
   height: 15%;
   /*background-color: blue;*/
 /*}*/
+
+#logo {
+  font-family: 'Pacifico';
+}
 
 header {
   height: 10vh;
