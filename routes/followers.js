@@ -61,11 +61,32 @@ router.get('/followers/:id', authorize, (req, res, next) => {
     });
 })
 
-router.post('/followers', authorize, (req, res, next) => {
+router.get('/follows/?', authorize, (req, res, next) => {
+  const userId2 = req.query.userId2;
+  console.log(userId2);
+
+  knex('followers')
+    .where('followers.user_id_1', req.claim.userId)
+    .where('followers.user_id_2', userId2)
+    .then((follow) => {
+      console.log(follow);
+      if (!follow.length) {
+        res.send(false);
+      }
+
+      res.send(true);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.post('/followers/:id', authorize, (req, res, next) => {
+  console.log('here');
   knex('followers')
     .insert({
       user_id_1: req.claim.userId,
-      user_id_2: req.body.userId
+      user_id_2: req.params.id
     }, '*')
     .then((followers) => {
       res.send(camelizeKeys(followers[0]));
@@ -75,12 +96,15 @@ router.post('/followers', authorize, (req, res, next) => {
     });
 });
 
-router.delete('/followers', authorize, (req, res, next) => {
+router.delete('/followers/:id', authorize, (req, res, next) => {
+  console.log(req.params.id);
+
   knex('followers')
     .where('followers.user_id_1', req.claim.userId)
-    .where('followers.user_id_2', req.body.userId)
+    .where('followers.user_id_2', req.params.id)
     .first()
     .then((follower) => {
+      console.log(follower);
       if (!follower) {
         throw boom.create(404, 'Follower not found');
       }
@@ -88,7 +112,7 @@ router.delete('/followers', authorize, (req, res, next) => {
       return knex('followers')
         .del('*')
         .where('followers.user_id_1', req.claim.userId)
-        .where('followers.user_id_2', req.body.userId)
+        .where('followers.user_id_2', req.params.id)
     })
     .then((followers) => {
       const follower = followers[0];

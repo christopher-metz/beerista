@@ -622,14 +622,67 @@ const openThisFilter = function() {
   }
 }
 
+let isFollowing = false;
+
 const showFollowButton = function() {
-  if (window.location.userId) {
-    const userid = window.location.userId;
-    console.log(window.location.userId);
-  }
+  const param = window.location.search;
+  const userId = Number.parseInt(window.location.search.slice(param.indexOf('=') + 1));
 
   if (userId) {
     $('#follow-user').removeClass('off');
+
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: `/follows/?userId2=${userId}`,
+      contentType: 'application/json',
+      dataType: 'json',
+    })
+    .done((bool) => {
+      console.log(bool);
+      if (bool) {
+        $('#follow-user').text('Unfollow');
+        isFollowing = true;
+      }
+    })
+    .fail(($xhr) => {
+      console.log($xhr);
+    })
+  }
+}
+
+const followOrUnfollow = function() {
+  const param = window.location.search;
+  const userId = Number.parseInt(window.location.search.slice(param.indexOf('=') + 1));
+
+  if (isFollowing) {
+    const $xhr = $.ajax({
+      method: 'DELETE',
+      url: `/followers/${userId}`,
+      contentType: 'application/json',
+      dataType: 'json'
+    })
+    .done((follow) => {
+      isFollowing = false;
+      $('#follow-user').text('Follow');
+    })
+    .fail(($xhr) => {
+      console.log($xhr);
+    });
+  }
+  else {
+    const $xhr = $.ajax({
+      method: 'POST',
+      url: `/followers/${userId}`,
+      contentType: 'application/json',
+      dataType: 'json'
+    })
+    .done((follow) => {
+      isFollowing = true;
+      $('#follow-user').text('Unfollow');
+    })
+    .fail(($xhr) => {
+      console.log($xhr);
+    })
   }
 }
 
@@ -688,5 +741,7 @@ $('div.rating-circle').on('click', colorCircles);
 
 // Show Follow Button or not
   $(window).on('load', showFollowButton);
+
+  $('#follow-user').on('click', followOrUnfollow);
 
 })();
