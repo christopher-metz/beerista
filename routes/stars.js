@@ -24,7 +24,7 @@ const authorize = function(req, res, next) {
 // Get all ratings for a user.
 router.get('/stars', authorize, (req, res, next) => {
   knex('beers')
-    .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url', 'beers.source_id')
+    .select('stars.id as starId', 'beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url', 'beers.source_id')
     .innerJoin('stars', 'stars.beer_id', 'beers.id')
     .where('stars.user_id', req.claim.userId)
     .orderBy('beers.name')
@@ -99,7 +99,6 @@ router.delete('/stars', authorize, (req, res, next) => {
   knex('stars')
     .where('beer_id', beerId)
     .where('user_id', req.claim.userId)
-    .first()
     .then((star) => {
       if (!star) {
         throw boom.create(404, 'Star not found');
@@ -108,7 +107,7 @@ router.delete('/stars', authorize, (req, res, next) => {
       return knex('stars')
         .del('*')
         .where('user_id', req.claim.userId)
-        .where('beer_id', beerId);
+        .where('beer_id', beerId)
     })
     .then((stars) => {
       console.log(stars);

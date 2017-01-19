@@ -153,8 +153,10 @@ const getBeers = function(event) {
         url: `/stars`
       })
       .done((stars) => {
+        console.log(stars);
         beers = beers.map((beer) => {
           for (const star of stars) {
+            beer.beerId = star.id;
             beer.starred = false;
             if (star.source_id === beer.source_id) {
               beer.starred = true;
