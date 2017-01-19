@@ -61,7 +61,7 @@
   // const $settings = $('#settings');
   const $logout = $('#log-out');
 
-  $myUsers.on('click', () => { window.location.href = '/users.html' });
+  $findUsers.on('click', () => { window.location.href = '/users.html' });
   $myBeers.on('click', () => { window.location.href = '/profile.html' });
   $logout.on('click', logout);
 
