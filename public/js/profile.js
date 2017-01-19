@@ -622,6 +622,17 @@ const openThisFilter = function() {
   }
 }
 
+const showFollowButton = function() {
+  if (window.location.userId) {
+    const userid = window.location.userId;
+    console.log(window.location.userId);
+  }
+
+  if (userId) {
+    $('#follow-user').removeClass('off');
+  }
+}
+
 /* -------------------------------------------------------------------------------
 
 Event Handlers and Function Calls
@@ -673,5 +684,9 @@ $('div.rating-circle').on('click', colorCircles);
   $('#add-rating').on('click', submitRating);
 
 // Filter Option Btn click
-  $('.filter-option-btn').on('click', openThisFilter)
+  $('.filter-option-btn').on('click', openThisFilter);
+
+// Show Follow Button or not
+  $(window).on('load', showFollowButton);
+
 })();
