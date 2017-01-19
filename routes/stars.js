@@ -75,7 +75,9 @@ router.post('/stars', authorize, (req, res, next) => {
         .where('user_id', req.claim.userId)
     })
     .then((star) => {
-      if (!star) {
+      if (star.length) {
+        console.log(star);
+        console.log('star already exists');
         throw boom.create(400, 'Star already exists');
       }
 
