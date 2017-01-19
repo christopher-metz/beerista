@@ -48,10 +48,40 @@ main {
 }
 
 #user-info {
+  height: 50vh;
+  width: 70%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;;
   align-items: center;
+}
+
+#user-info span {
+  height: 18%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+#user-info button {
+  height: 10%;
+  width: 50%;
+  font-size: 50px;
+  background-color: #39E84E;
+  color: white;
+}
+
+#user-info span label {
+  font-size: 60px;
+}
+
+#user-info span input {
+  font-size: 40px;
+  height: 35%;
+  width: 70%;
 }
 
 #delete-prompt-container {
