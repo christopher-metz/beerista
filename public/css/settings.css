@@ -29,11 +29,22 @@ main {
   width: 100%;
 }
 
+#confirm  {
+  height: 45%;
+  width: 100%;
+  position: absolute;
+  top: 10vh;
+}
+
 #confirm-container {
+  height: 100%;
+  width: 70%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  background-color: white;
 }
 
 #user-info {
@@ -43,9 +54,55 @@ main {
   align-items: center;
 }
 
+#delete-prompt-container {
+  width: 100%;
+  height: 50%;
+  border-bottom: 3px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete-prompt {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#delete-prompt h3 {
+  text-align: center;
+  font-size: 60px;
+}
+
 #yea-or-nea {
+  height: 50%;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;;
+  justify-content: space-around;
   align-items: center;
+}
+
+.yea-or-nea-select {
+  height: 40%;
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 1px 1px 1px gray;
+}
+
+#cancel, #remove {
+  font-size: 50px;
+  color: white;
+}
+
+.yea-or-nea-select.cancel {
+  background-color: #39E84E;
+}
+
+.yea-or-nea-select.remove {
+  background-color: #B81E23;
 }
