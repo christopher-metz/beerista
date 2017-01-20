@@ -31,6 +31,11 @@ router.get('/ratings', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers!');
+        return;
+      }
+
+      for (const rating of ratings) {
+        rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
 
       res.send(ratings);
@@ -51,6 +56,11 @@ router.get('/ratings/:id', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers!');
+        return;
+      }
+
+      for (const rating of ratings) {
+        rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
 
       res.send(ratings);
@@ -65,7 +75,7 @@ router.get('/ratingsbeer/:input', authorize, (req, res, next) => {
   console.log(req.params.input);
   knex('beers')
     .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
-    .avg('ratings.rating as "rating"')
+    .avg('ratings.rating as rating')
     .innerJoin('ratings', 'ratings.beer_id', 'beers.id')
     .where('beers.name', 'LIKE', `%${req.params.input}%`)
     .where('ratings.user_id', req.claim.userId)
@@ -74,10 +84,15 @@ router.get('/ratingsbeer/:input', authorize, (req, res, next) => {
       console.log(ratings);
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+        return;
       }
-      else {
-        res.send(ratings);
+
+      for (const rating of ratings) {
+        console.log(rating);
+        rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
+
+      res.send(ratings);
     })
     .catch((err) => {
       next(err);
@@ -96,6 +111,11 @@ router.get('/ratingsrating/:input', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+        return;
+      }
+
+      for (const rating of ratings) {
+        rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
 
       res.send(ratings);
@@ -117,6 +137,11 @@ router.get('/ratingsstyle/:input', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+        return;
+      }
+
+      for (const rating of ratings) {
+        rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
 
       res.send(ratings);
@@ -139,6 +164,11 @@ router.get('/ratingsbrewery/:input', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+        return;
+      }
+
+      for (const rating of ratings) {
+        rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
 
       res.send(ratings);

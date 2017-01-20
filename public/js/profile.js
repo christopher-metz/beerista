@@ -174,7 +174,7 @@ const populateRatings = () => {
           }
           return dataRating;
         })
-        // console.log(results);
+        console.log(results);
         populateResults(results);
       })
       .fail(() => {
