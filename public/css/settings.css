@@ -25,8 +25,9 @@ header form input {
 */
 
 main {
-  height: 70vh;
+  height: 70%;
   width: 100%;
+  min-height: 70vh;
 }
 
 #confirm  {
@@ -48,7 +49,7 @@ main {
 }
 
 #user-info {
-  height: 50vh;
+  height: 60vh;
   width: 70%;
   margin: 0 auto;
   display: flex;
@@ -58,7 +59,7 @@ main {
 }
 
 #user-info span {
-  height: 18%;
+  height: 14%;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -66,9 +67,9 @@ main {
   flex-direction: column;
 }
 
-#user-info button {
-  height: 10%;
-  width: 50%;
+#submit {
+  height: 9%;
+  width: 70%;
   font-size: 50px;
   background-color: #39E84E;
   color: white;
@@ -82,6 +83,14 @@ main {
   font-size: 40px;
   height: 35%;
   width: 70%;
+}
+
+#delete {
+  height: 9%;
+  width: 70%;
+  font-size: 50px;
+  background-color: red;
+  color: white;
 }
 
 #delete-prompt-container {

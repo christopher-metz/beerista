@@ -143,7 +143,7 @@ main {
 }
 
 #profile-menu {
-  height: 10vh;
+  height: 5vh;
   width: 90%;
   margin: 0 auto;
   box-shadow: 1px 0 1px 1px gray;
@@ -157,17 +157,14 @@ main {
 
 #rated-beers, #starred-beers, #following {
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-/*#starred-beers {
-  flex-direction: column;
-  align-items: flex-start;
-}*/
 
 #beer-display {
   width: 85%;
   margin: 0 auto;
-  background-color: white;
   position: relative;
   top: 2vh;
   display: flex;
@@ -181,10 +178,11 @@ main {
 
 .result {
   height: 12vh;
-  width: 90%;
+  width: 100%;
   margin: 0.5% auto;
-  background-color: white;
-  box-shadow: 0 0 0 1px 5px gray;
+  border-radius: 3%;
+  background-color: lightgoldenrodyellow;
+  box-shadow: 0px 5px 15px 0px grey;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -286,5 +284,5 @@ main {
 
 #rated-beers h2, #starred-beers h2, #following h2 {
   font-size: 50px;
-  height: 100%;
+  height: 70%;
 }

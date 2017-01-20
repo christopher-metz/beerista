@@ -608,13 +608,13 @@ const populateRatingsBrewery = (event) => {
 
 const handleStarsOrRating = (event) => {
   const $target = $(event.target);
-  console.log($target.parent()[0].id);
-  if ($target.parent()[0].id === 'rated-beers') {
+  console.log($target);
+  if ($target.parent()[0].id === 'rated-beers' || $target[0].id === 'rated-beers') {
     isRatings = 'rate';
     $('#filter-btn').removeClass('off');
     populateRatings();
   }
-  else if ($target.parent()[0].id === 'starred-beers'){
+  else if ($target.parent()[0].id === 'starred-beers' || $target[0].id === 'starred-beers'){
     isRatings = 'star';
     $('#find-a-beer, #find-by-rating, #find-by-style, #find-by-brewery').addClass('off');
     $('#filter-options').addClass('off');
