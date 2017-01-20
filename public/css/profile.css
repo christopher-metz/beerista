@@ -43,18 +43,6 @@ main {
   top: 30%;
 }
 
-#filters-pop {
-  height: 100%;
-  width: 90%;
-  margin: 0 auto;
-  box-shadow: 0 10px 20px 10px gray;
-  background-color: #003FFF;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-}
-
 #filters-nav-container {
   height: 9vh;
   width: 90%;
@@ -138,9 +126,9 @@ main {
 }
 
 #follow-user {
-  height: 40%;
-  width: 25%;
-  background-color: #002596;
+  height: 75%;
+  width: 35%;
+  background-color: #334FCF;
   font-size: 50px;
   color: white;
   box-shadow: 0 1px 10px 5px gray;
@@ -277,7 +265,7 @@ main {
 }
 
 .shadow {
-  background-color: #003BF0;
+  background-color: #334FCF;
   box-shadow: 0 5px 25px 5px gray;
 }
 

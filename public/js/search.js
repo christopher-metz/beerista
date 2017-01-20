@@ -97,7 +97,7 @@ const populateResults = function(beers) {
 
     const $abvP = $('<p>').text(`ABV: ${beer.abv}`).addClass('abv');
     const $ibuP = $('<p>').text(`IBU: ${beer.ibu}`).addClass('ibu');
-    const $ratingP = $('<p>').text(`Rating: ${beer.rating}`).addClass('rating');
+    const $ratingP = $('<p>').text(`Rating: ${beer.source_rating}`).addClass('rating');
 
     $stats.append($abvP);
     $stats.append($ibuP);

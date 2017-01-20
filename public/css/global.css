@@ -76,9 +76,14 @@ header #login {
 
 .menu-option h3 {
   margin: 0;
-  font-size: 2em;
+  font-size: 2.5em;
+  text-decoration: none;
+  color: black;
 }
 
+a#settings.menu-option {
+  text-decoration: none;
+}
 
 /*Beer Page*/
 
