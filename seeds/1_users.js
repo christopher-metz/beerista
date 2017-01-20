@@ -132,6 +132,22 @@ exports.seed = function(knex) {
           city: 'Seattle',
           state: 'WA',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
+        }, {
+          id : 17,
+          first_name: 'Amanda',
+          last_name: 'Charles',
+          email: 'amandacharles@beerista.com',
+          city: 'Seattle',
+          state: 'WA',
+          hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
+        }, , {
+          id : 18,
+          first_name: 'Alicia',
+          last_name: 'Gyori',
+          email: 'aliciagyori@beerista.com',
+          city: 'Seattle',
+          state: 'WA',
+          hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS'
         }])
         .then(() => {
           return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));");
