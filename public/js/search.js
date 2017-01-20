@@ -131,52 +131,58 @@ const getBeers = function(event) {
   else {
     console.log('no params');
     searchParam = $('.search-box').val();
+    console.log(searchParam);
   }
 
-  const $xhr = $.ajax({
+  const $xhrBeers = $.ajax({
     method: 'GET',
     url: `/beers/?name=${searchParam}`,
+    contentType: 'application/json',
     dataType: 'json'
   })
   .done((data) => {
-    if ($xhr.status !== 200) {
+    if ($xhrBeers.status !== 200) {
       return;
     }
 
     beers = data;
 
     if (verified) {
-      const $xhr_2 = $.ajax({
+      const $xhr_2Beers = $.ajax({
         method: 'GET',
+        url: `/stars`,
         contentType: 'application/json',
-        dataType: 'json',
-        url: `/stars`
+        dataType: 'json'
       })
       .done((stars) => {
+        console.log('got stars');
         console.log(stars);
-        beers = beers.map((beer) => {
-          for (const star of stars) {
-            beer.beerId = star.id;
-            beer.starred = false;
-            if (star.source_id === beer.source_id) {
-              beer.starred = true;
-              return beer;
+        if (!stars.length) {
+          console.log(stars);
+          beers = beers.map((beer) => {
+            for (const star of stars) {
+              beer.beerId = star.id;
+              beer.starred = false;
+              if (star.source_id === beer.source_id) {
+                beer.starred = true;
+                return beer;
+              }
             }
-          }
-          return beer;
-        })
+            return beer;
+          })
+        }
         populateResults(beers);
       })
-      .fail(($xhr2) => {
-        console.log($xhr2);
+      .fail(($xhr2Beers) => {
+        console.log($xhr2Beers);
       });
     }
     else {
       populateResults(beers);
     }
   })
-  .fail(($xhr) => {
-    console.log($xhr)
+  .fail(($xhrBeers) => {
+    console.log($xhrBeers)
   });
 
 };

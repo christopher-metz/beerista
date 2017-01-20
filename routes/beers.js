@@ -122,6 +122,7 @@ router.get('/beers/?', (req, res, next) => {
       results.push(beer);
     }
   });
+  console.log('here');
   res.send(results);
 });
 
