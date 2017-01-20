@@ -343,7 +343,9 @@ const populateStars = () => {
       })
     })
     .fail(() => {
-      console.log('Failure at xhr_4');
+      populateResults([]);
+      const $h5 = $('<h5>').text('You haven\'t starred any beers yet.');
+      $('#beer-display').append($h5);
       // window.location.href = '/login.html';
     });
   }

@@ -29,9 +29,9 @@ router.get('/stars', authorize, (req, res, next) => {
     .where('stars.user_id', req.claim.userId)
     .orderBy('beers.name')
     .then((ratings) => {
-      // if (ratings.length === 0) {
-      //   res.send('You have not rated any beers!');
-      // }
+      if (ratings.length === 0) {
+        res.send('You have not rated any beers!');
+      }
       // Was causing an error in search.js by failing the ajax request which negated the call to popualteResults;
 
       res.send(ratings);
