@@ -7,26 +7,26 @@ const router = express.Router();
 const { camelizeKeys } = require('humps');
 
 const data = [{
-  name: 'Rare Bourbon County Brand Stout',
-  brewery: 'RandoBrewer1',
-  style: 'Stout - American Imperial/Double',
-  abv: 13,
-  ibu: 60,
-  source_rating: 4.75,
-  source_count: 6479,
-  source_id: '/goose-island-beer-co-rare-bourbon-county-brand-stout/11024',
-  photo_url: 'https://untappd.akamaized.net/site/beer_logos/beer-RareBourbonCountyStout_11024.jpeg',
-  description: 'Aged 2 years in 23-year old Pappy Van Winkle Bourbon Barrels. A true rarity—savor and share it only with those you hold dear, as it will never be made again.'
+  name: 'Corners Porter',
+  brewery: 'Philipsburg Brewing Company',
+  style: 'Porter - American',
+  abv: 6.6,
+  ibu: 65,
+  source_rating: 3.83,
+  source_count: 172,
+  source_id: '/philipsburg-brewing-company-corners-porter/297228',
+  photo_url: 'https://untappd.akamaized.net/site/assets/images/temp/badge-beer-default.png',
+  description: 'Rich coffee flavor comes from 5 pounds of fresh course ground coffee from Black Coffee Roasting Co. in Missoula, MT. '
 }, {
-  name: 'Proprietor\'s Bourbon County Brand Stout',
-  brewery: 'RandoBrewery2',
-  style: 'Stout - American Imperial/Double',
-  abv: 13.2,
-  source_rating: 4.74,
-  source_count: 10442,
-  source_id: '/goose-island-beer-co-proprietor-s-bourbon-county-brand-stout-2014/860942',
-  photo_url: 'https://untappd.akamaized.net/site/beer_logos/beer-860942_16c40_sm.jpeg',
-  description: 'Proprietor’s Bourbon County Brand Stout is meant to show our immense gratitude to our neighbors here in Chicago – the loyal and adventurous fans whose support helped bring Bourbon County Brand Stout to towering new heights. 2014 variant - Made in Rye barrels with Cassia Bark, Cocoa Nibs, Panela and Coconut Water'
+  name: 'Space Dust IPA',
+  brewery: 'Elysian Brewing Company',
+  style: 'IPA - American',
+  abv: 8.2,
+  source_rating: 62,
+  source_count: 112,025,
+  source_id: '/elysian-brewing-company-space-dust-ipa/121023',
+  photo_url: 'https://untappd.akamaized.net/site/beer_logos/beer-121023_cca67_sm.jpeg',
+  description: 'Space Dust :: A Totally Nebular IPA. Great Western premium two-row, combined with c-15 and Dextri-Pils, give this beer a bright and galactic Milky Way hue. The hopping is pure starglow energy, with Chinook to bitter and late and dry additions of Citra and Amarillo. Space Dust is out of this world, with 62 IBU, and 7.2% ABV.'
 }, {
   name: 'Bourbon County Brand Stout Vanilla Rye',
   brewery: 'RandoBrewery3',

@@ -60,6 +60,20 @@ exports.seed = function(knex) {
           state: 'MO',
           description: 'The leading American brewer, bringing people together for more than 160 years.',
           website: 'http://www.anheuser-busch.com/'
+        }, {
+          id: 9,
+          name: 'Philipsburg Brewing Company',
+          city: 'Philipsburg',
+          state: 'MT',
+          description: '',
+          website: 'http://www.philipsburgbrew.com/'
+        }, {
+          id: 10,
+          name: 'Elysian Brewing Company',
+          city: 'Seattle',
+          state: 'WA',
+          description: 'Elysian Brewing operates four Seattle restaurants -Elysian Capitol Hill, Elysian Tangletown, Elysian Fields, Elysian Bar, and a full production brewery – Elysian Airport Way, in the Georgetown neighborhood. Known for variety, Elysian has brewed over 350 craft beers since it opened on Capitol Hill in 1996.',
+          website: 'http://www.elysianbrewing.com/'
         }])
         .then(() => {
           return knex.raw("SELECT setval('breweries_id_seq', (SELECT MAX(id) FROM breweries));");
