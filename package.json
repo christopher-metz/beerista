@@ -4,7 +4,10 @@
   "description": "Beerista is a beer buying guide that aims to simplify the beer selection process by creating a very simple and fast beer search and rating tool.",
   "main": "index.js",
   "scripts": {
-    "knex": "knex"
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest",
+    "nf": "nf start",
+    "nodemon": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,10 @@
   },
   "devDependencies": {
     "dotenv": "^4.0.0",
+    "foreman": "^2.0.0",
     "nodemon": "^1.11.0"
+  },
+  "engines": {
+    "node": "7.2.1"
   }
 }
