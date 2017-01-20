@@ -1,3 +1,7 @@
+body {
+  position: relative;
+}
+
 h1, h2, h3, h4, h5, p {
   margin: 0;
 }
@@ -25,8 +29,10 @@ header form input {
 */
 
 main {
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  margin-bottom: 20vh;
+  min-height: 70vh;
 }
 
 /*Filter*/
@@ -50,7 +56,7 @@ main {
 }
 
 #filters-nav-container {
-  height: 10%;
+  height: 9vh;
   width: 90%;
   margin: 0 auto;
 }
@@ -66,7 +72,7 @@ main {
 #filter-btn {
   height: 60%;
   width: 25%;
-  background-color: #D90B29;
+  background-color: #51CF94;
   color: white;
   font-size: 50px;
 }
@@ -111,7 +117,7 @@ main {
 
 /*Profile*/
 #profile-info {
-  height: 10vh;
+  height: 7vh;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -163,6 +169,7 @@ main {
 }
 
 #beer-display {
+  /*height: 100%;*/
   width: 85%;
   margin: 0 auto;
   position: relative;
@@ -285,4 +292,8 @@ main {
 #rated-beers h2, #starred-beers h2, #following h2 {
   font-size: 50px;
   height: 70%;
+}
+
+footer {
+  align-self: flex-end;
 }
