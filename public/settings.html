@@ -18,7 +18,7 @@
     <header>
       <a href="/index.html" id="logo">Beerista</a>
       <form id="general-search">
-        <input type="text" name="search-from-profile" placeholder="Search all beers...">
+        <input type="text" name="search-from-profile" autocomplete="off" placeholder="Search all beers...">
       </form>
       <i class="material-icons" id="account-icon">account_circle</i>
     </header>
@@ -44,23 +44,23 @@
       <form id="user-info">
         <span>
           <label>First Name:</label>
-          <input type="text" name="first-name"/>
+          <input type="text" name="first-name" autocomplete="off"/>
         </span>
         <span>
           <label>Last Name:</label>
-          <input type="text" name="last-name"/>
+          <input type="text" name="last-name" autocomplete="off"/>
         </span>
         <span>
           <label>Email:</label>
-          <input class="input-area" type="text" name="email" placeholder="email@domain.com"/>
+          <input class="input-area" type="text" name="email" autocomplete="off" placeholder="email@domain.com"/>
         </span>
         <span>
           <label>City:</label>
-          <input type="text" name="city"/>
+          <input type="text" name="city" autocomplete="off"/>
         </span>
         <span>
           <label>State:</label>
-          <input type="text" name="state"/>
+          <input type="text" name="state" autocomplete="off"/>
         </span>
         <button type="submit">Edit Profile</button>
       </form>

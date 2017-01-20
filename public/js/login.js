@@ -27,6 +27,7 @@ const buildSignUp = () => {
   $input.addClass('input-area');
   $input.attr('type', 'text');
   $input.attr('name', 'first-name');
+  $input.attr('autocomplete', 'off');
   $input.attr('placeholder', 'Jane');
 
   $label.insertBefore($('label:contains("Email")'));
@@ -39,6 +40,7 @@ const buildSignUp = () => {
   $input.addClass('input-area');
   $input.attr('type', 'text');
   $input.attr('name', 'last-name');
+  $input.attr('autocomplete', 'off');
   $input.attr('placeholder', 'Doe');
 
   $label.insertBefore($('label:contains("Email")'));
@@ -51,6 +53,7 @@ const buildSignUp = () => {
   $input.addClass('input-area');
   $input.attr('type', 'text');
   $input.attr('name', 'city');
+  $input.attr('autocomplete', 'off');
   $input.attr('placeholder', 'Seattle');
 
   $label.insertBefore($('label:contains("Password")'));
@@ -63,6 +66,7 @@ const buildSignUp = () => {
   $input.addClass('input-area');
   $input.attr('type', 'text');
   $input.attr('name', 'state');
+  $input.attr('autocomplete', 'off');
   $input.attr('placeholder', 'WA');
 
   $label.insertBefore($('label:contains("Password")'));
