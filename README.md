@@ -1,2 +1,7 @@
 # beerista
 Beerista is a beer buying guide that aims to simplify the beer selection process by creating a very simple and fast beer search and rating tool.
+
+
+###Future Features
+  -Venue Page with links to their website, and having real time data on each venues tap list. This would allow us to alert users when a specific beer they have starred comes on tap at a bar near them.
+  -
