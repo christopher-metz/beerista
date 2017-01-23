@@ -19,7 +19,6 @@ const authorize = function(req, res, next) {
   });
 };
 
-
 // Get all ratings for a user.
 router.get('/ratings', authorize, (req, res, next) => {
   knex('beers')
@@ -31,6 +30,7 @@ router.get('/ratings', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers!');
+
         return;
       }
 
@@ -56,6 +56,7 @@ router.get('/ratings/:id', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers!');
+
         return;
       }
 
@@ -72,7 +73,6 @@ router.get('/ratings/:id', authorize, (req, res, next) => {
 
 // Get all ratings for a beer search.
 router.get('/ratingsbeer/:input', authorize, (req, res, next) => {
-  console.log(req.params.input);
   knex('beers')
     .select('beers.id', 'beers.name', 'beers.style', 'beers.abv', 'beers.ibu', 'beers.description', 'beers.photo_url')
     .avg('ratings.rating as rating')
@@ -81,14 +81,13 @@ router.get('/ratingsbeer/:input', authorize, (req, res, next) => {
     .where('ratings.user_id', req.claim.userId)
     .groupBy('beers.id')
     .then((ratings) => {
-      console.log(ratings);
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+
         return;
       }
 
       for (const rating of ratings) {
-        console.log(rating);
         rating.rating = Number.parseFloat(rating.rating).toFixed(2);
       }
 
@@ -111,6 +110,7 @@ router.get('/ratingsrating/:input', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+
         return;
       }
 
@@ -137,6 +137,7 @@ router.get('/ratingsstyle/:input', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+
         return;
       }
 
@@ -164,6 +165,7 @@ router.get('/ratingsbrewery/:input', authorize, (req, res, next) => {
     .then((ratings) => {
       if (ratings.length === 0) {
         res.send('You have not rated any beers with this filter!');
+
         return;
       }
 
@@ -189,7 +191,6 @@ router.post('/ratings', authorize, (req, res, next) => {
       rating: rating
     }, '*')
     .then((ratings) => {
-      console.log(ratings[0]);
       res.send(camelizeKeys(ratings[0]));
     })
     .catch((err) => {

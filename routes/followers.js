@@ -33,6 +33,7 @@ router.get('/followers', authorize, (req, res, next) => {
         delete user.hashedPassword;
       }
       const followers = camelizeKeys(rows);
+
       res.send(followers);
     })
     .catch((err) => {
@@ -41,7 +42,6 @@ router.get('/followers', authorize, (req, res, next) => {
 });
 
 router.get('/followers/:id', authorize, (req, res, next) => {
-  console.log('here');
   knex('followers')
     .innerJoin('users', 'followers.user_id_2', 'users.id')
     .where('followers.user_id_1', req.params.id)
@@ -60,17 +60,15 @@ router.get('/followers/:id', authorize, (req, res, next) => {
     .catch((err) => {
       next(err);
     });
-})
+});
 
 router.get('/follows/?', authorize, (req, res, next) => {
   const userId2 = req.query.userId2;
-  console.log(userId2);
 
   knex('followers')
     .where('followers.user_id_1', req.claim.userId)
     .where('followers.user_id_2', userId2)
     .then((follow) => {
-      console.log(follow);
       if (!follow.length) {
         res.send(false);
       }
@@ -83,7 +81,6 @@ router.get('/follows/?', authorize, (req, res, next) => {
 });
 
 router.post('/followers/:id', authorize, (req, res, next) => {
-  console.log('here');
   knex('followers')
     .insert({
       user_id_1: req.claim.userId,
@@ -98,14 +95,11 @@ router.post('/followers/:id', authorize, (req, res, next) => {
 });
 
 router.delete('/followers/:id', authorize, (req, res, next) => {
-  console.log(req.params.id);
-
   knex('followers')
     .where('followers.user_id_1', req.claim.userId)
     .where('followers.user_id_2', req.params.id)
     .first()
     .then((follower) => {
-      console.log(follower);
       if (!follower) {
         throw boom.create(404, 'Follower not found');
       }
@@ -113,7 +107,7 @@ router.delete('/followers/:id', authorize, (req, res, next) => {
       return knex('followers')
         .del('*')
         .where('followers.user_id_1', req.claim.userId)
-        .where('followers.user_id_2', req.params.id)
+        .where('followers.user_id_2', req.params.id);
     })
     .then((followers) => {
       const follower = followers[0];
