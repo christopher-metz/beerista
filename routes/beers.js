@@ -1,10 +1,8 @@
 'use strict';
 
-const boom = require('boom');
 const express = require('express');
 const knex = require('../knex');
 const router = express.Router();
-const { camelizeKeys } = require('humps');
 
 const data = [{
   name: 'Corners Porter',
@@ -69,7 +67,7 @@ const data = [{
   source_count: 238006,
   source_id: '/pabst-brewing-company-pabst-blue-ribbon/3883',
   photo_url: 'https://untappd.akamaized.net/site/beer_logos/beer-3883_a0aa4_sm.jpeg',
-  description: 'This is the original Pabst Blue Ribbon Beer. Nature\'s choicest products provide its prized flavor. Only the finest of hops and grains are used. Selected as America\'s Best in 1893.',
+  description: 'This is the original Pabst Blue Ribbon Beer. Nature\'s choicest products provide its prized flavor. Only the finest of hops and grains are used. Selected as America\'s Best in 1893.'
 }, {
   name: 'Universale Pale',
   brewery: 'Fremont',
@@ -123,12 +121,7 @@ router.get('/beers/?', (req, res, next) => {
       results.push(beer);
     }
   });
-  console.log('here');
   res.send(results);
-});
-
-router.get('/beers/:id', (req, res, next) => {
-  // Pull specific beer page data
 });
 
 router.post('/beers/rating', (req, res, next) => {
@@ -140,6 +133,7 @@ router.post('/beers/rating', (req, res, next) => {
       if (beer) {
         return beer;
       }
+
       return knex('beers')
         .insert({
           name: name,
@@ -152,7 +146,7 @@ router.post('/beers/rating', (req, res, next) => {
           photo_url: photo_url,
           description: description,
           brewery_id: 1
-        }, '*')
+        }, '*');
     })
     .then((beer) => {
       return knex('ratings')
@@ -169,12 +163,10 @@ router.post('/beers/rating', (req, res, next) => {
     .catch((err) => {
       next(err);
     });
-
 });
 
 router.post('/beers/star', (req, res, next) => {
   const { name, style, abv, ibu, source_rating, source_count, source_id, photo_url, description, userId } = req.body;
-  console.log(source_id);
 
   knex('beers')
     .where('source_id', source_id)
@@ -182,6 +174,7 @@ router.post('/beers/star', (req, res, next) => {
       if (beer) {
         return beer;
       }
+
       return knex('beers')
         .insert({
           name: name,
@@ -194,10 +187,9 @@ router.post('/beers/star', (req, res, next) => {
           photo_url: photo_url,
           description: description,
           brewery_id: 1
-        }, '*')
+        }, '*');
     })
     .then((beer) => {
-      console.log(beer);
       return knex('stars')
         .insert({
           beer_id: beer[0].id,
@@ -205,13 +197,11 @@ router.post('/beers/star', (req, res, next) => {
         }, '*');
     })
     .then((star) => {
-      console.log(star);
       res.send(star);
     })
     .catch((err) => {
       next(err);
     });
-
 });
 
 module.exports = router;
