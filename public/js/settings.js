@@ -20,7 +20,7 @@ const logout = () => {
   })
   .fail((err) => {
     console.log(err);
-  })
+  });
 };
 
 // Toggle Account Menu
@@ -42,14 +42,14 @@ const getUser = (resolve, reject) => {
   })
   .done((user) => {
     if ($xhr.status !== 200) {
-      reject;
+      reject();
     }
 
     resolve(user);
   })
   .fail((err) => {
     reject(err);
-  })
+  });
 };
 
 const handleEditUser = (event) => {
@@ -69,7 +69,7 @@ const handleEditUser = (event) => {
     contentType: 'application/json',
     data: JSON.stringify(user)
   });
-  $xhr.done((user) => {
+  $xhr.done(() => {
     if ($xhr.status !== 200) {
       return;
     }
@@ -104,20 +104,8 @@ const handleDeleteUser = (event) => {
 
 const loadDeleteConfirm = (event) => {
   event.preventDefault();
-
-  // $allResults.detach();
-  // $target.parents('#results').addClass('off');
-
   $('#confirm').removeClass('off');
   $('#delete').addClass('off');
-
-  // $('#beer-photo').attr('src', $target.find('.photo img').attr('src'));
-  // $('#name').text($target.find('.name h3').text());
-  // $('#brewery').text($target.find('.name h4').text());
-  // $('#style').text($target.find('.name h5').text());
-  // $('#abv').text($target.find('.abv').text());
-  // $('#ibu').text($target.find('.ibu').text());
-  // $('#rating').text($target.find('.rating').text());
 };
 
 const exitDeleteConfirm = (event) => {
@@ -125,9 +113,6 @@ const exitDeleteConfirm = (event) => {
 
   $('#confirm').addClass('off');
   $('#delete').removeClass('off');
-  // $('.rating-circle').removeClass('rating-color');
-  // $('#results').append($allResults);
-  // $('#results').removeClass('off');
 };
 
 (function() {
@@ -148,25 +133,29 @@ const exitDeleteConfirm = (event) => {
   // Navigate to other pages via Account Menu
   const $findPeople = $('#find-people');
   const $myBeers = $('#my-beers');
-  // const $settings = $('#settings');
   const $logout = $('#log-out');
 
-  $findPeople.on('click', () => { window.location.href = '/users.html' });
-  $myBeers.on('click', () => { window.location.href = '/profile.html' });
+  $findPeople.on('click', () => { window.location.href = '/users.html'; });
+  $myBeers.on('click', () => { window.location.href = '/profile.html'; });
   $logout.on('click', logout);
 
   const $generalSearch = $('#general-search');
+
   $generalSearch.submit(handleGeneralSearch);
 
   const $userInfo = $('#user-info');
+
   $userInfo.submit(handleEditUser);
 
   const $delete = $('#delete');
+
   $delete.on('click', loadDeleteConfirm);
 
   const $remove = $('#remove');
+
   $remove.on('click', handleDeleteUser);
 
   const $cancel = $('#cancel');
+
   $cancel.on('click', exitDeleteConfirm);
 })();

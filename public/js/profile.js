@@ -32,11 +32,9 @@ const populateResults = function(ratings) {
     $info.append($name);
 
     const $h3 = $('<h3>').text(rating.name);
-    // const $h4Brew = $('<h4>').text(rating.brewery);
     const $h4Style = $('<h4>').text(rating.style);
 
     $name.append($h3);
-    // $name.append($h4Brew);
     $name.append($h4Style);
 
     const $stats = $('<div>').addClass('stats');
@@ -56,7 +54,6 @@ const populateResults = function(ratings) {
     $star.append($starIcon);
     $result.append($star);
 
-
     $stats.append($abvP);
     $stats.append($ibuP);
 
@@ -66,7 +63,7 @@ const populateResults = function(ratings) {
     }
 
     $beerDisplay.append($result);
-  };
+  }
 };
 
 let follows = [];
@@ -77,10 +74,9 @@ const appendFollowing = function(data) {
   $beerDisplay.empty();
 
   for (const follow of data) {
-    console.log(follow);
     const $result = $('<div>').addClass('result');
 
-    $result.data("userId", follow.id);
+    $result.data('userId', follow.id);
 
     const $photo = $('<div>').addClass('photo');
 
@@ -103,18 +99,8 @@ const appendFollowing = function(data) {
     $name.append($h4);
 
     $beerDisplay.append($result);
-  };
+  }
 };
-
-// const sendToFollowPage = function(event) {
-//   const param = $(this).data();
-//   console.log(param);
-//   window.location.href = `/profile.html?userId=${param.userId}`;
-// };
-//
-// const addResultListener = function() {
-//   $('.result').on('click', sendToFollowPage);
-// };
 
 const populateRatings = () => {
   let userId;
@@ -142,7 +128,7 @@ const populateRatings = () => {
     })
     .done(($xhr) => {
       userId = $xhr.id;
-      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
+      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`);
     })
     .fail(() => {
       // window.location.href = '/login.html';
@@ -155,7 +141,6 @@ const populateRatings = () => {
       url: '/ratings'
     })
     .done((dataRatings) => {
-      // console.log(dataRatings);
       const $xhr_3 = $.ajax({
         method: 'GET',
         contentType: 'application/json',
@@ -169,22 +154,26 @@ const populateRatings = () => {
             dataRating.starred = false;
             if (dataRating.id === dataStar.id) {
               dataRating.starred = true;
+
               return dataRating;
             }
           }
+
           return dataRating;
-        })
-        console.log(results);
+        });
         populateResults(results);
       })
       .fail(() => {
+
         // window.location.href = '/login.html';
       });
     })
     .fail(() => {
       populateResults([]);
       const $h5 = $('<h5>').text('You haven\'t rated any beers yet.');
+
       $('#beer-display').append($h5);
+
       // window.location.href = '/login.html';
     });
   }
@@ -224,11 +213,13 @@ const populateRatings = () => {
             dataRating.starred = false;
             if (dataRating.id === dataStar.id) {
               dataRating.starred = true;
+
               return dataRating;
             }
           }
+
           return dataRating;
-        })
+        });
         populateResults(results);
       })
       .fail(() => {
@@ -240,7 +231,6 @@ const populateRatings = () => {
     });
   }
 };
-
 
 // Populate Stars Tab with "Starred Beers"
 const populateStars = () => {
@@ -269,7 +259,7 @@ const populateStars = () => {
     });
     $xhr.done(($xhr) => {
       userId = $xhr.id;
-      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
+      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`);
     });
     $xhr.fail(() => {
       // window.location.href = '/login.html';
@@ -284,6 +274,7 @@ const populateStars = () => {
     .done((stars) => {
       const results = stars.map((star) => {
         star.starred = true;
+
         return star;
       });
       populateResults(results);
@@ -291,7 +282,9 @@ const populateStars = () => {
     .fail(() => {
       populateResults([]);
       const $h5 = $('<h5>').text('You haven\'t starred any beers yet.');
+
       $('#beer-display').append($h5);
+
       // window.location.href = '/login.html';
     });
   }
@@ -306,7 +299,7 @@ const populateStars = () => {
     });
     $xhr.done(($xhr) => {
       userId = $xhr.id;
-      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`)
+      $('#user-name').text(`${$xhr.firstName} ${$xhr.lastName}`);
     });
     $xhr.fail(() => {
       window.location.href = '/login.html';
@@ -331,21 +324,24 @@ const populateStars = () => {
             followStar.starred = false;
             if (followStar.id === yourStar.id) {
               followStar.starred = true;
+
               return followStar;
             }
           }
+
           return followStar;
         });
         populateResults(results);
       })
       .fail(() => {
         console.log('Failure at xhr_3');
-      })
+      });
     })
     .fail(() => {
       populateResults([]);
       const $h5 = $('<h5>').text('You haven\'t starred any beers yet.');
       $('#beer-display').append($h5);
+
       // window.location.href = '/login.html';
     });
   }
@@ -384,11 +380,11 @@ const populateFollowing = () => {
     $xhr.fail((err) => {
       appendFollowing([]);
       const $h5 = $('<h5>').text('You aren\'t following any people yet.');
+
       $('#beer-display').append($h5);
     });
   }
   else {
-    console.log(window.QUERY_PARAMETERS.userId);
     const $xhr = $.ajax({
       method: 'GET',
       url: `/followers/${window.QUERY_PARAMETERS.userId}`,
@@ -405,7 +401,7 @@ const populateFollowing = () => {
       console.log(err);
     });
   }
-}
+};
 
 /*---------------------------------------------------*/
 // Gather filter results for specific beer search.
@@ -413,12 +409,11 @@ const populateRatingsBeer = (event) => {
   event.preventDefault();
 
   const searchInput = $('input[name|="find-a-beer"]').val();
-  console.log({ input: `${searchInput}` });
   const $xhr = $.ajax({
     method: 'GET',
     url: `/ratingsbeer/${searchInput}`,
     dataType: 'json'
-  })
+  });
   $xhr.done((ratingsbeers) => {
     const $xhr_2 = $.ajax({
       method: 'GET',
@@ -436,20 +431,23 @@ const populateRatingsBeer = (event) => {
           ratingbeer.starred = false;
           if (ratingbeer.id === dataStar.id) {
             ratingbeer.starred = true;
+
             return ratingbeer;
           }
         }
+
         return ratingbeer;
-      })
+      });
       populateResults(results);
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   });
   $xhr.fail((err) => {
     populateResults([]);
     window.alert(`${err.responseText}`);
+
     return;
   });
 };
@@ -462,6 +460,7 @@ const populateRatingsRating = (event) => {
   const ratingInput = $('input[name|="find-by-rating"]').val();
   if (ratingInput < 1 || ratingInput > 5) {
     window.alert('Minimum rating must be between 1 and 5');
+
     return;
   }
 
@@ -490,20 +489,23 @@ const populateRatingsRating = (event) => {
           ratingrating.starred = false;
           if (ratingrating.id === dataStar.id) {
             ratingrating.starred = true;
+
             return ratingrating;
           }
         }
+
         return ratingrating;
-      })
+      });
       populateResults(results);
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   });
   $xhr.fail((err) => {
     populateResults([]);
     window.alert(`${err.responseText}`);
+
     return;
   });
 };
@@ -539,20 +541,23 @@ const populateRatingsStyle = (event) => {
           style.starred = false;
           if (style.id === dataStar.id) {
             style.starred = true;
+
             return style;
           }
         }
+
         return style;
-      })
+      });
       populateResults(results);
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   });
   $xhr.fail((err) => {
     populateResults([]);
     window.alert(`${err.responseText}`);
+
     return;
   });
 };
@@ -588,20 +593,23 @@ const populateRatingsBrewery = (event) => {
           brewery.starred = false;
           if (brewery.id === dataStar.id) {
             brewery.starred = true;
+
             return brewery;
           }
         }
+
         return brewery;
-      })
+      });
       populateResults(results);
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   });
   $xhr.fail((err) => {
     populateResults([]);
     window.alert(`${err.responseText}`);
+
     return;
   });
 };
@@ -610,7 +618,7 @@ const populateRatingsBrewery = (event) => {
 
 const handleStarsOrRating = (event) => {
   const $target = $(event.target);
-  console.log($target);
+
   if ($target.parent()[0].id === 'rated-beers' || $target[0].id === 'rated-beers') {
     isRatings = 'rate';
     $('#filter-btn').removeClass('off');
@@ -655,9 +663,7 @@ const updateStar = function(event) {
   const id = $(event.target).parents('.result').data().id;
   const starred = $(event.target).parents('.result').data().starred;
 
-
   if (starred) {
-    // console.log('contains-gold');
     const $xhr = $.ajax({
       method: 'POST',
       url: '/stars',
@@ -676,7 +682,6 @@ const updateStar = function(event) {
   }
 
   if (!starred) {
-    // console.log('doesn\'t contain gold');
     const $xhr_2 = $.ajax({
       method: 'DELETE',
       url: '/stars',
@@ -691,19 +696,20 @@ const updateStar = function(event) {
       console.log('Failure');
     });
   }
-}
+};
 
 const loadBeerPage = function(event) {
   if (isRatings === 'follow') {
-    console.log($(event.target).parents('.result'));
     const id = $(event.target).parents('.result').data().userId;
 
     window.location.href = `/profile.html?userId=${id}`;
+
     return;
   }
 
   if (event.target.classList.contains('star-icon')) {
     updateStar(event);
+
     return;
   }
 
@@ -726,7 +732,7 @@ const loadBeerPage = function(event) {
   $('#abv').text($target.find('.abv').text());
   $('#ibu').text($target.find('.ibu').text());
   $('#rating').text($target.find('.rating').text());
-}
+};
 
 // Exit individual beer "pop-up"
 const exitBeerPage = function(event) {
@@ -737,14 +743,14 @@ const exitBeerPage = function(event) {
   $('.rating-circle').removeClass('rating-color');
   $beerDisplay.append($allResults);
   $beerDisplay.removeClass('off');
-}
+};
 
 // Color Rating Option on Beer Page
 const colorCircles = function() {
   $('div.rating-circle').removeClass('rating-color');
   $(this).prevAll().addClass('rating-color');
   $(this).addClass('rating-color');
-}
+};
 
 // Grab Rating from Page Before Rating is Submitted
 // Event Listener for "Add Rating"
@@ -759,7 +765,6 @@ const submitRating = function() {
   });
 
   if (ratingCount === 0) {
-    console.log('No rating selected.');
     return;
   }
 
@@ -806,7 +811,7 @@ const logout = () => {
   })
   .fail((err) => {
     console.log(err);
-  })
+  });
 };
 
 let filterOpen = false;
@@ -863,7 +868,6 @@ const showFollowButton = function() {
       dataType: 'json',
     })
     .done((bool) => {
-      console.log(bool);
       if (bool) {
         $('#follow-user').text('Unfollow');
         isFollowing = true;
@@ -871,9 +875,9 @@ const showFollowButton = function() {
     })
     .fail(($xhr) => {
       console.log($xhr);
-    })
+    });
   }
-}
+};
 
 const followOrUnfollow = function() {
   const param = window.location.search;
@@ -907,9 +911,9 @@ const followOrUnfollow = function() {
     })
     .fail(($xhr) => {
       console.log($xhr);
-    })
+    });
   }
-}
+};
 
 /* -------------------------------------------------------------------------------
 
@@ -926,14 +930,12 @@ $('div.rating-circle').on('click', colorCircles);
   // Navigate to other pages via Account Menu
   const findPeople = $('#find-people');
   const myBeers = $('#my-beers');
-  // const settings = $('#settings');
   const $logout = $('#log-out');
 
   findPeople.on('click', () => { window.location.href = '/users.html' });
   myBeers.on('click', () => { window.location.href = '/profile.html' });
   $logout.on('click', logout);
 
-  // const menuOptions = $('#log-out');
 /*-------------------------------------------------*/
   populateRatings();
 
@@ -945,7 +947,7 @@ $('div.rating-circle').on('click', colorCircles);
   $filter.on('click', toggleFilter);
 
   const $generalSearch = $('#general-search');
-  // $generalSearch.on('submit', handleGeneralSearch);
+
   $generalSearch.submit(handleGeneralSearch);
 
 // Load Beer Page
@@ -971,10 +973,13 @@ $('div.rating-circle').on('click', colorCircles);
 
   // Filter beer
   $('#find-a-beer').submit(populateRatingsBeer);
+
   // Filter rating
   $('#find-by-rating').submit(populateRatingsRating);
+
   // Filter style
   $('#find-by-style').submit(populateRatingsStyle);
+
   // Filter brewery
   $('#find-by-brewery').submit(populateRatingsBrewery);
 })();

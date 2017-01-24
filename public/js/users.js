@@ -1,6 +1,6 @@
 (function() {
 
-'use strict';
+  'use strict';
 
   // Check and verify logged in user
 
@@ -22,7 +22,7 @@
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   };
 
   const logout = () => {
@@ -45,7 +45,7 @@
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   };
 
   $(window).on('load', checkForCookie);
@@ -53,18 +53,17 @@
   // Toggle Account Menu
   const toggleAccountMenu = function() {
     $('#drop-down-container').toggleClass('off');
-  }
+  };
 
   $('#account-icon').on('click', toggleAccountMenu);
 
   // Navigate to other pages via Account Menu
   const findPeople = $('#find-people');
   const myBeers = $('#my-beers');
-  // const settings = $('#settings');
   const $logout = $('#log-out');
 
-  findPeople.on('click', function() { window.location.href = '/users.html' });
-  myBeers.on('click', function() { window.location.href = '/profile.html' });
+  findPeople.on('click', function() { window.location.href = '/users.html'; });
+  myBeers.on('click', function() { window.location.href = '/profile.html'; });
   $logout.on('click', logout);
 
   // const menuOptions = $('#log-out');
@@ -102,7 +101,7 @@
       $name.append($h4);
 
       $results.append($result);
-    };
+    }
     addResultListener();
   };
 
@@ -150,9 +149,7 @@
 
   // Event Listeners to Populate Results
   const $search = $('#search-btn');
-  console.log($search);
   const $searchInput = $('.search-box');
-  // console.log($searchInput);
 
   $(window).on('load', getAllUsers);
   $searchInput.on('input', searchAllUsers);
@@ -161,12 +158,11 @@
 
   const sendToFollowPage = function(event) {
     const param = $(this).data();
-    console.log(param);
     window.location.href = `/profile.html?userId=${param.userId}`;
-  }
+  };
 
   const addResultListener = function() {
     $('.result').on('click', sendToFollowPage);
-  }
+  };
 
 })();

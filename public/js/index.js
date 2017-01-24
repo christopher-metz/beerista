@@ -20,7 +20,7 @@
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   };
 
   const logout = () => {
@@ -43,7 +43,7 @@
     })
     .fail((err) => {
       console.log(err);
-    })
+    });
   };
 
   $(window).on('load', checkForCookie);
@@ -51,27 +51,27 @@
   // Toggle Account Menu
   const toggleAccountMenu = function() {
     $('#drop-down-container').toggleClass('off');
-  }
+  };
 
   $('#account-icon').on('click', toggleAccountMenu);
 
   // Navigate to other pages via Account Menu
   const $findUsers = $('#find-users');
   const $myBeers = $('#my-beers');
-  // const $settings = $('#settings');
   const $logout = $('#log-out');
 
-  $findUsers.on('click', () => { window.location.href = '/users.html' });
-  $myBeers.on('click', () => { window.location.href = '/profile.html' });
+  $findUsers.on('click', () => { window.location.href = '/users.html'; });
+  $myBeers.on('click', () => { window.location.href = '/profile.html'; });
   $logout.on('click', logout);
-
 
   const handleGeneralSearch = (event) => {
     event.preventDefault();
     const searchBeer = $('input').val();
+
     window.location.href = `/search.html?input=${searchBeer}`;
   };
 
   const $form = $('form');
+
   $form.submit(handleGeneralSearch);
 })();

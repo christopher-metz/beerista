@@ -25,7 +25,7 @@ const checkForCookie = function() {
   })
   .fail((err) => {
     console.log(err);
-  })
+  });
 };
 
 // Get User Id
@@ -72,7 +72,7 @@ const populateResults = function(beers) {
     const $info = $('<div>');
 
     if (verified) {
-      $info.addClass('info-loggedIn')
+      $info.addClass('info-loggedIn');
     }
     else {
       $info.addClass('info');
@@ -116,7 +116,7 @@ const populateResults = function(beers) {
     }
 
     $results.append($result);
-  };
+  }
 };
 
 const getBeers = function(event) {
@@ -125,13 +125,12 @@ const getBeers = function(event) {
   }
 
   let searchParam;
+
   if (window.location.search) {
     searchParam = window.QUERY_PARAMETERS.input;
   }
   else {
-    console.log('no params');
     searchParam = $('.search-box').val();
-    console.log(searchParam);
   }
 
   const $xhrBeers = $.ajax({
@@ -150,26 +149,25 @@ const getBeers = function(event) {
     if (verified) {
       const $xhr_2Beers = $.ajax({
         method: 'GET',
-        url: `/stars`,
+        url: '/stars',
         contentType: 'application/json',
         dataType: 'json'
       })
       .done((stars) => {
-        console.log('got stars');
-        console.log(stars);
         if (!stars.length) {
-          console.log(stars);
           beers = beers.map((beer) => {
             for (const star of stars) {
               beer.beerId = star.id;
               beer.starred = false;
               if (star.source_id === beer.source_id) {
                 beer.starred = true;
+
                 return beer;
               }
             }
+
             return beer;
-          })
+          });
         }
         populateResults(beers);
       })
@@ -184,7 +182,6 @@ const getBeers = function(event) {
   .fail(($xhrBeers) => {
     console.log($xhrBeers)
   });
-
 };
 
 const checkForSearchInput = () => {
@@ -202,11 +199,8 @@ const updateStar = function(event) {
   const starred = $(event.target).parents('.result').data().starred;
   const starData = $(event.target).parents('.result').data();
   starData.userId = userId;
-  console.log(starData);
-
 
   if (starred) {
-    // console.log('contains-gold');
     const $xhr = $.ajax({
       method: 'POST',
       url: '/beers/star',
@@ -225,7 +219,6 @@ const updateStar = function(event) {
   }
 
   if (!starred) {
-    // console.log('doesn\'t contain gold');
     const $xhr_2 = $.ajax({
       method: 'DELETE',
       url: '/stars',
@@ -240,7 +233,7 @@ const updateStar = function(event) {
       console.log('Failure');
     });
   }
-}
+};
 
 const loadBeerPage = function(event) {
   if (!verified) {
@@ -250,16 +243,15 @@ const loadBeerPage = function(event) {
 
   if (event.target.classList.contains('star-icon')) {
     updateStar(event);
+
     return;
   }
 
   $allResults = $('.result');
 
   const $target = $(event.target).parents('.result');
-  // console.log($target);
 
   beerData = $target.data();
-  console.log(beerData);
 
   $allResults.detach();
   $target.parents('#results').addClass('off');
@@ -308,16 +300,13 @@ const submitRating = function() {
   });
 
   if (ratingCount === 0) {
-    console.log('No rating selected.');
     return;
   }
 
   beerData.user_rating = ratingCount;
   beerData.user_id= userId;
-  console.log(beerData);
 
   const requestContent = JSON.stringify(beerData);
-  console.log(requestContent);
 
   const $xhr_2 = $.ajax({
     method: 'POST',
@@ -362,7 +351,7 @@ const logout = () => {
   })
   .fail((err) => {
     console.log(err);
-  })
+  });
 };
 
 (function() {
@@ -371,11 +360,10 @@ const logout = () => {
   // Navigate to other pages via Account Menu
   const findPeople = $('#find-people');
   const myBeers = $('#my-beers');
-  // const settings = $('#settings');
   const $logout = $('#log-out');
 
-  findPeople.on('click', () => { window.location.href = '/users.html' });
-  myBeers.on('click', () => { window.location.href = '/profile.html' });
+  findPeople.on('click', () => { window.location.href = '/users.html'; });
+  myBeers.on('click', () => { window.location.href = '/profile.html'; });
   $logout.on('click', logout);
 
   // const menuOptions = $('#log-out');
@@ -394,7 +382,6 @@ const logout = () => {
 
   const $search = $('#search-btn');
   const $searchInput = $('.search-box');
-  // console.log($searchInput);
 
   $searchInput.focus(clearSearchInput);
   $searchInput.on('input', getBeers);

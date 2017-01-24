@@ -38,7 +38,6 @@ router.get('/users', authorize, (req, res, next) => {
 });
 
 router.get('/users/all', authorize, (req, res, next) => {
-  console.log('here at all users');
   knex('users')
     .then((users) => {
       if (!users) {
@@ -46,12 +45,11 @@ router.get('/users/all', authorize, (req, res, next) => {
       }
 
       const newUsers = [];
-      // console.log(users);
+
       for (const user of users) {
         delete user.hashed_password;
         newUsers.push(camelizeKeys(user));
       }
-      console.log(newUsers);
       res.send(newUsers);
     })
     .catch((err) => {
@@ -60,9 +58,7 @@ router.get('/users/all', authorize, (req, res, next) => {
 });
 
 router.get('/users/search/?', authorize, (req, res, next) => {
-  console.log('got here');
   const search = req.query.search;
-  console.log(search);
 
   knex('users')
     .where('first_name', 'LIKE', `%${search}%`)
@@ -78,7 +74,6 @@ router.get('/users/search/?', authorize, (req, res, next) => {
         delete user.hashed_password;
         newUsers.push(camelizeKeys(user));
       }
-      console.log(newUsers);
       res.send(newUsers);
     })
     .catch((err) => {
@@ -153,7 +148,6 @@ router.post('/users', (req, res, next) => {
 
 router.patch('/users', authorize, (req, res, next) => {
   const { firstName, lastName, email, city, state } = req.body;
-  console.log(firstName);
 
   if (!email || !email.trim()) {
     return next(boom.create(400, 'Email must not be blank'));
@@ -170,6 +164,7 @@ router.patch('/users', authorize, (req, res, next) => {
     }), '*')
     .then((users) => {
       const user = users[0];
+
       if (!user) {
         return next(boom.create(400, 'Could not update.'));
       }
