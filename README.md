@@ -17,4 +17,8 @@ Beerista is a beer buying guide that aims to simplify the beer selection process
 
   Incorporate Untapped's API and Yelp's API. This will give us a very large selection of beers and breweries to search from. With both of those we can add in more filtering options. The Yelp API will allow us to validate venues, and give the user the opportunity to link to their Yelp page.
 
+  Add user Profile pictures.
+
+###Video
+
 
