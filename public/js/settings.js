@@ -18,8 +18,8 @@ const logout = () => {
 
     window.location.href = '/login.html';
   })
-  .fail((err) => {
-    console.log(err);
+  .fail((_err) => {
+    window.alert('Invalid email or username!'); // eslint-disable-line no-alert
   });
 };
 
